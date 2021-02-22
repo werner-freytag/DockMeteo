@@ -1,0 +1,8 @@
+.DS_Store
+xcuserdata
+fastlane/test_output/*
+/fastlane/screenshots/screenshots.html
+/fastlane/README.md
+/Preview.html
+/fastlane/report.xml
+/fastlane/Preview.html

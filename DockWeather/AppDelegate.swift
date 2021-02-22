@@ -1,26 +1,18 @@
 //
-//  AppDelegate.swift
-//  DockWeather
-//
-//  Created by Werner on 22.02.21.
+//  Created by Werner Freytag on 22.02.21.
+//  Copyright © 2021 Pecora GmbH. All rights reserved.
 //
 
 import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    @IBOutlet var window: NSWindow!
-
+    lazy var weatherUpdater = OpenWeatherUpdater()
+    lazy var locationUpdater = LocationUpdater()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        weatherUpdater.startUpdating()
+        locationUpdater.startUpdating()
+        NSApp.dockTile.contentView = DockTileContentView(frame: .zero)
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-
-
 }
-

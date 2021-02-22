@@ -10,6 +10,13 @@
 		36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */; };
 		36C6590D25E3C3B4000D4F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36C6590C25E3C3B4000D4F46 /* Assets.xcassets */; };
 		36C6591025E3C3B4000D4F46 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36C6590E25E3C3B4000D4F46 /* MainMenu.xib */; };
+		36C6591925E3C444000D4F46 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6591825E3C444000D4F46 /* LocationDelegate.swift */; };
+		36C6591F25E3ECCC000D4F46 /* OpenWeatherUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6591E25E3ECCC000D4F46 /* OpenWeatherUpdater.swift */; };
+		36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */; };
+		36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */; };
+		36ED738B25E40E83005D81FA /* LocationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738A25E40E83005D81FA /* LocationUpdater.swift */; };
+		36ED739025E41051005D81FA /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738F25E41051005D81FA /* DockTileContentView.swift */; };
+		36ED739225E41192005D81FA /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED739125E41192005D81FA /* WeatherData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +26,13 @@
 		36C6590F25E3C3B4000D4F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		36C6591125E3C3B4000D4F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36C6591225E3C3B4000D4F46 /* DockWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockWeather.entitlements; sourceTree = "<group>"; };
+		36C6591825E3C444000D4F46 /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
+		36C6591E25E3ECCC000D4F46 /* OpenWeatherUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherUpdater.swift; sourceTree = "<group>"; };
+		36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnitPreferences.swift; sourceTree = "<group>"; };
+		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
+		36ED738A25E40E83005D81FA /* LocationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUpdater.swift; sourceTree = "<group>"; };
+		36ED738F25E41051005D81FA /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
+		36ED739125E41192005D81FA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +70,31 @@
 				36C6590E25E3C3B4000D4F46 /* MainMenu.xib */,
 				36C6591125E3C3B4000D4F46 /* Info.plist */,
 				36C6591225E3C3B4000D4F46 /* DockWeather.entitlements */,
+				36ED738D25E40F30005D81FA /* Location */,
+				36ED738C25E40F1C005D81FA /* OpenWeather */,
+				36ED738F25E41051005D81FA /* DockTileContentView.swift */,
+				36ED739125E41192005D81FA /* WeatherData.swift */,
 			);
 			path = DockWeather;
+			sourceTree = "<group>";
+		};
+		36ED738C25E40F1C005D81FA /* OpenWeather */ = {
+			isa = PBXGroup;
+			children = (
+				36C6591E25E3ECCC000D4F46 /* OpenWeatherUpdater.swift */,
+				36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */,
+				36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */,
+			);
+			path = OpenWeather;
+			sourceTree = "<group>";
+		};
+		36ED738D25E40F30005D81FA /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				36C6591825E3C444000D4F46 /* LocationDelegate.swift */,
+				36ED738A25E40E83005D81FA /* LocationUpdater.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,6 +125,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
+				ORGANIZATIONNAME = "Pecora GmbH";
 				TargetAttributes = {
 					36C6590625E3C3B3000D4F46 = {
 						CreatedOnToolsVersion = 12.5;
@@ -129,7 +167,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36ED738B25E40E83005D81FA /* LocationUpdater.swift in Sources */,
 				36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */,
+				36ED739025E41051005D81FA /* DockTileContentView.swift in Sources */,
+				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
+				36C6591925E3C444000D4F46 /* LocationDelegate.swift in Sources */,
+				36C6591F25E3ECCC000D4F46 /* OpenWeatherUpdater.swift in Sources */,
+				36ED739225E41192005D81FA /* WeatherData.swift in Sources */,
+				36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +243,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -253,7 +298,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -268,6 +313,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DockWeather/DockWeather.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6F42U4FE9C;
@@ -289,6 +335,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DockWeather/DockWeather.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6F42U4FE9C;
