@@ -1,43 +1,29 @@
 //
-//  Created by Werner on 22.02.21.
+//  Created by Werner on 23.02.21.
 //  Copyright © 2021 Pecora GmbH. All rights reserved.
 //
 
-import Cocoa
+import SwiftUI
 
-class DockTileContentView: NSView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+struct DockTileContentView: View {
+    @State var weatherData: WeatherData?
 
-        wantsLayer = true
-        layer = makeBackingLayer()
-
-        guard let layer = layer else { return }
-
-        let shadow = NSShadow()
-        shadow.shadowOffset = .init(width: 0, height: -1.8)
-        shadow.shadowBlurRadius = 1.8
-        shadow.shadowColor = NSColor.black.withAlphaComponent(0.18)
-
-        self.shadow = shadow
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewDidMoveToSuperview() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.WeatherData.didRefresh, object: nil, queue: nil) {
-            guard let weatherData = $0.userInfo?["data"] as? WeatherData else { return assertionFailure() }
-
-            print(weatherData)
+    var body: some View {
+        if let weatherData = weatherData {
+            ZStack {
+                Image("BrokenClouds")
+                Text("\(Int(weatherData.temperature.rounded()))º")
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                    .multilineTextAlignment(.center)
+            }
         }
     }
+}
 
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-
-        // Drawing code here.
+struct DockTileContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        DockTileContentView(weatherData: WeatherData(condition: .clearSky, daytime: .day, name: "Krailling", datetime: Date(timeIntervalSince1970: 1_614_095_412), datetimeRange: Date(timeIntervalSince1970: 1_614_060_418) ..< Date(timeIntervalSince1970: 1_614_098_926), temperature: 13.98, temperatureRange: 11.67 ..< 15))
+            .frame(width: 128.0, height: 128.0)
     }
 }

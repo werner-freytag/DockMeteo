@@ -6,8 +6,6 @@ import AppKit
 import CoreLocation
 
 class LocationDelegate: NSObject, CLLocationManagerDelegate {
-    static let shared = LocationDelegate()
-
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         NotificationCenter.default.post(Notification(name: Notification.Name.Location.didUpdate, object: self, userInfo: ["locations": locations]))
     }

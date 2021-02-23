@@ -3,29 +3,46 @@
 //  Copyright © 2021 Pecora GmbH. All rights reserved.
 //
 
+import AppKit
+import Combine
 import CoreLocation
-import Foundation
 
-class OpenWeatherUpdater {
+class OpenWeatherPublisher {
     // Refresh every 10 minutes
     let refreshInterval = TimeInterval(600)
 
     // Update when distance to last position is more than
     let refreshDistance = CLLocationDistance(1000)
 
+    private let weatherDataSubject = PassthroughSubject<WeatherData, Never>()
+
+    private lazy var locationPublisher = LocationPublisher()
+
+    private var cancellable = Set<AnyCancellable>()
+
     private var refreshTimer: Timer?
 
-    func startUpdating() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.Location.didUpdate, object: nil, queue: nil) {
-            guard let locations = $0.userInfo?["locations"] as? [CLLocation] else { return assertionFailure() }
-            self.currentLocation = locations.last
-        }
+    func startUpdating() -> AnyPublisher<WeatherData, Never> {
+        locationPublisher
+            .startUpdating()
+            .sink(receiveCompletion: { completion in
+                if case let .failure(error) = completion {
+                    self.handleLocationAuthorizationError(error)
+                }
+            }, receiveValue: { locations in
+                self.currentLocation = locations.last
+            })
+            .store(in: &cancellable)
 
-        NotificationCenter.default.addObserver(forName: NSLocale.currentLocaleDidChangeNotification, object: nil, queue: nil) { _ in
-            self.refresh()
-        }
+        NotificationCenter.default.publisher(for: NSLocale.currentLocaleDidChangeNotification)
+            .sink { _ in
+                self.refresh()
+            }
+            .store(in: &cancellable)
 
         startRefreshTimer()
+
+        return weatherDataSubject.eraseToAnyPublisher()
     }
 
     private func stopRefreshTimer() {
@@ -38,21 +55,15 @@ class OpenWeatherUpdater {
         })
     }
 
+    private var lastUpdateLocation: CLLocation?
     private var currentLocation: CLLocation? {
         didSet {
-            if let lastUpdateLocation = lastUpdateLocation {
-                guard let currentLocation = currentLocation else { return assertionFailure() }
+            guard let currentLocation = currentLocation else { return assertionFailure() }
+            if let lastUpdateLocation = lastUpdateLocation, refreshDistance > lastUpdateLocation.distance(from: currentLocation) { return }
 
-                if lastUpdateLocation.distance(from: currentLocation) > refreshDistance {
-                    refresh()
-                }
-            } else {
-                refresh()
-            }
+            refresh()
         }
     }
-
-    private var lastUpdateLocation: CLLocation?
 
     func refresh() {
         stopRefreshTimer()
@@ -62,9 +73,11 @@ class OpenWeatherUpdater {
 
         URLSession.shared.dataTask(with: requestURL) { data, response, error in
             guard let data = data else { assertionFailure(); return }
+
             do {
                 let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
-                NotificationCenter.default.post(Notification(name: Notification.Name.WeatherData.didRefresh, object: self, userInfo: ["data": response.weatherData]))
+                guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
+                self.weatherDataSubject.send(weatherData)
             } catch {
                 assertionFailure("\(error)")
             }
@@ -93,11 +106,21 @@ class OpenWeatherUpdater {
 
         return urlComponents.url
     }
-}
 
-public extension Notification.Name {
-    enum WeatherData {
-        public static let didRefresh = Notification.Name(rawValue: "WeatherData.didRefresh")
+    private func handleLocationAuthorizationError(_ error: LocationPublisher.Error) {
+        let alert = NSAlert()
+        alert.messageText = "Location services are not enabled."
+        alert.addButton(withTitle: "Quit DockWeather")
+        alert.addButton(withTitle: "Open Preferences")
+
+        let workspace = NSWorkspace.shared
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:
+            NSApp.terminate(self)
+        default:
+            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security"))
+            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"))
+        }
     }
 }
 
@@ -135,18 +158,19 @@ private extension OpenWeatherResponse.Icon {
     }
 }
 
-extension OpenWeatherResponse {
-    var weatherData: WeatherData {
-        assert(weather.last != nil)
-        let weather = weather.last ?? Weather(id: 0, main: "", description: "", icon: .clearSky_Day)
-        return WeatherData(
+private extension WeatherData {
+    init?(response: OpenWeatherResponse) {
+        assert(response.weather.last != nil)
+        guard let weather = response.weather.last else { return nil }
+
+        self.init(
             condition: weather.icon.condition,
             daytime: weather.icon.daytime,
-            name: name,
-            datetime: Date(timeIntervalSince1970: dt),
-            datetimeRange: Date(timeIntervalSince1970: sys.sunrise) ..< Date(timeIntervalSince1970: sys.sunset),
-            temperature: main.temp,
-            temperatureRange: main.temp_min ..< main.temp_max
+            name: response.name,
+            datetime: Date(timeIntervalSince1970: response.dt),
+            datetimeRange: Date(timeIntervalSince1970: response.sys.sunrise) ..< Date(timeIntervalSince1970: response.sys.sunset),
+            temperature: response.main.temp,
+            temperatureRange: response.main.temp_min ..< response.main.temp_max
         )
     }
 }
