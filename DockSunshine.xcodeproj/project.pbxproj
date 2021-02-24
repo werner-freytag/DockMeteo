@@ -117,13 +117,14 @@
 				36C6590325E3C3B3000D4F46 /* Sources */,
 				36C6590425E3C3B3000D4F46 /* Frameworks */,
 				36C6590525E3C3B3000D4F46 /* Resources */,
+				36A4BFCE25E6D9EF00911AAE /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = DockSunshine;
-			productName = DockWeather;
+			productName = DockSunshine;
 			productReference = 36C6590725E3C3B3000D4F46 /* DockSunshine.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -177,6 +178,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		36A4BFCE25E6D9EF00911AAE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# http://davedelong.com/blog/2009/04/15/incrementing-build-numbers-xcode\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" DockSunshine/Info.plist)\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" DockSunshine/Info.plist\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		36C6590325E3C3B3000D4F46 /* Sources */ = {
