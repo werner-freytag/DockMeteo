@@ -1,0 +1,1 @@
+DockSunshine zeigt im Dock das Wetter an. Anhand des Standorts wird das Wetter ermittelt und grafisch dargestellt. Die Temperatur und der Standort werden ebenfalls angezeigt. Das Design ist modern auf das aktuelle macOS System ausgelegt, so dass sich das Symbol wunderschön in die anderen Dock-Symbole einreiht.

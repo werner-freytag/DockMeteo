@@ -1,0 +1,1 @@
+Wetter,Wetter im Dock,Dock Wetter,Dock Weather,Dock,DockWetter,WetterDock,Wetter Dock,Dock Sun,Dock Sunshine,Temperatur
