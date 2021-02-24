@@ -15,18 +15,18 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
-                <menuItem title="DockWeather" id="1Xt-HY-uBw">
+                <menuItem title="DockSunshine" id="1Xt-HY-uBw">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="DockWeather" systemMenu="apple" id="uQy-DD-JDr">
+                    <menu key="submenu" title="DockSunshine" systemMenu="apple" id="uQy-DD-JDr">
                         <items>
-                            <menuItem title="About DockWeather" id="5kV-Vb-QxS">
+                            <menuItem title="About DockSunshine" id="5kV-Vb-QxS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                            <menuItem title="Quit DockWeather" keyEquivalent="q" id="4sb-4s-VLi">
+                            <menuItem title="Quit DockSunshine" keyEquivalent="q" id="4sb-4s-VLi">
                                 <connections>
                                     <action selector="terminate:" target="-1" id="Te7-pn-YzF"/>
                                 </connections>

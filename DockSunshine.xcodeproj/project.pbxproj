@@ -19,12 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36C6590725E3C3B3000D4F46 /* DockWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DockWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		36B6821D25E6BF240035D7FE /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
+		36C6590725E3C3B3000D4F46 /* DockSunshine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DockSunshine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36C6590C25E3C3B4000D4F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36C6590F25E3C3B4000D4F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		36C6591125E3C3B4000D4F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		36C6591225E3C3B4000D4F46 /* DockWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockWeather.entitlements; sourceTree = "<group>"; };
+		36C6591225E3C3B4000D4F46 /* DockSunshine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockSunshine.entitlements; sourceTree = "<group>"; };
 		36C6591E25E3ECCC000D4F46 /* OpenWeatherPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherPublisher.swift; sourceTree = "<group>"; };
 		36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnitPreferences.swift; sourceTree = "<group>"; };
 		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
@@ -47,7 +48,7 @@
 		36C658FE25E3C3B3000D4F46 = {
 			isa = PBXGroup;
 			children = (
-				36C6590925E3C3B3000D4F46 /* DockWeather */,
+				36C6590925E3C3B3000D4F46 /* DockSunshine */,
 				36C6590825E3C3B3000D4F46 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,25 +56,26 @@
 		36C6590825E3C3B3000D4F46 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				36C6590725E3C3B3000D4F46 /* DockWeather.app */,
+				36C6590725E3C3B3000D4F46 /* DockSunshine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		36C6590925E3C3B3000D4F46 /* DockWeather */ = {
+		36C6590925E3C3B3000D4F46 /* DockSunshine */ = {
 			isa = PBXGroup;
 			children = (
 				36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */,
 				36C6590C25E3C3B4000D4F46 /* Assets.xcassets */,
 				36C6590E25E3C3B4000D4F46 /* MainMenu.xib */,
 				36C6591125E3C3B4000D4F46 /* Info.plist */,
-				36C6591225E3C3B4000D4F46 /* DockWeather.entitlements */,
+				36C6591225E3C3B4000D4F46 /* DockSunshine.entitlements */,
 				36ED738A25E40E83005D81FA /* LocationPublisher.swift */,
 				36ED738C25E40F1C005D81FA /* OpenWeather */,
 				36ED739125E41192005D81FA /* WeatherData.swift */,
 				36ED739325E55374005D81FA /* DockTileContentView.swift */,
+				36B6821D25E6BF240035D7FE /* fastlane */,
 			);
-			path = DockWeather;
+			path = DockSunshine;
 			sourceTree = "<group>";
 		};
 		36ED738C25E40F1C005D81FA /* OpenWeather */ = {
@@ -89,9 +91,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		36C6590625E3C3B3000D4F46 /* DockWeather */ = {
+		36C6590625E3C3B3000D4F46 /* DockSunshine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 36C6591525E3C3B4000D4F46 /* Build configuration list for PBXNativeTarget "DockWeather" */;
+			buildConfigurationList = 36C6591525E3C3B4000D4F46 /* Build configuration list for PBXNativeTarget "DockSunshine" */;
 			buildPhases = (
 				36C6590325E3C3B3000D4F46 /* Sources */,
 				36C6590425E3C3B3000D4F46 /* Frameworks */,
@@ -101,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = DockWeather;
+			name = DockSunshine;
 			productName = DockWeather;
-			productReference = 36C6590725E3C3B3000D4F46 /* DockWeather.app */;
+			productReference = 36C6590725E3C3B3000D4F46 /* DockSunshine.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -121,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 36C6590225E3C3B3000D4F46 /* Build configuration list for PBXProject "DockWeather" */;
+			buildConfigurationList = 36C6590225E3C3B3000D4F46 /* Build configuration list for PBXProject "DockSunshine" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -134,7 +136,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				36C6590625E3C3B3000D4F46 /* DockWeather */,
+				36C6590625E3C3B3000D4F46 /* DockSunshine */,
 			);
 		};
 /* End PBXProject section */
@@ -299,18 +301,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DockWeather/DockWeather.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DockSunshine/DockSunshine.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6F42U4FE9C;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = DockWeather/Info.plist;
+				INFOPLIST_FILE = "$(PRODUCT_NAME)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.pecora.DockWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = io.pecora.DockSunshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -320,18 +322,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DockWeather/DockWeather.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DockSunshine/DockSunshine.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6F42U4FE9C;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = DockWeather/Info.plist;
+				INFOPLIST_FILE = "$(PRODUCT_NAME)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.pecora.DockWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = io.pecora.DockSunshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -340,7 +342,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		36C6590225E3C3B3000D4F46 /* Build configuration list for PBXProject "DockWeather" */ = {
+		36C6590225E3C3B3000D4F46 /* Build configuration list for PBXProject "DockSunshine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36C6591325E3C3B4000D4F46 /* Debug */,
@@ -349,7 +351,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		36C6591525E3C3B4000D4F46 /* Build configuration list for PBXNativeTarget "DockWeather" */ = {
+		36C6591525E3C3B4000D4F46 /* Build configuration list for PBXNativeTarget "DockSunshine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36C6591625E3C3B4000D4F46 /* Debug */,
