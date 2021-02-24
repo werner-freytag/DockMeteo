@@ -47,6 +47,7 @@ class OpenWeatherPublisher {
 
     private func stopRefreshTimer() {
         refreshTimer?.invalidate()
+        refreshTimer = nil
     }
 
     private func startRefreshTimer() {
@@ -125,7 +126,7 @@ class OpenWeatherPublisher {
 }
 
 private extension OpenWeatherResponse.Icon {
-    var condition: WeatherCondition {
+    var condition: WeatherData.Condition {
         switch self {
         case .clearSky_Day, .clearSky_Night:
             return .clearSky
@@ -148,7 +149,7 @@ private extension OpenWeatherResponse.Icon {
         }
     }
 
-    var daytime: Daytime {
+    var daytime: WeatherData.Daytime {
         switch self {
         case .clearSky_Night, .fewClouds_Night, .scatteredClouds_Night, .brokenClouds_Night, .showerRain_Night, .rain_Night, .thunderstorm_Night, .snow_Night, .mist_Night:
             return .night
@@ -159,7 +160,7 @@ private extension OpenWeatherResponse.Icon {
 }
 
 private extension WeatherData {
-    init?(response: OpenWeatherResponse) {
+    convenience init?(response: OpenWeatherResponse) {
         assert(response.weather.last != nil)
         guard let weather = response.weather.last else { return nil }
 

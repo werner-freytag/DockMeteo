@@ -13,15 +13,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var cancellable = Set<AnyCancellable>()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let contentView = DockTileContentView(weatherData: WeatherData())
+        NSApp.dockTile.contentView = NSHostingView(rootView: contentView)
+
         weatherPublisher
             .startUpdating()
             .receive(on: RunLoop.main)
             .sink(receiveValue: { weatherData in
-                if let contentView = (NSApp.dockTile.contentView as? NSHostingView<DockTileContentView>)?.rootView {
-                    contentView.weatherData = weatherData
-                } else {
-                    NSApp.dockTile.contentView = NSHostingView(rootView: DockTileContentView(weatherData: weatherData))
-                }
+                contentView.weatherData.condition = weatherData.condition
+                contentView.weatherData.daytime = weatherData.daytime
+                contentView.weatherData.name = weatherData.name
+                contentView.weatherData.datetime = weatherData.datetime
+                contentView.weatherData.datetimeRange = weatherData.datetimeRange
+                contentView.weatherData.temperature = weatherData.temperature
+                contentView.weatherData.temperatureRange = weatherData.temperatureRange
                 NSApp.dockTile.display()
             })
             .store(in: &cancellable)

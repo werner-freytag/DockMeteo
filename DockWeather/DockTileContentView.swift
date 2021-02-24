@@ -6,32 +6,34 @@
 import SwiftUI
 
 struct DockTileContentView: View {
-    @State var weatherData: WeatherData
+    @ObservedObject var weatherData: WeatherData
 
     var body: some View {
         ZStack {
-            Image(weatherData.image)
-            ZStack {
+            Image(image)
+            if let temperature = weatherData.temperature?.rounded() {
                 VStack {
                     HStack {
                         Spacer()
-                            .frame(width: weatherData.temperature.rounded() < 0 ? 0 : 6.0)
-                            .background(Color.black)
-                        Text("\(Int(weatherData.temperature.rounded()))º")
+                            .frame(width: 6.0)
+                        Text("\(Int(temperature))º")
                             .font(.system(size: 36, weight: .light, design: .rounded))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.white)
-                            .shadow(color: Color(weatherData.shadowColor), radius: 5, x: 0, y: 1)
-                        Spacer()
-                            .frame(width: weatherData.temperature.rounded() < 0 ? 10 : 0)
-                            .background(Color.black)
+                            .shadow(color: Color(self.textShadowColor), radius: 5, x: 0, y: 1)
+                        if temperature < 0 {
+                            Spacer()
+                                .frame(width: 16)
+                        }
                     }
                     Spacer()
-                        .frame(width: 1, height: 6.0)
+                        .frame(height: 6.0)
                 }
+            }
+            if let name = weatherData.name {
                 VStack {
                     Spacer()
-                    Text(weatherData.name)
+                    Text(name)
                         .font(.system(size: 14, weight: .regular, design: .rounded))
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
@@ -43,20 +45,19 @@ struct DockTileContentView: View {
                 }
             }
         }
+        .frame(width: 128.0, height: 128.0)
     }
-}
 
-extension WeatherData {
     private func applyDaytime(to string: String) -> String {
-        daytime == .day ? string : "\(string)_Night"
+        weatherData.daytime == .night ? "\(string)_Night" : string
     }
-    
-    var shadowColor: String {
+
+    private var textShadowColor: String {
         applyDaytime(to: "TextShadowColor")
     }
-    
-    var image: String {
-        switch condition {
+
+    private var image: String {
+        switch weatherData.condition {
         case .clearSky:
             return applyDaytime(to: "Clear")
         case .fewClouds:
@@ -75,13 +76,17 @@ extension WeatherData {
             return applyDaytime(to: "Snow")
         case .mist:
             return applyDaytime(to: "Mist")
+        case .none:
+            return "Placeholder"
         }
     }
 }
 
 struct DockTileContentView_Previews: PreviewProvider {
     static var previews: some View {
-        DockTileContentView(weatherData: WeatherData(condition: .clearSky, daytime: .day, name: "Garmisch-Partenkirchen", datetime: Date(timeIntervalSince1970: 1_614_095_412), datetimeRange: Date(timeIntervalSince1970: 1_614_060_418) ..< Date(timeIntervalSince1970: 1_614_098_926), temperature: 13.58, temperatureRange: 11.67 ..< 15))
-            .frame(width: 128.0, height: 128.0)
+        Group {
+            DockTileContentView(weatherData: WeatherData(condition: .clearSky, daytime: .day, name: "Paris", temperature: 14))
+            DockTileContentView(weatherData: WeatherData(condition: .fewClouds, daytime: .night, name: "San Francisco", temperature: 47))
+        }
     }
 }
