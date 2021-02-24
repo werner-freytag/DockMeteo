@@ -23,14 +23,17 @@ class OpenWeatherPublisher {
     private var refreshTimer: Timer?
 
     func startUpdating() -> AnyPublisher<WeatherData, Never> {
+        self.currentLocation = UserDefaults.standard.lastLocation
+
         locationPublisher
             .startUpdating()
             .sink(receiveCompletion: { completion in
-                if case let .failure(error) = completion {
+                if case let .failure(error) = completion, self.currentLocation == nil {
                     self.handleLocationAuthorizationError(error)
                 }
             }, receiveValue: { locations in
                 self.currentLocation = locations.last
+                UserDefaults.standard.lastLocation = self.currentLocation
             })
             .store(in: &cancellable)
 
@@ -59,7 +62,7 @@ class OpenWeatherPublisher {
     private var lastUpdateLocation: CLLocation?
     private var currentLocation: CLLocation? {
         didSet {
-            guard let currentLocation = currentLocation else { return assertionFailure() }
+            guard let currentLocation = currentLocation else { return }
             if let lastUpdateLocation = lastUpdateLocation, refreshDistance > lastUpdateLocation.distance(from: currentLocation) { return }
 
             refresh()

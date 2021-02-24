@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */; };
 		36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822525E6CFA70035D7FE /* Localizable.strings */; };
 		36B6822D25E6D2BF0035D7FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */; };
 		36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefault+Keys.swift"; sourceTree = "<group>"; };
 		36B6821D25E6BF240035D7FE /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		36B6821E25E6CC900035D7FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6821F25E6CC960035D7FE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */,
 				36C6591225E3C3B4000D4F46 /* DockSunshine.entitlements */,
 				36B6822525E6CFA70035D7FE /* Localizable.strings */,
+				36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */,
 				36ED738A25E40E83005D81FA /* LocationPublisher.swift */,
 				36ED738C25E40F1C005D81FA /* OpenWeather */,
 				36ED739125E41192005D81FA /* WeatherData.swift */,
@@ -184,6 +187,7 @@
 				36ED738B25E40E83005D81FA /* LocationPublisher.swift in Sources */,
 				36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */,
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
+				36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */,
 				36ED739225E41192005D81FA /* WeatherData.swift in Sources */,
 				36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */,
