@@ -110,9 +110,9 @@ class OpenWeatherPublisher {
 
     private func handleLocationAuthorizationError(_ error: LocationPublisher.Error) {
         let alert = NSAlert()
-        alert.messageText = "Location services are not enabled."
-        alert.addButton(withTitle: "Quit DockWeather")
-        alert.addButton(withTitle: "Open Preferences")
+        alert.messageText = NSLocalizedString("Location services are not enabled.", comment: "Alert title")
+        alert.addButton(withTitle: NSLocalizedString("Quit DockSunshine", comment: "Alert button"))
+        alert.addButton(withTitle: NSLocalizedString("Open Preferences", comment: "Alert button"))
 
         let workspace = NSWorkspace.shared
         switch alert.runModal() {
