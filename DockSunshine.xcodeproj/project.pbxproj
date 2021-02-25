@@ -61,6 +61,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3633223B25E7C4310014AA17 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3633223C25E7C44C0014AA17 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				36ED739125E41192005D81FA /* WeatherData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3633223D25E7C4680014AA17 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				36ED739325E55374005D81FA /* DockTileContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		36C658FE25E3C3B3000D4F46 = {
 			isa = PBXGroup;
 			children = (
@@ -80,18 +104,18 @@
 		36C6590925E3C3B3000D4F46 /* DockSunshine */ = {
 			isa = PBXGroup;
 			children = (
+				3633223D25E7C4680014AA17 /* Views */,
+				3633223C25E7C44C0014AA17 /* Models */,
+				3633223B25E7C4310014AA17 /* Extensions */,
+				36ED738C25E40F1C005D81FA /* OpenWeather */,
 				36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */,
+				36ED738A25E40E83005D81FA /* LocationPublisher.swift */,
 				36C6590C25E3C3B4000D4F46 /* Assets.xcassets */,
 				36C6590E25E3C3B4000D4F46 /* MainMenu.xib */,
 				36C6591125E3C3B4000D4F46 /* Info.plist */,
 				36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */,
 				36C6591225E3C3B4000D4F46 /* DockSunshine.entitlements */,
 				36B6822525E6CFA70035D7FE /* Localizable.strings */,
-				36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */,
-				36ED738A25E40E83005D81FA /* LocationPublisher.swift */,
-				36ED738C25E40F1C005D81FA /* OpenWeather */,
-				36ED739125E41192005D81FA /* WeatherData.swift */,
-				36ED739325E55374005D81FA /* DockTileContentView.swift */,
 				36B6821D25E6BF240035D7FE /* fastlane */,
 			);
 			path = DockSunshine;

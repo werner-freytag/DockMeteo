@@ -17,7 +17,7 @@ struct DockTileContentView: View {
                         Spacer()
                             .frame(width: 6.0)
                         Text("\(Int(temperature))º")
-                            .font(.system(size: 36, weight: .light, design: .rounded))
+                            .font(.system(size: 38, weight: .light, design: .rounded))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color.white)
                             .shadow(color: Color(self.textShadowColor), radius: 5, x: 0, y: 1)
@@ -85,8 +85,10 @@ struct DockTileContentView: View {
 struct DockTileContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DockTileContentView(weatherData: WeatherData(condition: .clearSky, daytime: .day, name: "Paris", temperature: 14))
+            DockTileContentView(weatherData: WeatherData(condition: .clearSky, name: "Paris", temperature: 32))
             DockTileContentView(weatherData: WeatherData(condition: .fewClouds, daytime: .night, name: "San Francisco", temperature: 47))
+            DockTileContentView(weatherData: WeatherData(condition: .snow, name: "St. Moritz", temperature: -11))
+            DockTileContentView(weatherData: WeatherData(condition: .rain, name: "London", temperature: -11))
         }
     }
 }
