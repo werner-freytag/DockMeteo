@@ -6,3 +6,4 @@ fastlane/test_output/*
 /Preview.html
 /fastlane/report.xml
 /fastlane/Preview.html
+/build

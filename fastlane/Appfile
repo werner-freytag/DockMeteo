@@ -1,5 +1,5 @@
 app_identifier("io.pecora.DockSunshine") # The bundle identifier of your app
-apple_id("kontakt@pecora.io") # Your Apple email address
+apple_id("kontakt@pecora.de") # Your Apple email address
 
 itc_team_id("417696") # App Store Connect Team ID
 team_id("6F42U4FE9C") # Developer Portal Team ID

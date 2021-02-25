@@ -23,7 +23,10 @@ end
 desc "Push a new release build to the App Store"
 lane :release do
   increment_build_number
-  build_app(scheme: "DockSunshine")
+  build_app(
+    scheme: "DockSunshine",
+    output_directory: "./build"
+  )
   upload_to_app_store(
     force: true, # Skip HTML report verification
     skip_screenshots: true,
