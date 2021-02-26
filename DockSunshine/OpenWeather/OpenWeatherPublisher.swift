@@ -8,9 +8,9 @@ import Combine
 import CoreLocation
 
 class OpenWeatherPublisher {
-    // Refresh every 10 minutes
-    let refreshInterval = TimeInterval(600)
-
+    // Refresh every 10 minutes - or every 10 seconds, when no initial data exists
+    var refreshInterval: TimeInterval { didReceiveWeatherData ? TimeInterval(600) : TimeInterval(10) }
+    
     // Update when distance to last position is more than
     let refreshDistance = CLLocationDistance(1000)
 
