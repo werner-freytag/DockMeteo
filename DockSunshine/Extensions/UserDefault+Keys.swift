@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
 import CoreLocation
+import Foundation
 
 extension UserDefaults {
     enum Key {
@@ -35,10 +35,10 @@ extension UserDefaults {
         }
 
         get {
-            guard let dictionary = value(forKey: Self.Key.lastLocation) as? Dictionary<String, Any>,
+            guard let dictionary = value(forKey: Self.Key.lastLocation) as? [String: Any],
                   let latitude = dictionary["lat"] as? Double,
                   let longitude = dictionary["long"] as? Double
-                  else { return nil }
+            else { return nil }
             return CLLocation(latitude: latitude, longitude: longitude)
         }
     }

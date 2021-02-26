@@ -23,7 +23,7 @@ class OpenWeatherPublisher {
     private var refreshTimer: Timer?
 
     func startUpdating() -> AnyPublisher<WeatherData, Never> {
-        self.currentLocation = UserDefaults.standard.lastLocation
+        currentLocation = UserDefaults.standard.lastLocation
 
         locationPublisher
             .startUpdating()
