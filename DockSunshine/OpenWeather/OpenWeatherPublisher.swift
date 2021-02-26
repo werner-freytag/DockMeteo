@@ -10,7 +10,7 @@ import CoreLocation
 class OpenWeatherPublisher {
     // Refresh every 10 minutes - or every 10 seconds, when no initial data exists
     var refreshInterval: TimeInterval { didReceiveWeatherData ? TimeInterval(600) : TimeInterval(10) }
-    
+
     // Update when distance to last position is more than
     let refreshDistance = CLLocationDistance(1000)
 
@@ -106,7 +106,7 @@ class OpenWeatherPublisher {
     }
 
     private var requestURL: URL? {
-        guard let currentLocation = currentLocation else { assertionFailure(); return nil }
+        guard let currentLocation = currentLocation else { return nil }
 
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")!
         urlComponents.queryItems = [
