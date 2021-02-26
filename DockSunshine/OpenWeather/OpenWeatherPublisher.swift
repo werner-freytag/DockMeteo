@@ -27,8 +27,8 @@ class OpenWeatherPublisher {
 
         locationPublisher
             .startUpdating()
-            .sink(receiveCompletion: { completion in
-                if case let .failure(error) = completion, self.currentLocation == nil {
+            .sink(receiveCompletion: {
+                if case let .failure(error) = $0, self.currentLocation == nil {
                     self.handleLocationAuthorizationError(error)
                 }
             }, receiveValue: { locations in
@@ -69,23 +69,31 @@ class OpenWeatherPublisher {
         }
     }
 
+    private var didReceiveWeatherData = false
+
     func refresh() {
         stopRefreshTimer()
         defer { startRefreshTimer() }
 
         guard let requestURL = requestURL else { return }
 
-        URLSession.shared.dataTask(with: requestURL) { data, response, error in
-            guard let data = data else { assertionFailure(); return }
-
-            do {
-                let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
-                guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
-                self.weatherDataSubject.send(weatherData)
-            } catch {
-                assertionFailure("\(error)")
-            }
-        }.resume()
+        URLSession.shared.dataTaskPublisher(for: requestURL)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: {
+                if case let .failure(error) = $0, !self.didReceiveWeatherData {
+                    self.handleDownloadError(error.localizedDescription)
+                }
+            }, receiveValue: { data, response in
+                do {
+                    let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
+                    guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
+                    self.didReceiveWeatherData = true
+                    self.weatherDataSubject.send(weatherData)
+                } catch {
+                    assertionFailure("\(error)")
+                }
+            })
+            .store(in: &cancellable)
     }
 
     private var temperatureUnit: TemperatureUnitPreferences {
@@ -125,6 +133,19 @@ class OpenWeatherPublisher {
             workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security"))
             workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"))
         }
+    }
+
+    private var didShowAlertNoWeatherData = false
+    private func handleDownloadError(_ informativeText: String? = nil) {
+        guard !didShowAlertNoWeatherData else { return }
+        didShowAlertNoWeatherData = true
+
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("Weather data download failed.", comment: "Alert title")
+        if let informativeText = informativeText {
+            alert.informativeText = informativeText
+        }
+        alert.runModal()
     }
 }
 

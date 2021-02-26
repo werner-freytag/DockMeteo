@@ -10,3 +10,6 @@
 /* Alert button */
 "Quit DockSunshine" = "DockSunshine beenden";
 
+/* Alert title */
+"Weather data download failed." = "Download der Wetterdaten fehlgeschlagen.";
+
