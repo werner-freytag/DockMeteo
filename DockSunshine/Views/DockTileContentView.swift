@@ -87,7 +87,7 @@ struct NameView: View {
 struct TemperatureView: View {
     var temperature: Int
     var textShadowColor: Color
-    
+
     var body: some View {
         VStack {
             HStack {

@@ -121,7 +121,7 @@ class OpenWeatherPublisher {
                         NSLog("Mondaufgang: \(date(moon.ephemeris.rise)), -untergang: \(date(moon.ephemeris.set))")
                         NSLog("Mondrichtung:  \(direction(moon.ephemeris.azimuth)) (\(degrees(moon.ephemeris.azimuth)))")
                         NSLog("Mondstand: \(degrees(moon.ephemeris.elevation)), maximal: \(degrees(moon.ephemeris.transitElevation))")
-                        NSLog("Mondphase: \(moon.phase) (\(double(moon.phaseAge/Moon.maxPhaseAge*100))%%), Beleuchtung: \(double(moon.illumination*100))%%, Schattenwinkel: \(degrees(moon.diskOrientationViewingAngles.shadow))")
+                        NSLog("Mondphase: \(moon.phase) (\(double(moon.phaseAge / Moon.maxPhaseAge * 100))%%), Beleuchtung: \(double(moon.illumination * 100))%%, Schattenwinkel: \(degrees(moon.diskOrientationViewingAngles.shadow))")
                     }
 
                     self.didReceiveWeatherData = true
