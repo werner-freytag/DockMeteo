@@ -14,7 +14,6 @@ class LocationPublisher: NSObject {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
-
         return manager
     }()
 

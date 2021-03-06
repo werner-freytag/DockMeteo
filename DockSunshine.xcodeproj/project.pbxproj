@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36125F6225F2EA690018F781 /* MoonShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36125F6125F2EA690018F781 /* MoonShadow.swift */; };
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
 		36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */; };
 		36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822525E6CFA70035D7FE /* Localizable.strings */; };
@@ -16,6 +17,7 @@
 		36C6591025E3C3B4000D4F46 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36C6590E25E3C3B4000D4F46 /* MainMenu.xib */; };
 		36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6591E25E3ECCC000D4F46 /* OpenWeatherPublisher.swift */; };
 		36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */; };
+		36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 36D0F4C525F1422200935183 /* SunMoonCalc */; };
 		36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */; };
 		36ED738B25E40E83005D81FA /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738A25E40E83005D81FA /* LocationPublisher.swift */; };
 		36ED739225E41192005D81FA /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED739125E41192005D81FA /* WeatherData.swift */; };
@@ -23,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36125F6125F2EA690018F781 /* MoonShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonShadow.swift; sourceTree = "<group>"; };
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefault+Keys.swift"; sourceTree = "<group>"; };
 		36B6821E25E6CC900035D7FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				36ED739325E55374005D81FA /* DockTileContentView.swift */,
+				36125F6125F2EA690018F781 /* MoonShadow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,6 +154,9 @@
 			dependencies = (
 			);
 			name = DockSunshine;
+			packageProductDependencies = (
+				36D0F4C525F1422200935183 /* SunMoonCalc */,
+			);
 			productName = DockSunshine;
 			productReference = 36C6590725E3C3B3000D4F46 /* DockSunshine.app */;
 			productType = "com.apple.product-type.application";
@@ -181,6 +189,9 @@
 				it,
 			);
 			mainGroup = 36C658FE25E3C3B3000D4F46;
+			packageReferences = (
+				36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */,
+			);
 			productRefGroup = 36C6590825E3C3B3000D4F46 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -236,6 +247,7 @@
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
 				36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */,
+				36125F6225F2EA690018F781 /* MoonShadow.swift in Sources */,
 				36ED739225E41192005D81FA /* WeatherData.swift in Sources */,
 				36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */,
 			);
@@ -470,6 +482,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/werner-freytag/SunMoonCalc.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		36D0F4C525F1422200935183 /* SunMoonCalc */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */;
+			productName = SunMoonCalc;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36C658FF25E3C3B3000D4F46 /* Project object */;
 }

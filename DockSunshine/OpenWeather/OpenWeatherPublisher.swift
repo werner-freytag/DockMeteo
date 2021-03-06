@@ -6,6 +6,7 @@
 import AppKit
 import Combine
 import CoreLocation
+import SunMoonCalc
 
 class OpenWeatherPublisher {
     // Refresh every 10 minutes - or every 10 seconds, when no initial data exists
@@ -87,7 +88,44 @@ class OpenWeatherPublisher {
                 do {
                     let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
                     guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
+
+                    if let coordinate = self.currentLocation?.coordinate {
+                        func degrees(_ angle: Measurement<UnitAngle>) -> String {
+                            return MeasurementFormatter().string(from: angle.converted(to: .degrees))
+                        }
+                        func double(_ value: Double) -> String {
+                            let formatter = NumberFormatter()
+                            formatter.numberStyle = .decimal
+                            formatter.maximumFractionDigits = 2
+                            return formatter.string(from: NSNumber(value: value))!
+                        }
+                        func direction(_ angle: Measurement<UnitAngle>) -> SkyDirection {
+                            return SkyDirection(angle: angle)
+                        }
+
+                        func date(_ date: Date?) -> String {
+                            guard let date = date else { return "-" }
+                            let formatter = DateFormatter()
+                            formatter.dateStyle = .short
+                            formatter.timeStyle = .short
+                            return formatter.string(for: date)!
+                        }
+
+                        let sun = Sun(location: .init(coordinate.latitude, coordinate.longitude), twilightMode: .closest)
+                        NSLog("")
+                        NSLog("Sonnenaufgang: \(date(sun.ephemeris.rise)), -untergang: \(date(sun.ephemeris.set))")
+                        NSLog("Sonnenrichtung: \(direction(sun.ephemeris.azimuth)) (\(degrees(sun.ephemeris.azimuth)))")
+                        NSLog("Sonnenstand: \(degrees(sun.ephemeris.elevation)), maximal: \(degrees(sun.ephemeris.transitElevation))")
+
+                        let moon = Moon(location: .init(coordinate.latitude, coordinate.longitude), twilightMode: .closest)
+                        NSLog("Mondaufgang: \(date(moon.ephemeris.rise)), -untergang: \(date(moon.ephemeris.set))")
+                        NSLog("Mondrichtung:  \(direction(moon.ephemeris.azimuth)) (\(degrees(moon.ephemeris.azimuth)))")
+                        NSLog("Mondstand: \(degrees(moon.ephemeris.elevation)), maximal: \(degrees(moon.ephemeris.transitElevation))")
+                        NSLog("Mondphase: \(moon.phase) (\(double(moon.phaseAge/Moon.maxPhaseAge*100))%%), Beleuchtung: \(double(moon.illumination*100))%%, Schattenwinkel: \(degrees(moon.diskOrientationViewingAngles.shadow))")
+                    }
+
                     self.didReceiveWeatherData = true
+
                     self.weatherDataSubject.send(weatherData)
                 } catch {
                     assertionFailure("\(error)")
