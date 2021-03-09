@@ -1,13 +1,7 @@
 import SwiftUI
 
 public struct MoonView: View {
-    let ageAngle: Angle
-    let shadowAngle: Angle
-
-    public init(ageAngle: Angle = .degrees(180), shadowAngle: Angle = .zero) {
-        self.ageAngle = ageAngle
-        self.shadowAngle = shadowAngle
-    }
+    public init() {}
 
     static let spotColor = Color(white: 0.5).opacity(0.1)
 
@@ -41,7 +35,6 @@ public struct MoonView: View {
                         .transformEffect(.init(translationX: diameter * -0.05, y: diameter * 0.3))
                 }
             }
-            .mask(MoonShadowMask(ageAngle: ageAngle, rotationAngle: shadowAngle))
         }
     }
 }
@@ -50,10 +43,11 @@ struct Moon_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MoonView()
-            MoonView(ageAngle: .degrees(30), shadowAngle: .degrees(0))
-            MoonView(ageAngle: .degrees(120), shadowAngle: .degrees(10))
-            MoonView(ageAngle: .degrees(210), shadowAngle: .degrees(20))
-            MoonView(ageAngle: .degrees(300), shadowAngle: .degrees(30))
+            MoonView().applyingSphericShadowMask(yAngle: .degrees(30), zAngle: .degrees(0))
+            MoonView().applyingSphericShadowMask(yAngle: .degrees(30), zAngle: .degrees(0))
+            MoonView().applyingSphericShadowMask(yAngle: .degrees(120), zAngle: .degrees(10))
+            MoonView().applyingSphericShadowMask(yAngle: .degrees(210), zAngle: .degrees(20))
+            MoonView().applyingSphericShadowMask(yAngle: .degrees(300), zAngle: .degrees(30))
         }
         .padding(10)
         .background(Color(red: 0.03137254902, green: 0.3137254902, blue: 0.5647058824))

@@ -2,13 +2,13 @@ import Foundation
 import SwiftToolbox
 import SwiftUI
 
-struct MoonShadowMask: Shape {
-    let ageAngle: Angle
-    let rotationAngle: Angle
+struct SphericShadowMask: Shape {
+    let yAngle: Angle
+    let zAngle: Angle
 
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        let radians = normalizeRadians(.pi + ageAngle.radians)
+        let radians = normalizeRadians(.pi + yAngle.radians)
         guard !((Double.pi - 0.0001) ... (Double.pi + 0.0001)).contains(radians) else { return path }
 
         let leftFraction: CGFloat = radians < .pi ? -1 : CGFloat(-cos(radians))
@@ -32,20 +32,35 @@ struct MoonShadowMask: Shape {
         // swiftformat:enable all
 
         let transform: CGAffineTransform = .init(translationX: rect.midX, y: rect.midY)
-            .rotated(by: CGFloat(rotationAngle.radians))
+            .rotated(by: CGFloat(zAngle.radians))
             .translatedBy(x: -rect.midX, y: -rect.midY)
 
         return path.applying(transform)
     }
 }
 
-struct MoonShadowMask_Previews: PreviewProvider {
+struct SphericShadowMaskModifier: ViewModifier {
+    let yAngle: Angle
+    let zAngle: Angle
+
+    func body(content: Content) -> some View {
+        content.mask(SphericShadowMask(yAngle: yAngle, zAngle: zAngle))
+    }
+}
+
+public extension View {
+    func applyingSphericShadowMask(yAngle: Angle, zAngle: Angle) -> some View {
+        modifier(SphericShadowMaskModifier(yAngle: yAngle, zAngle: zAngle))
+    }
+}
+
+struct SphericShadowMask_Previews: PreviewProvider {
     static var previews: some View {
         let angles = Array(stride(from: 0.0, to: 360.0, by: 30))
         Group {
             ForEach(angles, id: \.self) { angle in
                 ZStack {
-                    MoonShadowMask(ageAngle: .degrees(angle), rotationAngle: .degrees(0))
+                    SphericShadowMask(yAngle: .degrees(angle), zAngle: .degrees(0))
                         .fill(Color.white)
                         .frame(width: 25, height: 25)
                         .padding(10)
