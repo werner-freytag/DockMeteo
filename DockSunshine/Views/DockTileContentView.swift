@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ViewLibrary
 
 struct DockTileContentView: View {
     @ObservedObject var weatherData: WeatherData
@@ -11,6 +12,19 @@ struct DockTileContentView: View {
     var body: some View {
         ZStack {
             Image(image)
+            SunView()
+                .frame(width: SunView.originalSize.width, height: SunView.originalSize.height)
+                .transformEffect(.init(translationX: 33, y: 33))
+                .shadow(color: textShadowColor, radius: 10, x: 0, y: 0)
+            MoonView()
+                .frame(width: 26, height: 26)
+                .transformEffect(.init(translationX: 33, y: -33))
+                .shadow(color: textShadowColor, radius: 10, x: 0, y: 0)
+            CloudShape()
+                .fill(Color.white)
+                .frame(width: CloudShape.originalSize.width, height: CloudShape.originalSize.height)
+                .transformEffect(.init(translationX: -33, y: 33))
+                .shadow(color: textShadowColor, radius: 10, x: 0, y: 0)
             if let temperature = weatherData.temperature?.rounded() {
                 TemperatureView(temperature: Int(temperature), textShadowColor: textShadowColor)
             }

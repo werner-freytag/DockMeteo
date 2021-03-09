@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SunMoonCalc",
+        "repositoryURL": "https://github.com/werner-freytag/SunMoonCalc.git",
+        "state": {
+          "branch": "develop",
+          "revision": "0f363465b7d58f14325f8a703615725ebf0bf5e9",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftToolbox",
+        "repositoryURL": "https://github.com/werner-freytag/SwiftToolbox.git",
+        "state": {
+          "branch": "develop",
+          "revision": "61fba003a2e8d60392a85ff86fad5adb1eb7af51",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

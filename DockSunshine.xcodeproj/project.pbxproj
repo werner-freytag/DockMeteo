@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36125F6225F2EA690018F781 /* MoonShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36125F6125F2EA690018F781 /* MoonShadow.swift */; };
+		3611974F25F77C2C008B1F19 /* ViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3611974E25F77C2C008B1F19 /* ViewLibrary */; };
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
 		36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */; };
 		36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822525E6CFA70035D7FE /* Localizable.strings */; };
@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36125F6125F2EA690018F781 /* MoonShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonShadow.swift; sourceTree = "<group>"; };
+		3611974C25F77BDC008B1F19 /* ViewLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewLibrary; sourceTree = "<group>"; };
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefault+Keys.swift"; sourceTree = "<group>"; };
 		36B6821E25E6CC900035D7FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -60,12 +60,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */,
+				3611974F25F77C2C008B1F19 /* ViewLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3611974D25F77C2C008B1F19 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3633223B25E7C4310014AA17 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				36ED739325E55374005D81FA /* DockTileContentView.swift */,
-				36125F6125F2EA690018F781 /* MoonShadow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,8 +102,10 @@
 			isa = PBXGroup;
 			children = (
 				36C6590925E3C3B3000D4F46 /* DockSunshine */,
+				3611974C25F77BDC008B1F19 /* ViewLibrary */,
 				3633223E25E7C7240014AA17 /* fastlane */,
 				36C6590825E3C3B3000D4F46 /* Products */,
+				3611974D25F77C2C008B1F19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,6 +165,7 @@
 			name = DockSunshine;
 			packageProductDependencies = (
 				36D0F4C525F1422200935183 /* SunMoonCalc */,
+				3611974E25F77C2C008B1F19 /* ViewLibrary */,
 			);
 			productName = DockSunshine;
 			productReference = 36C6590725E3C3B3000D4F46 /* DockSunshine.app */;
@@ -247,7 +257,6 @@
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
 				36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */,
-				36125F6225F2EA690018F781 /* MoonShadow.swift in Sources */,
 				36ED739225E41192005D81FA /* WeatherData.swift in Sources */,
 				36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */,
 			);
@@ -495,6 +504,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3611974E25F77C2C008B1F19 /* ViewLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewLibrary;
+		};
 		36D0F4C525F1422200935183 /* SunMoonCalc */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */;
