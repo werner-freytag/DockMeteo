@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3611974F25F77C2C008B1F19 /* ViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3611974E25F77C2C008B1F19 /* ViewLibrary */; };
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
+		366042C925F92CDB004FE324 /* DockTileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366042C825F92CDB004FE324 /* DockTileContentView.xib */; };
+		366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CA25F92CEA004FE324 /* DockTileContentView.swift */; };
+		366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */; };
+		366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CF25F94A23004FE324 /* NSTextField+Extension.swift */; };
 		36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */; };
 		36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822525E6CFA70035D7FE /* Localizable.strings */; };
 		36B6822D25E6D2BF0035D7FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */; };
@@ -21,12 +25,15 @@
 		36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */; };
 		36ED738B25E40E83005D81FA /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738A25E40E83005D81FA /* LocationPublisher.swift */; };
 		36ED739225E41192005D81FA /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED739125E41192005D81FA /* WeatherData.swift */; };
-		36ED739425E55374005D81FA /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED739325E55374005D81FA /* DockTileContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3611974C25F77BDC008B1F19 /* ViewLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewLibrary; sourceTree = "<group>"; };
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
+		366042C825F92CDB004FE324 /* DockTileContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DockTileContentView.xib; sourceTree = "<group>"; };
+		366042CA25F92CEA004FE324 /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
+		366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldCell.swift; sourceTree = "<group>"; };
+		366042CF25F94A23004FE324 /* NSTextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Extension.swift"; sourceTree = "<group>"; };
 		36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefault+Keys.swift"; sourceTree = "<group>"; };
 		36B6821E25E6CC900035D7FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6821F25E6CC960035D7FE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -51,7 +58,7 @@
 		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
 		36ED738A25E40E83005D81FA /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		36ED739125E41192005D81FA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
-		36ED739325E55374005D81FA /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
+		36ED739325E55374005D81FA /* DockTileContentSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentSwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +100,11 @@
 		3633223D25E7C4680014AA17 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				36ED739325E55374005D81FA /* DockTileContentView.swift */,
+				36ED739325E55374005D81FA /* DockTileContentSwiftUIView.swift */,
+				366042CA25F92CEA004FE324 /* DockTileContentView.swift */,
+				366042C825F92CDB004FE324 /* DockTileContentView.xib */,
+				366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */,
+				366042CF25F94A23004FE324 /* NSTextField+Extension.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,6 +232,7 @@
 				36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */,
 				36C6591025E3C3B4000D4F46 /* MainMenu.xib in Resources */,
 				3633223F25E7C7240014AA17 /* fastlane in Resources */,
+				366042C925F92CDB004FE324 /* DockTileContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,12 +263,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36ED739425E55374005D81FA /* DockTileContentView.swift in Sources */,
 				36ED738B25E40E83005D81FA /* LocationPublisher.swift in Sources */,
 				36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */,
+				366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */,
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
 				36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */,
+				366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */,
+				366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */,
 				36ED739225E41192005D81FA /* WeatherData.swift in Sources */,
 				36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */,
 			);

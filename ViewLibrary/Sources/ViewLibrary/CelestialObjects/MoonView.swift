@@ -1,36 +1,42 @@
 import SwiftUI
 
 public struct MoonView: View {
-    public init() {}
+    public init(fill fillColor: Color = .white, spotFill spotColor: Color = Color(white: 0).opacity(0.05)) {
+        self.fillColor = fillColor
+        self.spotColor = spotColor
+    }
 
-    static let spotColor = Color(white: 0.5).opacity(0.1)
+    let fillColor: Color
+    let spotColor: Color
 
     public var body: some View {
         GeometryReader { geometry in
             let diameter = min(geometry.size.width, geometry.size.height)
 
             ZStack {
-                Circle()
-                    .fill(RadialGradient(gradient: Gradient(colors: [Color.white, Color(white: 0.9)]), center: .center, startRadius: diameter * 0.2, endRadius: diameter))
+                Group {
+                    Circle().fill(self.fillColor)
+                    Circle().fill(RadialGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color(white: 0).opacity(0.1)]), center: .center, startRadius: diameter * 0.2, endRadius: diameter))
+                }
                 Group {
                     Circle()
-                        .fill(Self.spotColor)
+                        .fill(spotColor)
                         .frame(width: diameter * 0.15, height: diameter * 0.15)
                         .transformEffect(.init(translationX: diameter * 0.2, y: diameter * -0.25))
                     Circle()
-                        .fill(Self.spotColor)
+                        .fill(spotColor)
                         .frame(width: diameter * 0.21, height: diameter * 0.21)
                         .transformEffect(.init(translationX: diameter * 0.3, y: diameter * 0.05))
                     Circle()
-                        .fill(Self.spotColor)
+                        .fill(spotColor)
                         .frame(width: diameter * 0.31, height: diameter * 0.31)
                         .transformEffect(.init(translationX: diameter * -0.25, y: diameter * -0.1))
                     Circle()
-                        .fill(Self.spotColor)
+                        .fill(spotColor)
                         .frame(width: diameter * 0.125, height: diameter * 0.125)
                         .transformEffect(.init(translationX: diameter * -0.18, y: diameter * -0.35))
                     Circle()
-                        .fill(Self.spotColor)
+                        .fill(spotColor)
                         .frame(width: diameter * 0.17, height: diameter * 0.17)
                         .transformEffect(.init(translationX: diameter * -0.05, y: diameter * 0.3))
                 }

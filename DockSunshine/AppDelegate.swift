@@ -12,21 +12,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var weatherPublisher = OpenWeatherPublisher()
     private var cancellable = Set<AnyCancellable>()
 
+    private lazy var contentView: DockTileContentView = {
+        var objects: NSArray!
+        Bundle.main.loadNibNamed("DockTileContentView", owner: nil, topLevelObjects: &objects)
+        return objects.first(where: { type(of: $0) == DockTileContentView.self }) as! DockTileContentView
+    }()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let contentView = DockTileContentView(weatherData: WeatherData())
-        NSApp.dockTile.contentView = NSHostingView(rootView: contentView)
+        NSApp.dockTile.contentView = contentView
 
         weatherPublisher
             .startUpdating()
             .receive(on: RunLoop.main)
-            .sink(receiveValue: { weatherData in
-                contentView.weatherData.condition = weatherData.condition
-                contentView.weatherData.daytime = weatherData.daytime
-                contentView.weatherData.name = weatherData.name
-                contentView.weatherData.datetime = weatherData.datetime
-                contentView.weatherData.datetimeRange = weatherData.datetimeRange
-                contentView.weatherData.temperature = weatherData.temperature
-                contentView.weatherData.temperatureRange = weatherData.temperatureRange
+            .sink(receiveValue: { [contentView] weatherData in
+                contentView.weatherData = weatherData
                 NSApp.dockTile.display()
             })
             .store(in: &cancellable)
