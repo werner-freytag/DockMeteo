@@ -7,11 +7,10 @@ import Cocoa
 
 class DockTileContentView: NSView {
     @IBOutlet var backgroundImageView: NSImageView!
+    @IBOutlet var middleImageView: NSImageView!
     @IBOutlet var foregroundImageView: NSImageView!
     @IBOutlet var temperatureLabel: NSTextField!
     @IBOutlet var nameLabel: NSTextField!
-
-    @IBOutlet var temperatureLabelCenterXConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +35,7 @@ class DockTileContentView: NSView {
                 temperatureLabel.stringValue = "\(Int(temperature))º"
                 temperatureLabel.shadow(color: textShadowColor, radius: 5, x: 0, y: 1)
 
-                temperatureLabelCenterXConstraint.constant = temperature < 0 ? -2 : 6
+                temperatureLabel.frame.origin.x = 10 + (temperature < 0 ? -2 : 6)
             } else {
                 temperatureLabel.stringValue = ""
             }

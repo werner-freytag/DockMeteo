@@ -14,13 +14,18 @@
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZk-uN-xgf" userLabel="Background Image View">
                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Clear Background" id="7yN-7j-s9m"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mPa-Ne-uLm" userLabel="Middle Image View">
+                    <rect key="frame" x="5" y="70" width="54" height="54"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="Sun" id="XcH-UB-EQE"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="MDe-CD-ion" userLabel="Foreground Image View">
                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="BrokenClouds Foreground" id="Zes-SE-a77"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="FewClouds Foreground" id="Zes-SE-a77"/>
                 </imageView>
                 <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KMa-JU-1tk" userLabel="Name Label">
                     <rect key="frame" x="16" y="15" width="96" height="39"/>
@@ -31,11 +36,9 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpG-p0-BQP" userLabel="Temperature Label">
-                    <rect key="frame" x="22" y="44" width="96" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="92" id="Vyj-zo-P6x"/>
-                    </constraints>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" id="OpG-p0-BQP" userLabel="Temperature Label">
+                    <rect key="frame" x="10" y="44" width="108" height="45"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" focusRingType="none" alignment="center" title="...º" usesSingleLineMode="YES" id="PVo-BR-1VA" customClass="CustomTextFieldCell" customModule="DockSunshine" customModuleProvider="target">
                         <font key="font" metaFont="systemLight" size="38"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -43,22 +46,19 @@
                     </textFieldCell>
                 </textField>
             </subviews>
-            <constraints>
-                <constraint firstItem="OpG-p0-BQP" firstAttribute="centerX" secondItem="MDe-CD-ion" secondAttribute="centerX" constant="6" id="5UL-a2-1Ul"/>
-                <constraint firstItem="OpG-p0-BQP" firstAttribute="centerY" secondItem="MDe-CD-ion" secondAttribute="centerY" constant="-2.5" id="Zcp-9I-UzF"/>
-            </constraints>
             <connections>
                 <outlet property="backgroundImageView" destination="GZk-uN-xgf" id="m3r-dO-jOm"/>
                 <outlet property="foregroundImageView" destination="MDe-CD-ion" id="o0b-f0-cxL"/>
+                <outlet property="middleImageView" destination="mPa-Ne-uLm" id="YeI-va-6o3"/>
                 <outlet property="nameLabel" destination="KMa-JU-1tk" id="gSB-jw-gsN"/>
                 <outlet property="temperatureLabel" destination="OpG-p0-BQP" id="iA2-Ir-aRo"/>
-                <outlet property="temperatureLabelCenterXConstraint" destination="5UL-a2-1Ul" id="D2B-Ob-zw1"/>
             </connections>
             <point key="canvasLocation" x="-26" y="39"/>
         </customView>
     </objects>
     <resources>
-        <image name="BrokenClouds Foreground" width="128" height="128"/>
         <image name="Clear Background" width="128" height="128"/>
+        <image name="FewClouds Foreground" width="128" height="128"/>
+        <image name="Sun" width="54" height="54"/>
     </resources>
 </document>
