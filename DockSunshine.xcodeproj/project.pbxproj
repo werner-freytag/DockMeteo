@@ -58,7 +58,6 @@
 		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
 		36ED738A25E40E83005D81FA /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		36ED739125E41192005D81FA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
-		36ED739325E55374005D81FA /* DockTileContentSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentSwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +99,6 @@
 		3633223D25E7C4680014AA17 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				36ED739325E55374005D81FA /* DockTileContentSwiftUIView.swift */,
 				366042CA25F92CEA004FE324 /* DockTileContentView.swift */,
 				366042C825F92CDB004FE324 /* DockTileContentView.xib */,
 				366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */,

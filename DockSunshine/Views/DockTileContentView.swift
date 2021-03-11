@@ -25,6 +25,13 @@ class DockTileContentView: NSView {
         didSet {
             backgroundImageView.image = NSImage(named: backgroundImageName)
 
+            if let middleImageName = middleImageName {
+                middleImageView.image = NSImage(named: middleImageName)
+                middleImageView.frame.origin = middleImagePosition
+            } else {
+                middleImageView.image = nil
+            }
+
             if let foregroundImageName = foregroundImageName {
                 foregroundImageView.image = NSImage(named: foregroundImageName)
             } else {
@@ -35,7 +42,7 @@ class DockTileContentView: NSView {
                 temperatureLabel.stringValue = "\(Int(temperature))º"
                 temperatureLabel.shadow(color: textShadowColor, radius: 5, x: 0, y: 1)
 
-                temperatureLabel.frame.origin.x = 10 + (temperature < 0 ? -2 : 6)
+                temperatureLabel.frame.origin.x = 10 + (temperature < 0 ? -1 : 3)
             } else {
                 temperatureLabel.stringValue = ""
             }
@@ -43,170 +50,7 @@ class DockTileContentView: NSView {
             nameLabel.stringValue = weatherData?.name ?? ""
         }
     }
-}
 
-/*
-     @ObservedObject var weatherData: WeatherData
-
-     var body: some View {
-         ZStack {
-             Image(backgroundImageName)
-             if let foregroundImageName = foregroundImageName {
-                 Image(foregroundImageName)
-             }
-
-             if false {
-                 SunView()
-                     .frame(width: SunView.originalSize.width, height: SunView.originalSize.height)
-                     .transformEffect(.init(translationX: 33, y: 33))
-                     .shadow(color: textShadowColor, radius: 3, x: 0, y: 0)
-                 ZStack {
-     //                MoonView(fill: .init(hex: 0x526288), spotFill: .init(white: 0).opacity(0.1))
-                     MoonView()
-                         .applyingSphericShadowMask(yAngle: .degrees(60), zAngle: .zero)
-                 }
-                 .frame(width: 26, height: 26)
-                 .transformEffect(.init(translationX: 33, y: -33))
-                 .shadow(color: textShadowColor, radius: 3, x: 0, y: 0)
-             }
-
-             SnowFlakeShape()
-                 .stroke(Color.white, style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
-                 .frame(width: SnowFlakeShape.originalSize.width, height: SnowFlakeShape.originalSize.height)
-                 .transformEffect(.init(translationX: -33, y: -33))
-                 .shadow(color: textShadowColor, radius: 3, x: 0, y: 0)
-             RainShape()
-                 .stroke(Color(red: 0.3, green: 0.4, blue: 0.5).opacity(0.7), style: StrokeStyle(lineWidth: 1.0, lineCap: .round))
-                 .frame(width: RainShape.originalSize.width, height: RainShape.originalSize.height)
-                 .transformEffect(.init(translationX: 0, y: -33))
-                 .shadow(color: textShadowColor, radius: 3, x: 0, y: 0)
-             FlashShape()
-                 .fill(Color.white)
-                 .frame(width: FlashShape.originalSize.width, height: FlashShape.originalSize.height)
-                 .transformEffect(.init(translationX: -33, y: 0))
-             CloudShape()
-                 .fill(Color.white)
-                 .frame(width: CloudShape.originalSize.width, height: CloudShape.originalSize.height)
-                 .transformEffect(.init(translationX: -33, y: 33))
-                 .shadow(color: textShadowColor, radius: 3, x: 0, y: 0)
-             if let temperature = weatherData.temperature?.rounded() {
-                 TemperatureView(temperature: Int(temperature), textShadowColor: textShadowColor)
-             }
-             if let name = weatherData.name {
-                 NameView(name: name)
-             }
-         }
-         .frame(width: 128.0, height: 128.0)
-     }
-
-     private func applyDaytime(to string: String) -> String {
-         weatherData.daytime == .night ? "\(string)_Night" : string
-     }
-
-     private var textShadowColor: Color {
-         switch true {
-         case weatherData.daytime == .night:
-             return Color(hex: 0x001F3A).opacity(0.86)
-         default:
-             return Color(hex: 0x7E9FB1)
-         }
-     }
-
-     private var backgroundGradient: Gradient {
-         switch true {
-         default:
-             return Gradient(colors: [.init(hex: 0xABD8FF), .init(hex: 0x4CA7E3).opacity(0.9)])
-         }
-     }
-
-     private var image: String {
-         switch weatherData.condition {
-         case .clearSky:
-             return applyDaytime(to: "Clear")
-         case .fewClouds:
-             return applyDaytime(to: "FewClouds")
-         case .scatteredClouds:
-             return applyDaytime(to: "ScatteredClouds")
-         case .brokenClouds:
-             return applyDaytime(to: "BrokenClouds")
-         case .showerRain:
-             return applyDaytime(to: "ShowerRain")
-         case .rain:
-             return applyDaytime(to: "Rain")
-         case .thunderstorm:
-             return applyDaytime(to: "Thunderstorm")
-         case .snow:
-             return applyDaytime(to: "Snow")
-         case .mist:
-             return applyDaytime(to: "Mist")
-         case .none:
-             return "Placeholder"
-         }
-     }
- }
-
- struct DockTileContentView_Previews: PreviewProvider {
-     static var previews: some View {
-         Group {
-             DockTileContentView(weatherData: WeatherData(condition: .clearSky, name: "Paris", temperature: 32))
-             DockTileContentView(weatherData: WeatherData(condition: .fewClouds, daytime: .night, name: "San Francisco", temperature: 47))
-             DockTileContentView(weatherData: WeatherData(condition: .snow, name: "St. Moritz", temperature: -1))
-             DockTileContentView(weatherData: WeatherData(condition: .rain, name: "London", temperature: 19))
-         }
-     }
- }
-
- struct NameView: View {
-     var name: String
-     var body: some View {
-         VStack {
-             Spacer()
-             Text(name)
-                 .font(.system(size: 14, weight: .regular, design: .rounded))
-                 .multilineTextAlignment(.center)
-                 .lineLimit(2)
-                 .frame(width: 94.0, height: 35.0)
-                 .foregroundColor(Color.white)
-                 .opacity(0.75)
-             Spacer()
-                 .frame(height: 17.0)
-         }
-     }
- }
-
- struct TemperatureView: View {
-     var temperature: Int
-     var textShadowColor: Color
-
-     var body: some View {
-         VStack {
-             HStack {
-                 Spacer()
-                     .frame(width: 6.0)
-                 Text("\(temperature)º")
-                     .font(.system(size: 38, weight: .light, design: .rounded))
-                     .multilineTextAlignment(.center)
-                     .foregroundColor(Color.white)
-                     .shadow(color: textShadowColor, radius: 5, x: 0, y: 1)
-                 if temperature < 0 {
-                     Spacer()
-                         .frame(width: 16)
-                 }
-             }
-             Spacer()
-                 .frame(height: 6.0)
-         }
-     }
- }
-
- //var conditionDetails: (backgroundImage: String, foregroundImage: String?, sunImage: String?, moonImage: String?) {
-
- private extension DockTileContentView {
-
- }
- */
-
-private extension DockTileContentView {
     private var textShadowColor: NSColor {
         switch true {
         case weatherData?.daytime == .night:
@@ -251,7 +95,41 @@ private extension DockTileContentView {
         }
     }
 
-    var backgroundImageName: String {
+    private var middleImageName: String? {
+        switch weatherData?.daytime {
+        case .none:
+            return nil
+        case .day:
+            switch weatherData?.condition {
+            case .clearSky, .fewClouds:
+                return "Sun"
+            case .rain, .mist:
+                return "Sun weak"
+            default:
+                return nil
+            }
+        case .night:
+            switch weatherData?.condition {
+            case .clearSky, .fewClouds, .rain:
+                return "Moon"
+            case .mist:
+                return "Moon weak"
+            default:
+                return nil
+            }
+        }
+    }
+
+    private var middleImagePosition: CGPoint {
+        switch weatherData?.condition {
+        case .rain:
+            return .init(x: 29, y: 70)
+        default:
+            return .init(x: 5, y: 70)
+        }
+    }
+
+    private var backgroundImageName: String {
         switch weatherData?.daytime {
         case .day, .none:
             switch weatherData?.condition {
