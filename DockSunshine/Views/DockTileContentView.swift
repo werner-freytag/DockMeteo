@@ -24,8 +24,17 @@ class DockTileContentView: NSView {
 
     var weatherData: WeatherData? {
         didSet {
-            updateSunAndMoon()
-            printSunAndMoon()
+            if let weatherData = weatherData,
+               let location = weatherData.location,
+               let date = weatherData.date,
+               location.coordinate != oldValue?.location?.coordinate || date != oldValue?.date {
+                print()
+                NSLog("\(weatherData)")
+
+                updateSunAndMoon()
+                printSunAndMoon()
+            }
+
             updateViews()
         }
     }
@@ -63,11 +72,12 @@ class DockTileContentView: NSView {
             return formatter.string(for: date)!
         }
 
-        NSLog("")
+        print()
         NSLog("Sonnenaufgang: \(date(sun.ephemeris.rise)), -untergang: \(date(sun.ephemeris.set))")
         NSLog("Sonnenrichtung: \(direction(sun.ephemeris.azimuth)) (\(degrees(sun.ephemeris.azimuth)))")
         NSLog("Sonnenstand: \(degrees(sun.ephemeris.elevation)), maximal: \(degrees(sun.ephemeris.transitElevation))")
 
+        print()
         NSLog("Mondaufgang: \(date(moon.ephemeris.rise)), -untergang: \(date(moon.ephemeris.set))")
         NSLog("Mondrichtung:  \(direction(moon.ephemeris.azimuth)) (\(degrees(moon.ephemeris.azimuth)))")
         NSLog("Mondstand: \(degrees(moon.ephemeris.elevation)), maximal: \(degrees(moon.ephemeris.transitElevation))")

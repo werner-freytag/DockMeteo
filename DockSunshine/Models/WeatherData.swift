@@ -26,7 +26,7 @@ struct WeatherData {
         var name: String?
         let coordinate: Coordinate
 
-        struct Coordinate {
+        struct Coordinate: Equatable {
             let latitude: Double
             let longitude: Double
         }

@@ -10,7 +10,7 @@ import SunMoonCalc
 
 class OpenWeatherPublisher {
     // Refresh every 10 minutes - or every 10 seconds, when no initial data exists
-    var refreshInterval: TimeInterval { weatherData.condition != nil ? TimeInterval(600) : TimeInterval(10) }
+    var refreshInterval: TimeInterval { weatherData.condition == nil || weatherData.location?.name == nil ? TimeInterval(10) : TimeInterval(600) }
 
     // Update when distance to last position is more than
     let refreshDistance = CLLocationDistance(1000)
@@ -53,8 +53,14 @@ class OpenWeatherPublisher {
             weatherData.location = .init(location)
 
             geocoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
-                guard let placemark = placemarks?.first, let locality = placemark.locality, self.weatherData.location?.name != locality else { return }
+                guard let placemark = placemarks?.first,
+                      let locality = placemark.locality,
+                      !locality.isEmpty,
+                      self.weatherData.location?.name != locality else { return }
+
+                print()
                 NSLog("Geocode-Location: \(placemark)")
+
                 self.weatherData.location?.name = locality
             })
 
@@ -90,7 +96,8 @@ class OpenWeatherPublisher {
                     guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
 
                     let location: WeatherData.Location? = {
-                        guard let location = self.weatherData.location, let newLocation = weatherData.location,
+                        guard let location = self.weatherData.location, location.name != nil,
+                              let newLocation = weatherData.location,
                               self.refreshDistance > CLLocation(location).distance(from: CLLocation(newLocation)) else { return weatherData.location }
                         return location
                     }()
@@ -115,16 +122,19 @@ class OpenWeatherPublisher {
 
     private var requestURL: URL? {
 <<<<<<< HEAD
+<<<<<<< HEAD
         guard let currentLocation = currentLocation else { return nil }
 =======
         guard let location = location else { assertionFailure(); return nil }
 >>>>>>> cleanup code, use CLGeocoder
 
+=======
+>>>>>>> improve code
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")!
         urlComponents.queryItems = [
             URLQueryItem(name: "appid", value: "5d20c08f748c06727dbdacc4d6dd2c42"),
-            URLQueryItem(name: "lat", value: String(format: "%f", location.coordinate.latitude)),
-            URLQueryItem(name: "lon", value: String(format: "%f", location.coordinate.longitude)),
+            URLQueryItem(name: "lat", value: String(format: "%f", location?.coordinate.latitude ?? 0)),
+            URLQueryItem(name: "lon", value: String(format: "%f", location?.coordinate.longitude ?? 0)),
             URLQueryItem(name: "units", value: temperatureUnit == .celsius ? "metric" : "imperial"),
         ]
 

@@ -20,10 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        NSApp.dockTile.contentView = contentView
-
         locationPublisher
             .startUpdating()
+            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
             .sink(receiveCompletion: {
                 if case let .failure(error) = $0, self.weatherPublisher.location == nil {
                     self.handleLocationAuthorizationError(error)
@@ -36,8 +35,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         weatherPublisher
             .startUpdating()
             .receive(on: RunLoop.main)
+            .filter { $0.condition != nil }
             .sink(receiveValue: { [contentView] weatherData in
                 contentView.weatherData = weatherData
+                NSApp.dockTile.contentView = contentView
                 NSApp.dockTile.display()
             })
             .store(in: &cancellable)

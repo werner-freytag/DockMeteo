@@ -12,7 +12,7 @@ class LocationPublisher: NSObject {
 
     lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.desiredAccuracy = kCLLocationAccuracyKilometer
         manager.delegate = self
         return manager
     }()
