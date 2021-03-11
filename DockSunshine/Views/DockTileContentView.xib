@@ -30,8 +30,11 @@
                 <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KMa-JU-1tk" userLabel="Name Label">
                     <rect key="frame" x="16" y="15" width="96" height="39"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textFieldCell key="cell" allowsUndo="NO" focusRingType="none" alignment="center" title="..." id="hiM-2v-N3s" customClass="CustomTextFieldCell" customModule="DockSunshine" customModuleProvider="target">
+                    <textFieldCell key="cell" truncatesLastVisibleLine="YES" allowsUndo="NO" focusRingType="none" alignment="center" id="hiM-2v-N3s" customClass="CustomTextFieldCell" customModule="DockSunshine" customModuleProvider="target">
                         <font key="font" metaFont="system" size="14"/>
+                        <string key="title" base64-UTF8="YES">
+Cg
+</string>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

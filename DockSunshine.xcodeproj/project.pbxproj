@@ -13,7 +13,6 @@
 		366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CA25F92CEA004FE324 /* DockTileContentView.swift */; };
 		366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */; };
 		366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CF25F94A23004FE324 /* NSTextField+Extension.swift */; };
-		36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */; };
 		36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822525E6CFA70035D7FE /* Localizable.strings */; };
 		36B6822D25E6D2BF0035D7FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */; };
 		36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */; };
@@ -34,7 +33,6 @@
 		366042CA25F92CEA004FE324 /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
 		366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldCell.swift; sourceTree = "<group>"; };
 		366042CF25F94A23004FE324 /* NSTextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Extension.swift"; sourceTree = "<group>"; };
-		36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefault+Keys.swift"; sourceTree = "<group>"; };
 		36B6821E25E6CC900035D7FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6821F25E6CC960035D7FE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6822025E6CC9B0035D7FE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -80,14 +78,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3633223B25E7C4310014AA17 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		3633223C25E7C44C0014AA17 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,7 +121,6 @@
 			children = (
 				3633223D25E7C4680014AA17 /* Views */,
 				3633223C25E7C44C0014AA17 /* Models */,
-				3633223B25E7C4310014AA17 /* Extensions */,
 				36ED738C25E40F1C005D81FA /* OpenWeather */,
 				36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */,
 				36ED738A25E40E83005D81FA /* LocationPublisher.swift */,
@@ -265,7 +254,6 @@
 				36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */,
 				366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */,
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
-				36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */,
 				366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */,
 				366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */,

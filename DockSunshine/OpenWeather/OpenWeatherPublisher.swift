@@ -10,37 +10,23 @@ import SunMoonCalc
 
 class OpenWeatherPublisher {
     // Refresh every 10 minutes - or every 10 seconds, when no initial data exists
-    var refreshInterval: TimeInterval { didReceiveWeatherData ? TimeInterval(600) : TimeInterval(10) }
+    var refreshInterval: TimeInterval { weatherData.condition != nil ? TimeInterval(600) : TimeInterval(10) }
 
     // Update when distance to last position is more than
     let refreshDistance = CLLocationDistance(1000)
 
     private let weatherDataSubject = PassthroughSubject<WeatherData, Never>()
 
-    private lazy var locationPublisher = LocationPublisher()
+    private lazy var geocoder = CLGeocoder()
 
     private var cancellable = Set<AnyCancellable>()
 
     private var refreshTimer: Timer?
 
     func startUpdating() -> AnyPublisher<WeatherData, Never> {
-        currentLocation = UserDefaults.standard.lastLocation
-
-        locationPublisher
-            .startUpdating()
-            .sink(receiveCompletion: {
-                if case let .failure(error) = $0, self.currentLocation == nil {
-                    self.handleLocationAuthorizationError(error)
-                }
-            }, receiveValue: { locations in
-                self.currentLocation = locations.last
-                UserDefaults.standard.lastLocation = self.currentLocation
-            })
-            .store(in: &cancellable)
-
         NotificationCenter.default.publisher(for: NSLocale.currentLocaleDidChangeNotification)
             .sink { _ in
-                self.refresh()
+                self.refreshWeatherInformation()
             }
             .store(in: &cancellable)
 
@@ -56,23 +42,37 @@ class OpenWeatherPublisher {
 
     private func startRefreshTimer() {
         refreshTimer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: false, block: { _ in
-            self.refresh()
+            self.refreshWeatherInformation()
         })
     }
 
-    private var lastUpdateLocation: CLLocation?
-    private var currentLocation: CLLocation? {
-        didSet {
-            guard let currentLocation = currentLocation else { return }
-            if let lastUpdateLocation = lastUpdateLocation, refreshDistance > lastUpdateLocation.distance(from: currentLocation) { return }
+    var location: CLLocation? {
+        set {
+            guard let location = newValue else { return }
+            if let lastUpdateLocation = weatherData.location, refreshDistance > CLLocation(lastUpdateLocation).distance(from: location) { return }
+            weatherData.location = .init(location)
 
-            refresh()
+            geocoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+                guard let placemark = placemarks?.first, let locality = placemark.locality, self.weatherData.location?.name != locality else { return }
+                NSLog("Geocode-Location: \(placemark)")
+                self.weatherData.location?.name = locality
+            })
+
+            refreshWeatherInformation()
+        }
+        get {
+            guard let location = weatherData.location else { return nil }
+            return CLLocation(location)
         }
     }
 
-    private var didReceiveWeatherData = false
+    private var weatherData = WeatherData() {
+        didSet {
+            weatherDataSubject.send(weatherData)
+        }
+    }
 
-    func refresh() {
+    func refreshWeatherInformation() {
         stopRefreshTimer()
         defer { startRefreshTimer() }
 
@@ -81,7 +81,7 @@ class OpenWeatherPublisher {
         URLSession.shared.dataTaskPublisher(for: requestURL)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: {
-                if case let .failure(error) = $0, !self.didReceiveWeatherData {
+                if case let .failure(error) = $0, self.weatherData.condition == nil {
                     self.handleDownloadError(error.localizedDescription)
                 }
             }, receiveValue: { data, response in
@@ -89,44 +89,14 @@ class OpenWeatherPublisher {
                     let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
                     guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
 
-                    if let coordinate = self.currentLocation?.coordinate {
-                        func degrees(_ angle: Measurement<UnitAngle>) -> String {
-                            return MeasurementFormatter().string(from: angle.converted(to: .degrees))
-                        }
-                        func double(_ value: Double) -> String {
-                            let formatter = NumberFormatter()
-                            formatter.numberStyle = .decimal
-                            formatter.maximumFractionDigits = 2
-                            return formatter.string(from: NSNumber(value: value))!
-                        }
-                        func direction(_ angle: Measurement<UnitAngle>) -> SkyDirection {
-                            return SkyDirection(angle: angle)
-                        }
+                    let location: WeatherData.Location? = {
+                        guard let location = self.weatherData.location, let newLocation = weatherData.location,
+                              self.refreshDistance > CLLocation(location).distance(from: CLLocation(newLocation)) else { return weatherData.location }
+                        return location
+                    }()
 
-                        func date(_ date: Date?) -> String {
-                            guard let date = date else { return "-" }
-                            let formatter = DateFormatter()
-                            formatter.dateStyle = .short
-                            formatter.timeStyle = .short
-                            return formatter.string(for: date)!
-                        }
-
-                        let sun = Sun(location: .init(coordinate.latitude, coordinate.longitude), twilightMode: .closest)
-                        NSLog("")
-                        NSLog("Sonnenaufgang: \(date(sun.ephemeris.rise)), -untergang: \(date(sun.ephemeris.set))")
-                        NSLog("Sonnenrichtung: \(direction(sun.ephemeris.azimuth)) (\(degrees(sun.ephemeris.azimuth)))")
-                        NSLog("Sonnenstand: \(degrees(sun.ephemeris.elevation)), maximal: \(degrees(sun.ephemeris.transitElevation))")
-
-                        let moon = Moon(location: .init(coordinate.latitude, coordinate.longitude), twilightMode: .closest)
-                        NSLog("Mondaufgang: \(date(moon.ephemeris.rise)), -untergang: \(date(moon.ephemeris.set))")
-                        NSLog("Mondrichtung:  \(direction(moon.ephemeris.azimuth)) (\(degrees(moon.ephemeris.azimuth)))")
-                        NSLog("Mondstand: \(degrees(moon.ephemeris.elevation)), maximal: \(degrees(moon.ephemeris.transitElevation))")
-                        NSLog("Mondphase: \(moon.phase) (\(double(moon.phaseAge / Moon.maxPhaseAge * 100))%%), Beleuchtung: \(double(moon.illumination * 100))%%, Schattenwinkel: \(degrees(moon.diskOrientationViewingAngles.shadow))")
-                    }
-
-                    self.didReceiveWeatherData = true
-
-                    self.weatherDataSubject.send(weatherData)
+                    let newWeatherData = WeatherData(condition: weatherData.condition, temperature: weatherData.temperature, temperatureRange: weatherData.temperatureRange, location: location, date: weatherData.date)
+                    self.weatherData = newWeatherData
                 } catch {
                     assertionFailure("\(error)")
                 }
@@ -144,33 +114,21 @@ class OpenWeatherPublisher {
     }
 
     private var requestURL: URL? {
+<<<<<<< HEAD
         guard let currentLocation = currentLocation else { return nil }
+=======
+        guard let location = location else { assertionFailure(); return nil }
+>>>>>>> cleanup code, use CLGeocoder
 
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")!
         urlComponents.queryItems = [
             URLQueryItem(name: "appid", value: "5d20c08f748c06727dbdacc4d6dd2c42"),
-            URLQueryItem(name: "lat", value: String(format: "%f", currentLocation.coordinate.latitude)),
-            URLQueryItem(name: "lon", value: String(format: "%f", currentLocation.coordinate.longitude)),
+            URLQueryItem(name: "lat", value: String(format: "%f", location.coordinate.latitude)),
+            URLQueryItem(name: "lon", value: String(format: "%f", location.coordinate.longitude)),
             URLQueryItem(name: "units", value: temperatureUnit == .celsius ? "metric" : "imperial"),
         ]
 
         return urlComponents.url
-    }
-
-    private func handleLocationAuthorizationError(_ error: LocationPublisher.Error) {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("Location services are not enabled.", comment: "Alert title")
-        alert.addButton(withTitle: NSLocalizedString("Quit DockSunshine", comment: "Alert button"))
-        alert.addButton(withTitle: NSLocalizedString("Open Preferences", comment: "Alert button"))
-
-        let workspace = NSWorkspace.shared
-        switch alert.runModal() {
-        case .alertFirstButtonReturn:
-            NSApp.terminate(self)
-        default:
-            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security"))
-            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"))
-        }
     }
 
     private var didShowAlertNoWeatherData = false
@@ -210,30 +168,25 @@ private extension OpenWeatherResponse.Icon {
             return .mist
         }
     }
-
-    var daytime: WeatherData.Daytime {
-        switch self {
-        case .clearSky_Night, .fewClouds_Night, .scatteredClouds_Night, .brokenClouds_Night, .showerRain_Night, .rain_Night, .thunderstorm_Night, .snow_Night, .mist_Night:
-            return .night
-        default:
-            return .day
-        }
-    }
 }
 
 private extension WeatherData {
-    convenience init?(response: OpenWeatherResponse) {
+    init?(response: OpenWeatherResponse) {
         assert(response.weather.last != nil)
         guard let weather = response.weather.last else { return nil }
 
-        self.init(
-            condition: weather.icon.condition,
-            daytime: weather.icon.daytime,
-            name: response.name,
-            datetime: Date(timeIntervalSince1970: response.dt),
-            datetimeRange: Date(timeIntervalSince1970: response.sys.sunrise) ..< Date(timeIntervalSince1970: response.sys.sunset),
-            temperature: response.main.temp,
-            temperatureRange: response.main.temp_min ..< response.main.temp_max
-        )
+        self.init(condition: weather.icon.condition, temperature: response.main.temp, temperatureRange: response.main.temp_min ..< response.main.temp_max, location: .init(name: response.name, coordinate: .init(latitude: response.coord.lat, longitude: response.coord.lon)), date: Date(timeIntervalSince1970: response.dt))
+    }
+}
+
+private extension CLLocation {
+    convenience init(_ location: WeatherData.Location) {
+        self.init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+    }
+}
+
+private extension WeatherData.Location {
+    init(_ location: CLLocation) {
+        self.init(name: nil, coordinate: .init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude))
     }
 }

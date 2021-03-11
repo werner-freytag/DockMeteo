@@ -5,27 +5,32 @@
 
 import Foundation
 
-class WeatherData: ObservableObject {
-    init(condition: Condition? = nil, daytime: Daytime = .day, name: String? = nil, datetime: Date? = nil, datetimeRange: Range<Date>? = nil, temperature: Double? = nil, temperatureRange: Range<Double>? = nil) {
+struct WeatherData {
+    init(condition: Condition? = nil, temperature: Double? = nil, temperatureRange: Range<Double>? = nil, location: Location? = nil, date: Date? = nil) {
         self.condition = condition
-        self.daytime = daytime
-        self.name = name
-        self.datetime = datetime
-        self.datetimeRange = datetimeRange
         self.temperature = temperature
         self.temperatureRange = temperatureRange
+
+        self.location = location
+        self.date = date
     }
 
-    @Published var condition: Condition?
-    @Published var daytime: Daytime?
+    let condition: Condition?
+    let temperature: Double?
+    let temperatureRange: Range<Double>?
 
-    @Published var name: String?
+    var location: Location?
+    let date: Date?
 
-    @Published var datetime: Date?
-    @Published var datetimeRange: Range<Date>?
+    struct Location {
+        var name: String?
+        let coordinate: Coordinate
 
-    @Published var temperature: Double?
-    @Published var temperatureRange: Range<Double>?
+        struct Coordinate {
+            let latitude: Double
+            let longitude: Double
+        }
+    }
 
     enum Condition {
         case clearSky
@@ -37,10 +42,5 @@ class WeatherData: ObservableObject {
         case thunderstorm
         case snow
         case mist
-    }
-
-    enum Daytime {
-        case day
-        case night
     }
 }

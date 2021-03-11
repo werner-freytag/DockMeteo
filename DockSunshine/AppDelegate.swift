@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    private lazy var locationPublisher = LocationPublisher()
     private lazy var weatherPublisher = OpenWeatherPublisher()
     private var cancellable = Set<AnyCancellable>()
 
@@ -21,6 +22,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.dockTile.contentView = contentView
 
+        locationPublisher
+            .startUpdating()
+            .sink(receiveCompletion: {
+                if case let .failure(error) = $0, self.weatherPublisher.location == nil {
+                    self.handleLocationAuthorizationError(error)
+                }
+            }, receiveValue: { locations in
+                self.weatherPublisher.location = locations.last
+            })
+            .store(in: &cancellable)
+
         weatherPublisher
             .startUpdating()
             .receive(on: RunLoop.main)
@@ -29,5 +41,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 NSApp.dockTile.display()
             })
             .store(in: &cancellable)
+    }
+
+    private func handleLocationAuthorizationError(_ error: LocationPublisher.Error) {
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("Location services are not enabled.", comment: "Alert title")
+        alert.addButton(withTitle: NSLocalizedString("Quit DockSunshine", comment: "Alert button"))
+        alert.addButton(withTitle: NSLocalizedString("Open Preferences", comment: "Alert button"))
+
+        let workspace = NSWorkspace.shared
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:
+            NSApp.terminate(self)
+        default:
+            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security"))
+            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"))
+        }
     }
 }
