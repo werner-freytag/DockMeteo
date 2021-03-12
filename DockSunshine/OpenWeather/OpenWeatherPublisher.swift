@@ -125,20 +125,8 @@ class OpenWeatherPublisher {
     }
 
     private var requestURL: URL? {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        guard let currentLocation = currentLocation else { return nil }
-=======
-        guard let location = location else { assertionFailure(); return nil }
->>>>>>> cleanup code, use CLGeocoder
-
-=======
->>>>>>> improve code
-=======
         let location = location ?? .applePark
 
->>>>>>> fix smaller issues
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")!
         urlComponents.queryItems = [
             URLQueryItem(name: "appid", value: "5d20c08f748c06727dbdacc4d6dd2c42"),
