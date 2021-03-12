@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3611974F25F77C2C008B1F19 /* ViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3611974E25F77C2C008B1F19 /* ViewLibrary */; };
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
 		3641C8F325FB5C2800748BB7 /* ReachabilityPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F225FB5C2800748BB7 /* ReachabilityPublisher.swift */; };
 		3641C8F625FB5C6100748BB7 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 3641C8F525FB5C6100748BB7 /* Reachability */; };
@@ -30,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3611974C25F77BDC008B1F19 /* ViewLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewLibrary; sourceTree = "<group>"; };
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		3641C8F225FB5C2800748BB7 /* ReachabilityPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityPublisher.swift; sourceTree = "<group>"; };
 		3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 			files = (
 				36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */,
 				3641C8F625FB5C6100748BB7 /* Reachability in Frameworks */,
-				3611974F25F77C2C008B1F19 /* ViewLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				36C6590925E3C3B3000D4F46 /* DockSunshine */,
-				3611974C25F77BDC008B1F19 /* ViewLibrary */,
 				3633223E25E7C7240014AA17 /* fastlane */,
 				36C6590825E3C3B3000D4F46 /* Products */,
 				3611974D25F77C2C008B1F19 /* Frameworks */,
@@ -187,7 +183,6 @@
 			name = DockSunshine;
 			packageProductDependencies = (
 				36D0F4C525F1422200935183 /* SunMoonCalc */,
-				3611974E25F77C2C008B1F19 /* ViewLibrary */,
 				3641C8F525FB5C6100748BB7 /* Reachability */,
 			);
 			productName = DockSunshine;
@@ -540,10 +535,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3611974E25F77C2C008B1F19 /* ViewLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ViewLibrary;
-		};
 		3641C8F525FB5C6100748BB7 /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3641C8F425FB5C6100748BB7 /* XCRemoteSwiftPackageReference "Reachability" */;
