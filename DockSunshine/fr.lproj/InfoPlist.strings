@@ -1,5 +1,0 @@
-/* Bundle name */
-"CFBundleName" = "DockSunshine";
-
-/* Privacy - Location Usage Description */
-"NSLocationUsageDescription" = "Ton emplacement est nécessaire pour afficher le temps pour ton emplacement actuel.";
