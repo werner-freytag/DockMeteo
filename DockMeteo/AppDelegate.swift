@@ -10,6 +10,7 @@ import SwiftUI
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var weatherPublisher = OpenWeatherPublisher()
+
     private var cancellable = Set<AnyCancellable>()
 
     private lazy var contentView: DockTileContentView = {
@@ -42,6 +43,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }, receiveValue: {
                 self.weatherPublisher.location = $0
+
+                CLGeocoder().reverseGeocodeLocation($0, completionHandler: { placemarks, error in
+                    self.contentView.placemark = placemarks?.first
+
+                    if let placemark = placemarks?.first {
+                        print()
+                        NSLog("Geocode-Location: \(placemark)")
+                    }
+                })
             })
             .store(in: &cancellable)
 

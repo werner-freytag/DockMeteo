@@ -40,6 +40,12 @@ class DockTileContentView: NSView {
         }
     }
 
+    var placemark: CLPlacemark? {
+        didSet {
+            updateViews()
+        }
+    }
+
     private var sun: Sun?
     private var moon: Moon?
 
@@ -109,7 +115,7 @@ class DockTileContentView: NSView {
             temperatureLabel.stringValue = ""
         }
 
-        if let name = weatherData?.location?.name {
+        if let name = placemark?.locality ?? weatherData?.location?.name {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.maximumLineHeight = 13.0
             paragraphStyle.alignment = .center

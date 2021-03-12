@@ -17,8 +17,6 @@ class OpenWeatherPublisher {
 
     private let weatherDataSubject = PassthroughSubject<WeatherData, Never>()
 
-    private lazy var geocoder = CLGeocoder()
-
     private var cancellable = Set<AnyCancellable>()
 
     private var refreshTimer: Timer?
