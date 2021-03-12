@@ -162,7 +162,7 @@ private extension WeatherData {
         assert(response.weather.last != nil)
         guard let weather = response.weather.last else { return nil }
 
-        self.init(condition: weather.icon.condition, temperature: response.main.temp, temperatureRange: response.main.temp_min ..< response.main.temp_max, location: .init(name: response.name, coordinate: .init(latitude: response.coord.lat, longitude: response.coord.lon)), date: Date(timeIntervalSince1970: response.dt))
+        self.init(condition: weather.icon.condition, temperature: response.main.temp, location: .init(name: response.name, coordinate: .init(latitude: response.coord.lat, longitude: response.coord.lon)), date: Date(timeIntervalSince1970: response.dt))
     }
 }
 

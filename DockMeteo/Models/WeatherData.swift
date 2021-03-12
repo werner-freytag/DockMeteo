@@ -6,10 +6,9 @@
 import Foundation
 
 struct WeatherData {
-    init(condition: Condition? = nil, temperature: Double? = nil, temperatureRange: Range<Double>? = nil, location: Location? = nil, date: Date? = nil) {
+    init(condition: Condition? = nil, temperature: Double? = nil, location: Location? = nil, date: Date? = nil) {
         self.condition = condition
         self.temperature = temperature
-        self.temperatureRange = temperatureRange
 
         self.location = location
         self.date = date
@@ -17,7 +16,6 @@ struct WeatherData {
 
     let condition: Condition?
     let temperature: Double?
-    let temperatureRange: Range<Double>?
 
     let location: Location?
     let date: Date?
