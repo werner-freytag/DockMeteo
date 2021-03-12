@@ -20,22 +20,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var location: CLLocation?
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    private var locationPublisher: AnyPublisher<CLLocation, LocationPublisherFactory.Error> {
         if let location = location {
-            weatherPublisher.location = location
-        } else {
-            LocationPublisherFactory.shared
-                .startUpdating()
-                .throttle(for: 10, scheduler: RunLoop.main, latest: true)
-                .sink(receiveCompletion: {
-                    if case let .failure(error) = $0, self.weatherPublisher.location == nil {
-                        self.handleLocationAuthorizationError(error)
-                    }
-                }, receiveValue: { locations in
-                    self.weatherPublisher.location = locations.last
-                })
-                .store(in: &cancellable)
+            return Just(location)
+                .setFailureType(to: LocationPublisherFactory.Error.self)
+                .eraseToAnyPublisher()
         }
+
+        return LocationPublisherFactory.shared
+            .startUpdating()
+            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+            .compactMap { $0.last }
+            .eraseToAnyPublisher()
+    }
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        locationPublisher
+            .sink(receiveCompletion: {
+                if case let .failure(error) = $0, self.weatherPublisher.location == nil {
+                    self.handleLocationAuthorizationError(error)
+                }
+            }, receiveValue: {
+                self.weatherPublisher.location = $0
+            })
+            .store(in: &cancellable)
 
         weatherPublisher
             .startUpdating()

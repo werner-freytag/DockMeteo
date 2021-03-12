@@ -55,28 +55,11 @@ class OpenWeatherPublisher {
     }
 
     var location: CLLocation? {
-        set {
-            guard let location = newValue else { return }
+        didSet {
+            guard let location = location else { return }
             if let lastUpdateLocation = weatherData.location, refreshDistance > CLLocation(lastUpdateLocation).distance(from: location) { return }
-            weatherData.location = .init(location)
-
-            geocoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
-                guard let placemark = placemarks?.first,
-                      let locality = placemark.locality,
-                      !locality.isEmpty,
-                      self.weatherData.location?.name != locality else { return }
-
-                print()
-                NSLog("Geocode-Location: \(placemark)")
-
-                self.weatherData.location?.name = locality
-            })
 
             refreshWeatherInformation()
-        }
-        get {
-            guard let location = weatherData.location else { return nil }
-            return CLLocation(location)
         }
     }
 
@@ -106,11 +89,7 @@ class OpenWeatherPublisher {
                     print()
                     NSLog("\(weatherData)")
 
-                    var location = self.weatherData.location
-                    if location?.name == nil { location?.name = weatherData.location?.name }
-
-                    let newWeatherData = WeatherData(condition: weatherData.condition, temperature: weatherData.temperature, temperatureRange: weatherData.temperatureRange, location: location, date: weatherData.date)
-                    self.weatherData = newWeatherData
+                    self.weatherData = weatherData
                 } catch {
                     assertionFailure("\(error)")
                 }

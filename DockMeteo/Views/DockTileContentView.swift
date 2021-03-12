@@ -120,21 +120,18 @@ class DockTileContentView: NSView {
         }
     }
 
-    private var daytime: Daytime? {
+    private var isNight: Bool? {
         guard let date = weatherData?.date, let ephemeris = sun?.ephemeris else { return nil }
         guard let rise = ephemeris.rise, let set = ephemeris.set else { assertionFailure(); return nil }
 
-        return (rise ... set).contains(date) ? .day : .night
-    }
+        guard rise <= set else { return (set ... rise).contains(date) }
 
-    enum Daytime {
-        case day
-        case night
+        return !(rise ... set).contains(date)
     }
 
     private var textShadowColor: NSColor {
         switch true {
-        case daytime == .night:
+        case isNight:
             return NSColor(hex: 0x001F3A).withAlphaComponent(0.8)
         default:
             return NSColor(hex: 0x7E9FB1).withAlphaComponent(0.5)
@@ -145,27 +142,27 @@ class DockTileContentView: NSView {
         switch weatherData?.condition {
         case .clearSky, .none:
             return nil
-        case .fewClouds where daytime == .night:
+        case .fewClouds where isNight == true:
             return "FewClouds Night Foreground"
         case .fewClouds:
             return "FewClouds Foreground"
-        case .scatteredClouds where daytime == .night:
+        case .scatteredClouds where isNight == true:
             return "ScatteredClouds Night Foreground"
         case .scatteredClouds:
             return "ScatteredClouds Foreground"
-        case .brokenClouds where daytime == .night:
+        case .brokenClouds where isNight == true:
             return "BrokenClouds Night Foreground"
         case .brokenClouds:
             return "BrokenClouds Foreground"
-        case .showerRain where daytime == .night:
+        case .showerRain where isNight == true:
             return "ShowerRain Night Foreground"
         case .showerRain:
             return "ShowerRain Foreground"
-        case .rain where daytime == .night:
+        case .rain where isNight == true:
             return "Rain Night Foreground"
         case .rain:
             return "Rain Foreground"
-        case .thunderstorm where daytime == .night:
+        case .thunderstorm where isNight == true:
             return "Thunderstorm Night Foreground"
         case .thunderstorm:
             return "Thunderstorm Foreground"
@@ -177,24 +174,22 @@ class DockTileContentView: NSView {
     }
 
     private var middleImageName: String? {
-        switch daytime {
-        case .none:
-            return nil
-        case .day:
-            switch weatherData?.condition {
-            case .clearSky, .fewClouds:
-                return "Sun"
-            case .rain, .mist:
-                return "Sun weak"
-            default:
-                return nil
-            }
-        case .night:
+        switch isNight {
+        case true:
             switch weatherData?.condition {
             case .clearSky, .fewClouds, .rain:
                 return "Moon"
             case .mist:
                 return "Moon weak"
+            default:
+                return nil
+            }
+        default:
+            switch weatherData?.condition {
+            case .clearSky, .fewClouds:
+                return "Sun"
+            case .rain, .mist:
+                return "Sun weak"
             default:
                 return nil
             }
@@ -211,21 +206,8 @@ class DockTileContentView: NSView {
     }
 
     private var backgroundImageName: String {
-        switch daytime {
-        case .day, .none:
-            switch weatherData?.condition {
-            case .clearSky, .fewClouds, .none:
-                return "Clear Background"
-            case .scatteredClouds, .brokenClouds, .showerRain, .rain:
-                return "Cloudy Background"
-            case .thunderstorm:
-                return "Thunderstorm Background"
-            case .snow:
-                return "Snow Background"
-            case .mist:
-                return "Foggy Background"
-            }
-        case .night:
+        switch isNight {
+        case true:
             switch weatherData?.condition {
             case .clearSky, .fewClouds, .none:
                 return "Clear Night Background"
@@ -237,6 +219,19 @@ class DockTileContentView: NSView {
                 return "Snow Night Background"
             case .mist:
                 return "Foggy Night Background"
+            }
+        default:
+            switch weatherData?.condition {
+            case .clearSky, .fewClouds, .none:
+                return "Clear Background"
+            case .scatteredClouds, .brokenClouds, .showerRain, .rain:
+                return "Cloudy Background"
+            case .thunderstorm:
+                return "Thunderstorm Background"
+            case .snow:
+                return "Snow Background"
+            case .mist:
+                return "Foggy Background"
             }
         }
     }
