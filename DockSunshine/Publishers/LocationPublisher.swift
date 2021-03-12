@@ -8,7 +8,9 @@ import CoreLocation
 import Foundation
 
 class LocationPublisher: NSObject {
-    private let locationSubject = PassthroughSubject<[CLLocation], Error>()
+    static let shared = LocationPublisher()
+
+    private let subject = PassthroughSubject<[CLLocation], Error>()
 
     lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -19,18 +21,18 @@ class LocationPublisher: NSObject {
 
     func startUpdating() -> AnyPublisher<[CLLocation], Error> {
         locationManager.startUpdatingLocation()
-        return locationSubject.eraseToAnyPublisher()
+        return subject.eraseToAnyPublisher()
     }
 }
 
 extension LocationPublisher: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locationSubject.send(locations)
+        subject.send(locations)
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .denied || manager.authorizationStatus == .restricted {
-            locationSubject.send(completion: .failure(.authorizationFailed))
+            subject.send(completion: .failure(.authorizationFailed))
         }
     }
 

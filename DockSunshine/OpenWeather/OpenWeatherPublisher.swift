@@ -30,6 +30,14 @@ class OpenWeatherPublisher {
             }
             .store(in: &cancellable)
 
+        try? ReachabilityPublisher.shared
+            .startNotifier()
+            .filter { $0.connection != .unavailable }
+            .sink(receiveValue: { _ in
+                self.refreshWeatherInformation()
+            })
+            .store(in: &cancellable)
+
         startRefreshTimer()
 
         return weatherDataSubject.eraseToAnyPublisher()

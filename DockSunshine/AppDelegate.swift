@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private lazy var locationPublisher = LocationPublisher()
     private lazy var weatherPublisher = OpenWeatherPublisher()
     private var cancellable = Set<AnyCancellable>()
 
@@ -20,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        locationPublisher
+        LocationPublisher.shared
             .startUpdating()
             .throttle(for: 10, scheduler: RunLoop.main, latest: true)
             .sink(receiveCompletion: {
