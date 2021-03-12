@@ -18,18 +18,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return objects.first(where: { type(of: $0) == DockTileContentView.self }) as! DockTileContentView
     }()
 
+    private var location: CLLocation?
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        LocationPublisher.shared
-            .startUpdating()
-            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
-            .sink(receiveCompletion: {
-                if case let .failure(error) = $0, self.weatherPublisher.location == nil {
-                    self.handleLocationAuthorizationError(error)
-                }
-            }, receiveValue: { locations in
-                self.weatherPublisher.location = locations.last
-            })
-            .store(in: &cancellable)
+        if let location = location {
+            weatherPublisher.location = location
+        } else {
+            LocationPublisher.shared
+                .startUpdating()
+                .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+                .sink(receiveCompletion: {
+                    if case let .failure(error) = $0, self.weatherPublisher.location == nil {
+                        self.handleLocationAuthorizationError(error)
+                    }
+                }, receiveValue: { locations in
+                    self.weatherPublisher.location = locations.last
+                })
+                .store(in: &cancellable)
+        }
 
         weatherPublisher
             .startUpdating()

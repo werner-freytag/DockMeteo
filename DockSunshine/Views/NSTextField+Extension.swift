@@ -14,6 +14,7 @@ extension NSTextField {
         let shadow = NSShadow()
         shadow.shadowBlurRadius = radius
         shadow.shadowOffset = .init(width: x, height: y)
+        shadow.shadowColor = color
         self.shadow = shadow
 
         return self

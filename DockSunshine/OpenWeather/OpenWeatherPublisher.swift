@@ -103,12 +103,8 @@ class OpenWeatherPublisher {
                     let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
                     guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
 
-                    let location: WeatherData.Location? = {
-                        guard let location = self.weatherData.location, location.name != nil,
-                              let newLocation = weatherData.location,
-                              self.refreshDistance > CLLocation(location).distance(from: CLLocation(newLocation)) else { return weatherData.location }
-                        return location
-                    }()
+                    var location = self.weatherData.location
+                    if location?.name == nil { location?.name = weatherData.location?.name }
 
                     let newWeatherData = WeatherData(condition: weatherData.condition, temperature: weatherData.temperature, temperatureRange: weatherData.temperatureRange, location: location, date: weatherData.date)
                     self.weatherData = newWeatherData
@@ -131,6 +127,7 @@ class OpenWeatherPublisher {
     private var requestURL: URL? {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         guard let currentLocation = currentLocation else { return nil }
 =======
         guard let location = location else { assertionFailure(); return nil }
@@ -138,11 +135,15 @@ class OpenWeatherPublisher {
 
 =======
 >>>>>>> improve code
+=======
+        let location = location ?? .applePark
+
+>>>>>>> fix smaller issues
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")!
         urlComponents.queryItems = [
             URLQueryItem(name: "appid", value: "5d20c08f748c06727dbdacc4d6dd2c42"),
-            URLQueryItem(name: "lat", value: String(format: "%f", location?.coordinate.latitude ?? 0)),
-            URLQueryItem(name: "lon", value: String(format: "%f", location?.coordinate.longitude ?? 0)),
+            URLQueryItem(name: "lat", value: String(format: "%f", location.coordinate.latitude)),
+            URLQueryItem(name: "lon", value: String(format: "%f", location.coordinate.longitude)),
             URLQueryItem(name: "units", value: temperatureUnit == .celsius ? "metric" : "imperial"),
         ]
 

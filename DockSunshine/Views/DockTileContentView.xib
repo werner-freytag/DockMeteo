@@ -28,7 +28,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="FewClouds Foreground" id="Zes-SE-a77"/>
                 </imageView>
                 <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KMa-JU-1tk" userLabel="Name Label">
-                    <rect key="frame" x="16" y="15" width="96" height="39"/>
+                    <rect key="frame" x="16" y="17" width="96" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" truncatesLastVisibleLine="YES" allowsUndo="NO" focusRingType="none" alignment="center" id="hiM-2v-N3s" customClass="CustomTextFieldCell" customModule="DockSunshine" customModuleProvider="target">
                         <font key="font" metaFont="system" size="14"/>
@@ -40,7 +40,7 @@ Cg
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" id="OpG-p0-BQP" userLabel="Temperature Label">
-                    <rect key="frame" x="10" y="44" width="108" height="45"/>
+                    <rect key="frame" x="10" y="45" width="108" height="45"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" focusRingType="none" alignment="center" title="...º" usesSingleLineMode="YES" id="PVo-BR-1VA" customClass="CustomTextFieldCell" customModule="DockSunshine" customModuleProvider="target">
                         <font key="font" metaFont="systemLight" size="38"/>

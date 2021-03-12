@@ -11,6 +11,7 @@
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
 		3641C8F325FB5C2800748BB7 /* ReachabilityPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F225FB5C2800748BB7 /* ReachabilityPublisher.swift */; };
 		3641C8F625FB5C6100748BB7 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 3641C8F525FB5C6100748BB7 /* Reachability */; };
+		3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */; };
 		366042C925F92CDB004FE324 /* DockTileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366042C825F92CDB004FE324 /* DockTileContentView.xib */; };
 		366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CA25F92CEA004FE324 /* DockTileContentView.swift */; };
 		366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */; };
@@ -32,6 +33,7 @@
 		3611974C25F77BDC008B1F19 /* ViewLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewLibrary; sourceTree = "<group>"; };
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		3641C8F225FB5C2800748BB7 /* ReachabilityPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityPublisher.swift; sourceTree = "<group>"; };
+		3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
 		366042C825F92CDB004FE324 /* DockTileContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DockTileContentView.xib; sourceTree = "<group>"; };
 		366042CA25F92CEA004FE324 /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
 		366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldCell.swift; sourceTree = "<group>"; };
@@ -110,6 +112,14 @@
 			path = Publishers;
 			sourceTree = "<group>";
 		};
+		3641C8F925FB8E0D00748BB7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		36C658FE25E3C3B3000D4F46 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +142,7 @@
 		36C6590925E3C3B3000D4F46 /* DockSunshine */ = {
 			isa = PBXGroup;
 			children = (
+				3641C8F925FB8E0D00748BB7 /* Extensions */,
 				3633223D25E7C4680014AA17 /* Views */,
 				3633223C25E7C44C0014AA17 /* Models */,
 				3641C8F125FB5C1800748BB7 /* Publishers */,
@@ -270,6 +281,7 @@
 				366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */,
 				3641C8F325FB5C2800748BB7 /* ReachabilityPublisher.swift in Sources */,
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
+				3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */,
 				366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */,
 				366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */,
