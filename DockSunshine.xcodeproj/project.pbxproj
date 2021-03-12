@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3611974F25F77C2C008B1F19 /* ViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3611974E25F77C2C008B1F19 /* ViewLibrary */; };
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
-		36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */; };
+		3641C8F325FB5C2800748BB7 /* ReachabilityPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F225FB5C2800748BB7 /* ReachabilityPublisher.swift */; };
+		3641C8F625FB5C6100748BB7 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 3641C8F525FB5C6100748BB7 /* Reachability */; };
+		3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */; };
+		366042C925F92CDB004FE324 /* DockTileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366042C825F92CDB004FE324 /* DockTileContentView.xib */; };
+		366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CA25F92CEA004FE324 /* DockTileContentView.swift */; };
+		366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */; };
+		366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CF25F94A23004FE324 /* NSTextField+Extension.swift */; };
 		36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822525E6CFA70035D7FE /* Localizable.strings */; };
 		36B6822D25E6D2BF0035D7FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */; };
 		36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */; };
@@ -16,15 +23,21 @@
 		36C6591025E3C3B4000D4F46 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36C6590E25E3C3B4000D4F46 /* MainMenu.xib */; };
 		36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6591E25E3ECCC000D4F46 /* OpenWeatherPublisher.swift */; };
 		36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */; };
+		36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 36D0F4C525F1422200935183 /* SunMoonCalc */; };
 		36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */; };
 		36ED738B25E40E83005D81FA /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738A25E40E83005D81FA /* LocationPublisher.swift */; };
 		36ED739225E41192005D81FA /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED739125E41192005D81FA /* WeatherData.swift */; };
-		36ED739425E55374005D81FA /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED739325E55374005D81FA /* DockTileContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3611974C25F77BDC008B1F19 /* ViewLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewLibrary; sourceTree = "<group>"; };
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
-		36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefault+Keys.swift"; sourceTree = "<group>"; };
+		3641C8F225FB5C2800748BB7 /* ReachabilityPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityPublisher.swift; sourceTree = "<group>"; };
+		3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
+		366042C825F92CDB004FE324 /* DockTileContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DockTileContentView.xib; sourceTree = "<group>"; };
+		366042CA25F92CEA004FE324 /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
+		366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldCell.swift; sourceTree = "<group>"; };
+		366042CF25F94A23004FE324 /* NSTextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Extension.swift"; sourceTree = "<group>"; };
 		36B6821E25E6CC900035D7FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6821F25E6CC960035D7FE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6822025E6CC9B0035D7FE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -48,7 +61,6 @@
 		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
 		36ED738A25E40E83005D81FA /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		36ED739125E41192005D81FA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
-		36ED739325E55374005D81FA /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,18 +68,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */,
+				3641C8F625FB5C6100748BB7 /* Reachability in Frameworks */,
+				3611974F25F77C2C008B1F19 /* ViewLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3633223B25E7C4310014AA17 /* Extensions */ = {
+		3611974D25F77C2C008B1F19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				36AB441325E6D459006C2D79 /* UserDefault+Keys.swift */,
 			);
-			path = Extensions;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3633223C25E7C44C0014AA17 /* Models */ = {
@@ -81,17 +95,39 @@
 		3633223D25E7C4680014AA17 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				36ED739325E55374005D81FA /* DockTileContentView.swift */,
+				366042CA25F92CEA004FE324 /* DockTileContentView.swift */,
+				366042C825F92CDB004FE324 /* DockTileContentView.xib */,
+				366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */,
+				366042CF25F94A23004FE324 /* NSTextField+Extension.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3641C8F125FB5C1800748BB7 /* Publishers */ = {
+			isa = PBXGroup;
+			children = (
+				36ED738A25E40E83005D81FA /* LocationPublisher.swift */,
+				3641C8F225FB5C2800748BB7 /* ReachabilityPublisher.swift */,
+			);
+			path = Publishers;
+			sourceTree = "<group>";
+		};
+		3641C8F925FB8E0D00748BB7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		36C658FE25E3C3B3000D4F46 = {
 			isa = PBXGroup;
 			children = (
 				36C6590925E3C3B3000D4F46 /* DockSunshine */,
+				3611974C25F77BDC008B1F19 /* ViewLibrary */,
 				3633223E25E7C7240014AA17 /* fastlane */,
 				36C6590825E3C3B3000D4F46 /* Products */,
+				3611974D25F77C2C008B1F19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,12 +142,12 @@
 		36C6590925E3C3B3000D4F46 /* DockSunshine */ = {
 			isa = PBXGroup;
 			children = (
+				3641C8F925FB8E0D00748BB7 /* Extensions */,
 				3633223D25E7C4680014AA17 /* Views */,
 				3633223C25E7C44C0014AA17 /* Models */,
-				3633223B25E7C4310014AA17 /* Extensions */,
+				3641C8F125FB5C1800748BB7 /* Publishers */,
 				36ED738C25E40F1C005D81FA /* OpenWeather */,
 				36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */,
-				36ED738A25E40E83005D81FA /* LocationPublisher.swift */,
 				36C6590C25E3C3B4000D4F46 /* Assets.xcassets */,
 				36C6590E25E3C3B4000D4F46 /* MainMenu.xib */,
 				36C6591125E3C3B4000D4F46 /* Info.plist */,
@@ -149,6 +185,11 @@
 			dependencies = (
 			);
 			name = DockSunshine;
+			packageProductDependencies = (
+				36D0F4C525F1422200935183 /* SunMoonCalc */,
+				3611974E25F77C2C008B1F19 /* ViewLibrary */,
+				3641C8F525FB5C6100748BB7 /* Reachability */,
+			);
 			productName = DockSunshine;
 			productReference = 36C6590725E3C3B3000D4F46 /* DockSunshine.app */;
 			productType = "com.apple.product-type.application";
@@ -181,6 +222,10 @@
 				it,
 			);
 			mainGroup = 36C658FE25E3C3B3000D4F46;
+			packageReferences = (
+				36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */,
+				3641C8F425FB5C6100748BB7 /* XCRemoteSwiftPackageReference "Reachability" */,
+			);
 			productRefGroup = 36C6590825E3C3B3000D4F46 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,6 +245,7 @@
 				36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */,
 				36C6591025E3C3B4000D4F46 /* MainMenu.xib in Resources */,
 				3633223F25E7C7240014AA17 /* fastlane in Resources */,
+				366042C925F92CDB004FE324 /* DockTileContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,12 +276,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36ED739425E55374005D81FA /* DockTileContentView.swift in Sources */,
 				36ED738B25E40E83005D81FA /* LocationPublisher.swift in Sources */,
 				36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */,
+				366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */,
+				3641C8F325FB5C2800748BB7 /* ReachabilityPublisher.swift in Sources */,
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
-				36AB441425E6D459006C2D79 /* UserDefault+Keys.swift in Sources */,
+				3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */,
+				366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */,
+				366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */,
 				36ED739225E41192005D81FA /* WeatherData.swift in Sources */,
 				36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */,
 			);
@@ -470,6 +519,42 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3641C8F425FB5C6100748BB7 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+		36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/werner-freytag/SunMoonCalc.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3611974E25F77C2C008B1F19 /* ViewLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewLibrary;
+		};
+		3641C8F525FB5C6100748BB7 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3641C8F425FB5C6100748BB7 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+		36D0F4C525F1422200935183 /* SunMoonCalc */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */;
+			productName = SunMoonCalc;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36C658FF25E3C3B3000D4F46 /* Project object */;
 }

@@ -12,23 +12,56 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var weatherPublisher = OpenWeatherPublisher()
     private var cancellable = Set<AnyCancellable>()
 
+    private lazy var contentView: DockTileContentView = {
+        var objects: NSArray!
+        Bundle.main.loadNibNamed("DockTileContentView", owner: nil, topLevelObjects: &objects)
+        return objects.first(where: { type(of: $0) == DockTileContentView.self }) as! DockTileContentView
+    }()
+
+    private var location: CLLocation?
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let contentView = DockTileContentView(weatherData: WeatherData())
-        NSApp.dockTile.contentView = NSHostingView(rootView: contentView)
+        if let location = location {
+            weatherPublisher.location = location
+        } else {
+            LocationPublisher.shared
+                .startUpdating()
+                .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+                .sink(receiveCompletion: {
+                    if case let .failure(error) = $0, self.weatherPublisher.location == nil {
+                        self.handleLocationAuthorizationError(error)
+                    }
+                }, receiveValue: { locations in
+                    self.weatherPublisher.location = locations.last
+                })
+                .store(in: &cancellable)
+        }
 
         weatherPublisher
             .startUpdating()
             .receive(on: RunLoop.main)
-            .sink(receiveValue: { weatherData in
-                contentView.weatherData.condition = weatherData.condition
-                contentView.weatherData.daytime = weatherData.daytime
-                contentView.weatherData.name = weatherData.name
-                contentView.weatherData.datetime = weatherData.datetime
-                contentView.weatherData.datetimeRange = weatherData.datetimeRange
-                contentView.weatherData.temperature = weatherData.temperature
-                contentView.weatherData.temperatureRange = weatherData.temperatureRange
+            .filter { $0.condition != nil }
+            .sink(receiveValue: { [contentView] weatherData in
+                contentView.weatherData = weatherData
+                NSApp.dockTile.contentView = contentView
                 NSApp.dockTile.display()
             })
             .store(in: &cancellable)
+    }
+
+    private func handleLocationAuthorizationError(_ error: LocationPublisher.Error) {
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("Location services are not enabled.", comment: "Alert title")
+        alert.addButton(withTitle: NSLocalizedString("Quit DockSunshine", comment: "Alert button"))
+        alert.addButton(withTitle: NSLocalizedString("Open Preferences", comment: "Alert button"))
+
+        let workspace = NSWorkspace.shared
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:
+            NSApp.terminate(self)
+        default:
+            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security"))
+            workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"))
+        }
     }
 }
