@@ -205,7 +205,7 @@ class DockTileContentView: NSView {
     private var middleImagePosition: CGPoint {
         switch weatherData?.condition {
         case .rain:
-            return .init(x: 29, y: 70)
+            return .init(x: 33, y: 83)
         default:
             return .init(x: 5, y: 70)
         }
