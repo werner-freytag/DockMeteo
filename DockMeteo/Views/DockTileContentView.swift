@@ -28,14 +28,13 @@ class DockTileContentView: NSView {
 
     var weatherData: WeatherData? {
         didSet {
-            if let weatherData = weatherData,
-               let location = weatherData.location,
-               let date = weatherData.date,
-               location.coordinate != oldValue?.location?.coordinate || date != oldValue?.date {
-                updateSunAndMoon()
-                printSunAndMoon()
-            }
+            guard weatherData != oldValue else { return }
+            
+            updateSunAndMoon()
 
+            NSLog("Sun: \(sun!)\n")
+            NSLog("Moon: \(moon!)\n")
+            
             updateViews()
         }
     }
@@ -50,45 +49,9 @@ class DockTileContentView: NSView {
     private var moon: Moon?
 
     private func updateSunAndMoon() {
-        guard let date = weatherData?.date, let coords = weatherData?.location?.coordinate else { return }
+        guard let date = weatherData?.date, let coords = weatherData?.location.coordinate else { return }
         sun = Sun(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: date)
         moon = Moon(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: date, twilightMode: .closest)
-    }
-
-    private func printSunAndMoon() {
-        guard let sun = sun, let moon = moon else { return }
-
-        func degrees(_ angle: Measurement<UnitAngle>) -> String {
-            return MeasurementFormatter().string(from: angle.converted(to: .degrees))
-        }
-        func double(_ value: Double) -> String {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            formatter.maximumFractionDigits = 2
-            return formatter.string(from: NSNumber(value: value))!
-        }
-        func direction(_ angle: Measurement<UnitAngle>) -> SkyDirection {
-            return SkyDirection(angle: angle)
-        }
-
-        func date(_ date: Date?) -> String {
-            guard let date = date else { return "-" }
-            let formatter = DateFormatter()
-            formatter.dateStyle = .short
-            formatter.timeStyle = .short
-            return formatter.string(for: date)!
-        }
-
-        print()
-        NSLog("Sonnenaufgang: \(date(sun.ephemeris.rise)), -untergang: \(date(sun.ephemeris.set))")
-        NSLog("Sonnenrichtung: \(direction(sun.ephemeris.azimuth)) (\(degrees(sun.ephemeris.azimuth)))")
-        NSLog("Sonnenstand: \(degrees(sun.ephemeris.elevation)), maximal: \(degrees(sun.ephemeris.transitElevation))")
-
-        print()
-        NSLog("Mondaufgang: \(date(moon.ephemeris.rise)), -untergang: \(date(moon.ephemeris.set))")
-        NSLog("Mondrichtung:  \(direction(moon.ephemeris.azimuth)) (\(degrees(moon.ephemeris.azimuth)))")
-        NSLog("Mondstand: \(degrees(moon.ephemeris.elevation)), maximal: \(degrees(moon.ephemeris.transitElevation))")
-        NSLog("Mondphase: \(moon.phase) (\(double(moon.phaseAge / Moon.maxPhaseAge * 100))%%), Beleuchtung: \(double(moon.illumination * 100))%%, Schattenwinkel: \(degrees(moon.diskOrientationViewingAngles.shadow))")
     }
 
     private func updateViews() {
@@ -107,7 +70,7 @@ class DockTileContentView: NSView {
             foregroundImageView.image = nil
         }
 
-        if let temperature = weatherData?.temperature?.rounded() {
+        if let temperature = weatherData?.temperature.rounded() {
             temperatureLabel.stringValue = "\(Int(temperature))º"
 
             temperatureLabel.frame.origin.x = 10 + (temperature < 0 ? -1 : 3)
@@ -115,7 +78,7 @@ class DockTileContentView: NSView {
             temperatureLabel.stringValue = ""
         }
 
-        if let name = placemark?.locality ?? weatherData?.location?.name {
+        if let name = placemark?.locality ?? weatherData?.location.name {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.maximumLineHeight = 13.0
             paragraphStyle.alignment = .center

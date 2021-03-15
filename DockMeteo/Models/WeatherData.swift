@@ -6,7 +6,7 @@
 import Foundation
 
 struct WeatherData {
-    init(condition: Condition? = nil, temperature: Double? = nil, location: Location? = nil, date: Date? = nil) {
+    init(condition: Condition, temperature: Double, location: Location, date: Date) {
         self.condition = condition
         self.temperature = temperature
 
@@ -14,17 +14,17 @@ struct WeatherData {
         self.date = date
     }
 
-    let condition: Condition?
-    let temperature: Double?
+    let condition: Condition
+    let temperature: Double
 
-    let location: Location?
-    let date: Date?
+    let location: Location
+    let date: Date
 
     struct Location {
-        var name: String?
+        var name: String
         let coordinate: Coordinate
 
-        struct Coordinate: Equatable {
+        struct Coordinate {
             let latitude: Double
             let longitude: Double
         }
@@ -42,3 +42,9 @@ struct WeatherData {
         case mist
     }
 }
+
+extension WeatherData: Equatable {}
+
+extension WeatherData.Location: Equatable {}
+
+extension WeatherData.Location.Coordinate: Equatable {}

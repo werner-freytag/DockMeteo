@@ -9,8 +9,11 @@ import CoreLocation
 import SunMoonCalc
 
 class OpenWeatherPublisher {
-    // Refresh every 10 minutes - or every 10 seconds, when no initial data exists
-    var refreshInterval: TimeInterval { weatherData.condition == nil || weatherData.location?.name == nil ? TimeInterval(10) : TimeInterval(600) }
+    // Timer runs every 10 seconds so it updates faster when data is missing / outdated
+    var refreshTimerInterval: TimeInterval = 10
+
+    // Refresh every 10 minutes
+    var refreshInterval: TimeInterval = 600
 
     // Update when distance to last position is more than
     let refreshDistance = CLLocationDistance(1000)
@@ -28,14 +31,6 @@ class OpenWeatherPublisher {
             }
             .store(in: &cancellable)
 
-        try? ReachabilityPublisherFactory.shared
-            .startNotifier()
-            .filter { $0.connection != .unavailable }
-            .sink(receiveValue: { _ in
-                self.refreshWeatherInformation()
-            })
-            .store(in: &cancellable)
-
         startRefreshTimer()
 
         return weatherDataSubject.eraseToAnyPublisher()
@@ -47,7 +42,8 @@ class OpenWeatherPublisher {
     }
 
     private func startRefreshTimer() {
-        refreshTimer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: false, block: { _ in
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: refreshTimerInterval, repeats: false, block: { _ in
+            guard self.weatherData?.date.distance(to: .init()) ?? self.refreshInterval >= self.refreshInterval else { return }
             self.refreshWeatherInformation()
         })
     }
@@ -55,14 +51,15 @@ class OpenWeatherPublisher {
     var location: CLLocation? {
         didSet {
             guard let location = location else { return }
-            if let lastUpdateLocation = weatherData.location, refreshDistance > CLLocation(lastUpdateLocation).distance(from: location) { return }
+            if let lastUpdateLocation = weatherData?.location, refreshDistance > CLLocation(lastUpdateLocation).distance(from: location) { return }
 
             refreshWeatherInformation()
         }
     }
 
-    private var weatherData = WeatherData() {
+    private var weatherData: WeatherData? {
         didSet {
+            guard let weatherData = weatherData else { return }
             weatherDataSubject.send(weatherData)
         }
     }
@@ -73,10 +70,12 @@ class OpenWeatherPublisher {
 
         guard let requestURL = requestURL else { return }
 
+        NSLog("Requesting weather information...\n")
+
         URLSession.shared.dataTaskPublisher(for: requestURL)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: {
-                if case let .failure(error) = $0, self.weatherData.condition == nil {
+                if case let .failure(error) = $0, self.weatherData == nil {
                     self.handleDownloadError(error.localizedDescription)
                 }
             }, receiveValue: { data, response in
@@ -84,8 +83,7 @@ class OpenWeatherPublisher {
                     let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
                     guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
 
-                    print()
-                    NSLog("\(weatherData)")
+                    NSLog("Weather: \(weatherData)\n")
 
                     self.weatherData = weatherData
                 } catch {
@@ -169,11 +167,5 @@ private extension WeatherData {
 private extension CLLocation {
     convenience init(_ location: WeatherData.Location) {
         self.init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-    }
-}
-
-private extension WeatherData.Location {
-    init(_ location: CLLocation) {
-        self.init(name: nil, coordinate: .init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude))
     }
 }

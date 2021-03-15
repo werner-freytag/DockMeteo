@@ -48,8 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     self.contentView.placemark = placemarks?.first
 
                     if let placemark = placemarks?.first {
-                        print()
-                        NSLog("Geocode-Location: \(placemark)")
+                        NSLog("Placemark: \(placemark)\n")
                     }
                 })
             })
@@ -58,7 +57,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         weatherPublisher
             .startUpdating()
             .receive(on: RunLoop.main)
-            .filter { $0.condition != nil }
             .sink(receiveValue: { [contentView] weatherData in
                 contentView.weatherData = weatherData
                 NSApp.dockTile.contentView = contentView

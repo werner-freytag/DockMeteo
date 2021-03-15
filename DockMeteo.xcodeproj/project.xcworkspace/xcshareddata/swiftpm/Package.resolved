@@ -2,20 +2,11 @@
   "object": {
     "pins": [
       {
-        "package": "Reachability",
-        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
-        "state": {
-          "branch": null,
-          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-          "version": "5.1.0"
-        }
-      },
-      {
         "package": "SunMoonCalc",
         "repositoryURL": "https://github.com/werner-freytag/SunMoonCalc.git",
         "state": {
           "branch": "develop",
-          "revision": "0f363465b7d58f14325f8a703615725ebf0bf5e9",
+          "revision": "f787b207ff270df4ce33f45dfd4a75ea32121f66",
           "version": null
         }
       },

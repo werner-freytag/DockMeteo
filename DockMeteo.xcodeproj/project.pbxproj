@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
-		3641C8F325FB5C2800748BB7 /* ReachabilityPublisherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F225FB5C2800748BB7 /* ReachabilityPublisherFactory.swift */; };
-		3641C8F625FB5C6100748BB7 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 3641C8F525FB5C6100748BB7 /* Reachability */; };
 		3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */; };
 		366042C925F92CDB004FE324 /* DockTileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366042C825F92CDB004FE324 /* DockTileContentView.xib */; };
 		366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CA25F92CEA004FE324 /* DockTileContentView.swift */; };
@@ -23,6 +21,7 @@
 		36C6591F25E3ECCC000D4F46 /* OpenWeatherPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6591E25E3ECCC000D4F46 /* OpenWeatherPublisher.swift */; };
 		36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */; };
 		36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 36D0F4C525F1422200935183 /* SunMoonCalc */; };
+		36E9413925FF6E9D00E31093 /* CustomStringConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E9413825FF6E9D00E31093 /* CustomStringConvertable.swift */; };
 		36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */; };
 		36ED738B25E40E83005D81FA /* LocationPublisherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738A25E40E83005D81FA /* LocationPublisherFactory.swift */; };
 		36ED739225E41192005D81FA /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED739125E41192005D81FA /* WeatherData.swift */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
-		3641C8F225FB5C2800748BB7 /* ReachabilityPublisherFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityPublisherFactory.swift; sourceTree = "<group>"; };
 		3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
 		366042C825F92CDB004FE324 /* DockTileContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DockTileContentView.xib; sourceTree = "<group>"; };
 		366042CA25F92CEA004FE324 /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +54,7 @@
 		36C6591225E3C3B4000D4F46 /* DockMeteo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockMeteo.entitlements; sourceTree = "<group>"; };
 		36C6591E25E3ECCC000D4F46 /* OpenWeatherPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherPublisher.swift; sourceTree = "<group>"; };
 		36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnitPreferences.swift; sourceTree = "<group>"; };
+		36E9413825FF6E9D00E31093 /* CustomStringConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStringConvertable.swift; sourceTree = "<group>"; };
 		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
 		36ED738A25E40E83005D81FA /* LocationPublisherFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisherFactory.swift; sourceTree = "<group>"; };
 		36ED739125E41192005D81FA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
@@ -67,7 +66,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */,
-				3641C8F625FB5C6100748BB7 /* Reachability in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				36ED738A25E40E83005D81FA /* LocationPublisherFactory.swift */,
-				3641C8F225FB5C2800748BB7 /* ReachabilityPublisherFactory.swift */,
 			);
 			path = Combine;
 			sourceTree = "<group>";
@@ -113,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */,
+				36E9413825FF6E9D00E31093 /* CustomStringConvertable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -183,7 +181,6 @@
 			name = DockMeteo;
 			packageProductDependencies = (
 				36D0F4C525F1422200935183 /* SunMoonCalc */,
-				3641C8F525FB5C6100748BB7 /* Reachability */,
 			);
 			productName = DockMeteo;
 			productReference = 36C6590725E3C3B3000D4F46 /* DockMeteo.app */;
@@ -219,7 +216,6 @@
 			mainGroup = 36C658FE25E3C3B3000D4F46;
 			packageReferences = (
 				36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */,
-				3641C8F425FB5C6100748BB7 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = 36C6590825E3C3B3000D4F46 /* Products */;
 			projectDirPath = "";
@@ -274,7 +270,7 @@
 				36ED738B25E40E83005D81FA /* LocationPublisherFactory.swift in Sources */,
 				36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */,
 				366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */,
-				3641C8F325FB5C2800748BB7 /* ReachabilityPublisherFactory.swift in Sources */,
+				36E9413925FF6E9D00E31093 /* CustomStringConvertable.swift in Sources */,
 				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
 				3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */,
 				366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */,
@@ -516,14 +512,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3641C8F425FB5C6100748BB7 /* XCRemoteSwiftPackageReference "Reachability" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.0;
-			};
-		};
 		36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/werner-freytag/SunMoonCalc.git";
@@ -535,11 +523,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3641C8F525FB5C6100748BB7 /* Reachability */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3641C8F425FB5C6100748BB7 /* XCRemoteSwiftPackageReference "Reachability" */;
-			productName = Reachability;
-		};
 		36D0F4C525F1422200935183 /* SunMoonCalc */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */;
