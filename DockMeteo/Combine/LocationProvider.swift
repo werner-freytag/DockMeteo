@@ -7,8 +7,8 @@ import Combine
 import CoreLocation
 import Foundation
 
-class LocationPublisherFactory: NSObject {
-    static let shared = LocationPublisherFactory()
+class LocationProvider: NSObject {
+    static let shared = LocationProvider()
 
     private let subject = PassthroughSubject<[CLLocation], Error>()
 
@@ -25,7 +25,7 @@ class LocationPublisherFactory: NSObject {
     }
 }
 
-extension LocationPublisherFactory: CLLocationManagerDelegate {
+extension LocationProvider: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         subject.send(locations)
     }

@@ -18,12 +18,10 @@ class DockTileContentView: NSView {
 
         temperatureLabel.fontDesign(.rounded)
         temperatureLabel.wantsLayer = true
-        temperatureLabel.shadow(color: textShadowColor, radius: 3, x: 0, y: -2)
 
         nameLabel.fontDesign(.rounded)
         nameLabel.textColor = NSColor(white: 1, alpha: 0.75)
         nameLabel.wantsLayer = true
-        nameLabel.shadow(color: textShadowColor, radius: 3, x: 0, y: -2)
     }
 
     var weatherData: WeatherData? {
@@ -70,8 +68,8 @@ class DockTileContentView: NSView {
 
         if let temperature = weatherData?.temperature.rounded() {
             temperatureLabel.stringValue = "\(Int(temperature))º"
-
             temperatureLabel.frame.origin.x = 10 + (temperature < 0 ? -1 : 3)
+            temperatureLabel.shadow(color: textShadowColor, radius: 3, x: 0, y: -1.5)
         } else {
             temperatureLabel.stringValue = ""
         }
@@ -80,8 +78,8 @@ class DockTileContentView: NSView {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.maximumLineHeight = 13.0
             paragraphStyle.alignment = .center
-
             nameLabel.attributedStringValue = NSAttributedString(string: name, attributes: [.paragraphStyle: paragraphStyle])
+            nameLabel.shadow(color: textShadowColor, radius: 3, x: 0, y: -2)
         } else {
             nameLabel.stringValue = ""
         }
@@ -99,7 +97,7 @@ class DockTileContentView: NSView {
     private var textShadowColor: NSColor {
         switch true {
         case isNight:
-            return NSColor(hex: 0x001F3A).withAlphaComponent(0.8)
+            return NSColor(hex: 0x001F3A).withAlphaComponent(0.5)
         default:
             return NSColor(hex: 0x7E9FB1).withAlphaComponent(0.5)
         }

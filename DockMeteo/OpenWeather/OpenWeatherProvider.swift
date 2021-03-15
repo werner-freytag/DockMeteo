@@ -8,7 +8,7 @@ import Combine
 import CoreLocation
 import SunMoonCalc
 
-class OpenWeatherPublisher {
+class OpenWeatherProvider {
     // Timer runs every 10 seconds so it updates faster when data is missing / outdated
     private static let refreshTimerInterval: TimeInterval = 10
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private lazy var weatherPublisher = OpenWeatherPublisher()
+    private lazy var weatherProvider = OpenWeatherProvider()
 
     private var cancellable = Set<AnyCancellable>()
 
@@ -21,14 +21,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var location: CLLocation?
 
-    private var locationPublisher: AnyPublisher<CLLocation, LocationPublisherFactory.Error> {
+    private var locationProvider: AnyPublisher<CLLocation, LocationProvider.Error> {
         if let location = location {
             return Just(location)
-                .setFailureType(to: LocationPublisherFactory.Error.self)
+                .setFailureType(to: LocationProvider.Error.self)
                 .eraseToAnyPublisher()
         }
 
-        return LocationPublisherFactory.shared
+        return LocationProvider.shared
             .startUpdating()
             .throttle(for: 10, scheduler: RunLoop.main, latest: true)
             .compactMap { $0.last }
@@ -36,13 +36,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        locationPublisher
+        locationProvider
             .sink(receiveCompletion: {
-                if case let .failure(error) = $0, self.weatherPublisher.location == nil {
+                if case let .failure(error) = $0, self.weatherProvider.location == nil {
                     self.handleLocationAuthorizationError(error)
                 }
             }, receiveValue: {
-                self.weatherPublisher.location = $0
+                self.weatherProvider.location = $0
 
                 CLGeocoder().reverseGeocodeLocation($0, completionHandler: { placemarks, error in
                     self.contentView.placemark = placemarks?.first
@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             })
             .store(in: &cancellable)
 
-        weatherPublisher
+        weatherProvider
             .startUpdating()
             .receive(on: RunLoop.main)
             .removeDuplicates()
@@ -66,7 +66,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .store(in: &cancellable)
     }
 
-    private func handleLocationAuthorizationError(_ error: LocationPublisherFactory.Error) {
+    private func handleLocationAuthorizationError(_ error: LocationProvider.Error) {
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("Location services are not enabled.", comment: "Alert title")
         alert.addButton(withTitle: NSLocalizedString("Quit DockMeteo", comment: "Alert button"))
