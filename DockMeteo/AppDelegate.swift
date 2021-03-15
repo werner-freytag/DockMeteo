@@ -57,6 +57,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         weatherPublisher
             .startUpdating()
             .receive(on: RunLoop.main)
+            .removeDuplicates()
             .sink(receiveValue: { [contentView] weatherData in
                 contentView.weatherData = weatherData
                 NSApp.dockTile.contentView = contentView

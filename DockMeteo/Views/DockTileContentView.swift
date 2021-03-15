@@ -28,13 +28,11 @@ class DockTileContentView: NSView {
 
     var weatherData: WeatherData? {
         didSet {
-            guard weatherData != oldValue else { return }
-            
             updateSunAndMoon()
 
             NSLog("Sun: \(sun!)\n")
             NSLog("Moon: \(moon!)\n")
-            
+
             updateViews()
         }
     }

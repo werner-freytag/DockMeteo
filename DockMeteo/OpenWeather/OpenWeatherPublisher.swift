@@ -10,13 +10,13 @@ import SunMoonCalc
 
 class OpenWeatherPublisher {
     // Timer runs every 10 seconds so it updates faster when data is missing / outdated
-    var refreshTimerInterval: TimeInterval = 10
+    private static let refreshTimerInterval: TimeInterval = 10
 
     // Refresh every 10 minutes
-    var refreshInterval: TimeInterval = 600
+    private static let refreshInterval: TimeInterval = 600
 
     // Update when distance to last position is more than
-    let refreshDistance = CLLocationDistance(1000)
+    private static let refreshDistance = CLLocationDistance(1000)
 
     private let weatherDataSubject = PassthroughSubject<WeatherData, Never>()
 
@@ -42,8 +42,8 @@ class OpenWeatherPublisher {
     }
 
     private func startRefreshTimer() {
-        refreshTimer = Timer.scheduledTimer(withTimeInterval: refreshTimerInterval, repeats: false, block: { _ in
-            guard self.weatherData?.date.distance(to: .init()) ?? self.refreshInterval >= self.refreshInterval else { return }
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshTimerInterval, repeats: false, block: { _ in
+            guard self.weatherData?.date.distance(to: .init()) ?? Self.refreshInterval >= Self.refreshInterval else { return }
             self.refreshWeatherInformation()
         })
     }
@@ -51,7 +51,7 @@ class OpenWeatherPublisher {
     var location: CLLocation? {
         didSet {
             guard let location = location else { return }
-            if let lastUpdateLocation = weatherData?.location, refreshDistance > CLLocation(lastUpdateLocation).distance(from: location) { return }
+            if let lastUpdateLocation = weatherData?.location, Self.refreshDistance > CLLocation(lastUpdateLocation).distance(from: location) { return }
 
             refreshWeatherInformation()
         }
