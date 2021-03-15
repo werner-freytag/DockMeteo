@@ -45,9 +45,9 @@ class DockTileContentView: NSView {
     private var moon: Moon?
 
     private func updateSunAndMoon() {
-        guard let date = weatherData?.date, let coords = weatherData?.location.coordinate else { return }
-        sun = Sun(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: date)
-        moon = Moon(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: date, twilightMode: .closest)
+        guard let coords = weatherData?.location.coordinate else { return }
+        sun = Sun(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: .init())
+        moon = Moon(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: .init(), twilightMode: .closest)
     }
 
     private func updateViews() {
@@ -74,24 +74,24 @@ class DockTileContentView: NSView {
             temperatureLabel.stringValue = ""
         }
 
-        if let name = placemark?.locality ?? weatherData?.location.name {
+        if let name = placemark?.locality ?? placemark?.name ?? weatherData?.location.name {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.maximumLineHeight = 13.0
             paragraphStyle.alignment = .center
             nameLabel.attributedStringValue = NSAttributedString(string: name, attributes: [.paragraphStyle: paragraphStyle])
-            nameLabel.shadow(color: textShadowColor, radius: 3, x: 0, y: -2)
+            nameLabel.shadow(color: textShadowColor, radius: 2, x: 0, y: -1.5)
         } else {
             nameLabel.stringValue = ""
         }
     }
 
     private var isNight: Bool? {
-        guard let date = weatherData?.date, let ephemeris = sun?.ephemeris else { return nil }
+        guard let ephemeris = sun?.ephemeris else { return nil }
         guard let rise = ephemeris.rise, let set = ephemeris.set else { assertionFailure(); return nil }
 
-        guard rise <= set else { return (set ... rise).contains(date) }
+        guard rise <= set else { return (set ... rise).contains(.init()) }
 
-        return !(rise ... set).contains(date)
+        return !(rise ... set).contains(.init())
     }
 
     private var textShadowColor: NSColor {
@@ -145,7 +145,7 @@ class DockTileContentView: NSView {
             case .clearSky, .fewClouds, .rain:
                 return "Moon"
             case .mist:
-                return "Moon weak"
+                return "Moon Weak"
             default:
                 return nil
             }
@@ -154,7 +154,7 @@ class DockTileContentView: NSView {
             case .clearSky, .fewClouds:
                 return "Sun"
             case .rain, .mist:
-                return "Sun weak"
+                return "Sun Weak"
             default:
                 return nil
             }

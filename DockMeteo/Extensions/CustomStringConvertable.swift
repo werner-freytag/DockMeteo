@@ -7,7 +7,7 @@ import Foundation
 import SunMoonCalc
 
 extension WeatherData: CustomStringConvertible {
-    var description: String { "\(condition), \(formatDouble(temperature))º, \(location)" }
+    var description: String { "\(condition), \(formatDouble(temperature))º, \(location), \(formatDate(date))" }
 }
 
 extension WeatherData.Condition: CustomStringConvertible {
@@ -88,6 +88,6 @@ private func formatDate(_ date: Date?) -> String {
     guard let date = date else { return "-" }
     let formatter = DateFormatter()
     formatter.dateStyle = .short
-    formatter.timeStyle = .short
+    formatter.timeStyle = .long
     return formatter.string(for: date)!
 }

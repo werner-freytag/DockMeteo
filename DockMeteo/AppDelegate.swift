@@ -57,7 +57,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         weatherProvider
             .startUpdating()
             .receive(on: RunLoop.main)
-            .removeDuplicates()
             .sink(receiveValue: { [contentView] weatherData in
                 contentView.weatherData = weatherData
                 NSApp.dockTile.contentView = contentView
@@ -80,5 +79,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security"))
             workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"))
         }
+    }
+}
+
+private extension CLLocation {
+    convenience init(_ latitude: Double, _ longitude: Double) {
+        self.init(latitude: latitude, longitude: longitude)
     }
 }

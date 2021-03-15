@@ -16,13 +16,14 @@ class OpenWeatherProvider {
     private static let refreshInterval: TimeInterval = 600
 
     // Update when distance to last position is more than
-    private static let refreshDistance = CLLocationDistance(1000)
+    private static let refreshDistance: CLLocationDistance = 1000
 
     private let weatherDataSubject = PassthroughSubject<WeatherData, Never>()
 
     private var cancellable = Set<AnyCancellable>()
 
     private var refreshTimer: Timer?
+    private var lastUpdateDate: Date?
 
     func startUpdating() -> AnyPublisher<WeatherData, Never> {
         NotificationCenter.default.publisher(for: NSLocale.currentLocaleDidChangeNotification)
@@ -42,8 +43,10 @@ class OpenWeatherProvider {
     }
 
     private func startRefreshTimer() {
-        refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshTimerInterval, repeats: false, block: { _ in
-            guard self.weatherData?.date.distance(to: .init()) ?? Self.refreshInterval >= Self.refreshInterval else { return }
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshTimerInterval, repeats: true, block: { _ in
+
+            guard self.lastUpdateDate?.distance(to: .init()) ?? Self.refreshInterval >= Self.refreshInterval else { return }
+
             self.refreshWeatherInformation()
         })
     }
@@ -60,17 +63,13 @@ class OpenWeatherProvider {
     private var weatherData: WeatherData? {
         didSet {
             guard let weatherData = weatherData else { return }
+            lastUpdateDate = .init()
             weatherDataSubject.send(weatherData)
         }
     }
 
     func refreshWeatherInformation() {
-        stopRefreshTimer()
-        defer { startRefreshTimer() }
-
         guard let requestURL = requestURL else { return }
-
-        NSLog("Requesting weather information...\n")
 
         URLSession.shared.dataTaskPublisher(for: requestURL)
             .receive(on: RunLoop.main)
@@ -87,7 +86,9 @@ class OpenWeatherProvider {
 
                     self.weatherData = weatherData
                 } catch {
-                    assertionFailure("\(error)")
+                    if self.weatherData == nil {
+                        self.handleDownloadError(error.localizedDescription)
+                    }
                 }
             })
             .store(in: &cancellable)
