@@ -1,6 +1,0 @@
-/* Bundle name */
-"CFBundleName" = "DockSunshine";
-
-/* Privacy - Location Usage Description */
-"NSLocationUsageDescription" = "La tua posizione è necessaria per visualizzare il meteo per la tua posizione attuale.";
-

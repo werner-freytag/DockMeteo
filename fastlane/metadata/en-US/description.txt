@@ -1,1 +1,1 @@
-DockSunshine displays the weather in the dock. Based on the location, the weather is determined and displayed graphically. The temperature and location are also shown. The design is modern to the current macOS system, so the icon blends in beautifully with the other Dock icons.
+DockMeteo displays the weather in the dock. Based on the location, the weather is determined and displayed graphically. The temperature and location are also shown. The design is modern to the current macOS system, so the icon blends in beautifully with the other Dock icons.

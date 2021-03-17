@@ -1,1 +1,1 @@
-Dock Weather,Dock,DockWeather,WeatherDock,Weather Dock,DockSunshine,Dock Sun,DockSun,Temperature
+Dock Weather,Dock,DockWeather,WeatherDock,Weather Dock,DockMeteo,Dock Sun,DockSun,Temperature
