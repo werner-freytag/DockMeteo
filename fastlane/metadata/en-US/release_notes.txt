@@ -1,1 +1,5 @@
-
+- The graphics are now displayed in high-resolution retina
+- Detail optimizations of the graphics
+- More accurate location information
+- Numerous technical improvements
+- Renamed to DockMeteo
