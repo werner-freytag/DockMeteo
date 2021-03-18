@@ -10,6 +10,7 @@ import SwiftUI
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var weatherProvider = OpenWeatherProvider()
+    private lazy var dockMenuProvider = DockMenuProvider()
 
     private var cancellable = Set<AnyCancellable>()
 
@@ -19,11 +20,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return objects.first(where: { type(of: $0) == DockTileContentView.self }) as! DockTileContentView
     }()
 
-    private var location: CLLocation?
+    private var specifiedLocation: CLLocation?
 
     private var locationProvider: AnyPublisher<CLLocation, LocationProvider.Error> {
-        if let location = location {
-            return Just(location)
+        if let specifiedLocation = specifiedLocation {
+            return Just(specifiedLocation)
                 .setFailureType(to: LocationProvider.Error.self)
                 .eraseToAnyPublisher()
         }
@@ -46,6 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
                 CLGeocoder().reverseGeocodeLocation($0, completionHandler: { placemarks, error in
                     self.contentView.placemark = placemarks?.first
+                    self.dockMenuProvider.placemark = placemarks?.first
 
                     if let placemark = placemarks?.first {
                         NSLog("Placemark: \(placemark)\n")
@@ -57,12 +59,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         weatherProvider
             .startUpdating()
             .receive(on: RunLoop.main)
-            .sink(receiveValue: { [contentView] weatherData in
-                contentView.weatherData = weatherData
-                NSApp.dockTile.contentView = contentView
+            .sink(receiveValue: { weatherData in
+                self.contentView.weatherData = weatherData
+                self.dockMenuProvider.weatherData = weatherData
+                NSApp.dockTile.contentView = self.contentView
                 NSApp.dockTile.display()
             })
             .store(in: &cancellable)
+    }
+
+    func applicationDockMenu(_: NSApplication) -> NSMenu? {
+        dockMenuProvider.menu
     }
 
     private func handleLocationAuthorizationError(_ error: LocationProvider.Error) {
