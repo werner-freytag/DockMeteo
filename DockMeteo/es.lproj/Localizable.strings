@@ -1,14 +1,51 @@
-/* No comment provided by engineer. */
-"%@º" = "%@º";
+/* Info menu: clouds */
+"clouds: %@" = "nubes: %@";
+
+/* Short for sky direction East */
+"E" = "E";
+
+/* Info menu: temperature felt */
+"feels like %@" = "sensación de %@";
+
+/* Info menu: humidity */
+"humidity: %@" = "humedad: %@";
+
+/* Info menu title */
+"Info" = "Información";
+
+/* Info menu: Location */
+"Location" = "Ubicación";
 
 /* Alert title */
 "Location services are not enabled." = "Los servicios de localización no están habilitados.";
 
+/* Short for sky direction North */
+"N" = "N";
+
 /* Alert button */
 "Open Preferences" = "Abrir las preferencias";
+
+/* Info menu: pressure */
+"pressure: %@" = "presión: %@";
 
 /* Alert button */
 "Quit DockMeteo" = "Salir de DockMeteo";
 
+/* Short for sky direction South */
+"S" = "S";
+
+/* Info menu: visibility */
+"visibility: %@" = "visibilidad: %@";
+
+/* Short for sky direction West */
+"W" = "O";
+
+/* Info menu: Weather */
+"Weather" = "Tiempo";
+
 /* Alert title */
 "Weather data download failed." = "La descarga de datos meteorológicos ha fallado.";
+
+/* Info menu: wind <speed> from <direction> */
+"wind: %@ from %@" = "viento: %1$@ del %2$@";
+
