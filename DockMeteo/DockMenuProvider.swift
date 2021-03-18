@@ -12,22 +12,6 @@ struct DockMenuProvider {
     var menu: NSMenu {
         let menu = NSMenu(title: NSLocalizedString("Info", comment: "Info menu title"))
 
-        /*
-        menu.addString(NSLocalizedString("Location", comment: "Info menu: Location").localizedUppercase)
-
-        if let placemark = placemark, let formattedAddress = placemark.formattedAddress {
-            menu.addString(formattedAddress)
-        } else if let place = weatherData?.location.name {
-            menu.addString(place)
-        } else {
-            menu.addString("-")
-        }
-
-        menu.addItem(.separator())
-        
-        menu.addString(NSLocalizedString("Weather", comment: "Info menu: Weather").localizedUppercase)
-        */
-
         if let weatherData = weatherData {
             let formatter = MeasurementFormatter()
 
