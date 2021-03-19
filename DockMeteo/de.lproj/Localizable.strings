@@ -41,25 +41,25 @@
 "SkyDirection.N" = "N";
 
 /* Short for SkyDirection NNE */
-"SkyDirection.NNE" = "NNE";
+"SkyDirection.NNE" = "NNO";
 
 /* Short for SkyDirection NE */
-"SkyDirection.NE" = "NE";
+"SkyDirection.NE" = "NO";
 
 /* Short for SkyDirection ENE */
-"SkyDirection.ENE" = "ENE";
+"SkyDirection.ENE" = "ONO";
 
 /* Short for SkyDirection E */
-"SkyDirection.E" = "E";
+"SkyDirection.E" = "O";
 
 /* Short for SkyDirection ESE */
-"SkyDirection.ESE" = "ESE";
+"SkyDirection.ESE" = "OSO";
 
 /* Short for SkyDirection SE */
-"SkyDirection.SE" = "SE";
+"SkyDirection.SE" = "SO";
 
 /* Short for SkyDirection SSE */
-"SkyDirection.SSE" = "SSE";
+"SkyDirection.SSE" = "SSO";
 
 /* Short for SkyDirection S */
 "SkyDirection.S" = "S";
