@@ -99,45 +99,40 @@ private func formatDate(_ date: Date?) -> String {
 }
 
 extension SkyDirection: CustomStringConvertible {
-    private static let north = NSLocalizedString("N", comment: "Short for sky direction North")
-    private static let east = NSLocalizedString("E", comment: "Short for sky direction East")
-    private static let south = NSLocalizedString("S", comment: "Short for sky direction South")
-    private static let west = NSLocalizedString("W", comment: "Short for sky direction West")
-
     var description: String {
         switch self {
         case .N:
-            return Self.north
+            return NSLocalizedString("SkyDirection.N", comment: "Short for SkyDirection N")
         case .NNE:
-            return Self.north + Self.north + Self.east
+            return NSLocalizedString("SkyDirection.NNE", comment: "Short for SkyDirection NNE")
         case .NE:
-            return Self.north + Self.east
+            return NSLocalizedString("SkyDirection.NE", comment: "Short for SkyDirection NE")
         case .ENE:
-            return Self.east + Self.north + Self.east
+            return NSLocalizedString("SkyDirection.ENE", comment: "Short for SkyDirection ENE")
         case .E:
-            return Self.east
+            return NSLocalizedString("SkyDirection.E", comment: "Short for SkyDirection E")
         case .ESE:
-            return Self.east + Self.south + Self.east
+            return NSLocalizedString("SkyDirection.ESE", comment: "Short for SkyDirection ESE")
         case .SE:
-            return Self.south + Self.east
+            return NSLocalizedString("SkyDirection.SE", comment: "Short for SkyDirection SE")
         case .SSE:
-            return Self.south + Self.south + Self.east
+            return NSLocalizedString("SkyDirection.SSE", comment: "Short for SkyDirection SSE")
         case .S:
-            return Self.south
+            return NSLocalizedString("SkyDirection.S", comment: "Short for SkyDirection S")
         case .SSW:
-            return Self.south + Self.south + Self.west
+            return NSLocalizedString("SkyDirection.SSW", comment: "Short for SkyDirection SSW")
         case .SW:
-            return Self.south + Self.west
+            return NSLocalizedString("SkyDirection.SW", comment: "Short for SkyDirection SW")
         case .WSW:
-            return Self.west + Self.south + Self.west
+            return NSLocalizedString("SkyDirection.WSW", comment: "Short for SkyDirection WSW")
         case .W:
-            return Self.west
+            return NSLocalizedString("SkyDirection.W", comment: "Short for SkyDirection W")
         case .WNW:
-            return Self.west + Self.north + Self.west
+            return NSLocalizedString("SkyDirection.WNW", comment: "Short for SkyDirection WNW")
         case .NW:
-            return Self.north + Self.west
+            return NSLocalizedString("SkyDirection.NW", comment: "Short for SkyDirection NW")
         case .NNW:
-            return Self.north + Self.north + Self.west
+            return NSLocalizedString("SkyDirection.NNW", comment: "Short for SkyDirection NNW")
         }
     }
 }

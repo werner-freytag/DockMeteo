@@ -62,6 +62,10 @@
 		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
 		36ED738A25E40E83005D81FA /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		36ED739125E41192005D81FA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		528EDDB82604CDF0006EDC80 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		528EDDB92604CDF0006EDC80 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		528EDDBA2604CDF0006EDC80 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		528EDDBC2604D702006EDC80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +222,7 @@
 				fr,
 				es,
 				it,
+				ja,
 			);
 			mainGroup = 36C658FE25E3C3B3000D4F46;
 			packageReferences = (
@@ -299,6 +304,8 @@
 				36B6822825E6CFAA0035D7FE /* it */,
 				36B6822925E6CFAB0035D7FE /* es */,
 				36B6822A25E6CFAC0035D7FE /* fr */,
+				528EDDBA2604CDF0006EDC80 /* ja */,
+				528EDDBC2604D702006EDC80 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -310,6 +317,7 @@
 				36B6822E25E6D2C90035D7FE /* es */,
 				36B6822F25E6D2DE0035D7FE /* fr */,
 				36B6823025E6D2E90035D7FE /* de */,
+				528EDDB92604CDF0006EDC80 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 				36B6821F25E6CC960035D7FE /* fr */,
 				36B6822025E6CC9B0035D7FE /* es */,
 				36B6822125E6CCA20035D7FE /* it */,
+				528EDDB82604CDF0006EDC80 /* ja */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
