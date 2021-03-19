@@ -8,7 +8,7 @@ import SunMoonCalc
 
 extension OpenWeatherResponse: CustomStringConvertible {
     var description: String {
-        "\(weather.first!.description), \(formatDouble(main.temp))º (feels like \(formatDouble(main.feels_like))º), pressure: \(main.pressure) hPa, humidity: \(main.humidity)%%, visibility: \(formatDouble(Double(visibility), maximumFractionDigits: 0)) m, wind: \(formatDouble(wind.speed)) m/s from \(SkyDirection(degrees: Double(wind.deg))), clouds: \(clouds.all)%%, date: \(formatDate(Date(timeIntervalSince1970: dt))), location: \(name), \(sys.country) (\(coord.lat), \(coord.lon))"
+        "\(weather.first!.id), \(formatDouble(main.temp))º (feels like \(formatDouble(main.feels_like))º), pressure: \(main.pressure) hPa, humidity: \(main.humidity)%%, visibility: \(formatDouble(Double(visibility), maximumFractionDigits: 0)) m, wind: \(formatDouble(wind.speed)) m/s from \(SkyDirection(degrees: Double(wind.deg))), clouds: \(clouds.all)%%, date: \(formatDate(Date(timeIntervalSince1970: dt))), location: \(name), \(sys.country) (\(coord.lat), \(coord.lon))"
     }
 }
 

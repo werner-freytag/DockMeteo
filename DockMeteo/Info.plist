@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.1</string>
 	<key>CFBundleVersion</key>
-	<string>2485</string>
+	<string>2492</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.weather</string>
 	<key>LSMinimumSystemVersion</key>
