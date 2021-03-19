@@ -5,82 +5,118 @@
 
 import Cocoa
 
-struct DockMenuProvider {
+class DockMenuProvider {
     var placemark: CLPlacemark?
     var weatherData: WeatherData?
 
     var menu: NSMenu {
         let menu = NSMenu(title: NSLocalizedString("Info", comment: "Info menu title"))
 
-        if let weatherData = weatherData {
-            let formatter = MeasurementFormatter()
-
-            func formatTemperature(_ degrees: Double) -> String {
-                formatter.string(from: Measurement<UnitTemperature>(value: Double(Int(degrees.rounded())), unit: UnitTemperature.default ?? .celsius))
-            }
-
-            let details: [[String]] = [
-                {
-                    var details: [String] = []
-
-                    if let conditionDescription = weatherData.details?.conditionDescription {
-                        details.append(conditionDescription)
-                    }
-
-                    details.append(formatTemperature(weatherData.temperature))
-
-                    if let temperatureFelt = weatherData.details?.temperatureFelt {
-                        let format = NSLocalizedString("feels like %@", comment: "Info menu: temperature felt")
-                        details.append(String(format: format, formatTemperature(Double(temperatureFelt))))
-                    }
-
-                    return details
-                }(),
-
-                {
-                    var details: [String] = []
-
-                    if let pressure = weatherData.details?.pressure {
-                        details.append(String(format: NSLocalizedString("pressure: %@", comment: "Info menu: pressure"), formatter.string(from: Measurement<UnitPressure>(value: Double(pressure), unit: .hectopascals))))
-                    }
-
-                    if let humidity = weatherData.details?.humidity {
-                        details.append(String(format: NSLocalizedString("humidity: %@", comment: "Info menu: humidity"), "\(humidity) %"))
-                    }
-
-                    if let visibility = weatherData.details?.visibility {
-                        details.append(String(format: NSLocalizedString("visibility: %@", comment: "Info menu: visibility"), formatter.string(from: Measurement<UnitLength>(value: Double(visibility), unit: .meters))))
-                    }
-
-                    return details
-                }(),
-
-                {
-                    var details: [String] = []
-
-                    if let wind = weatherData.details?.wind {
-                        details.append(String(format: NSLocalizedString("wind: %@ from %@", comment: "Info menu: wind <speed> from <direction>"),
-                                              formatter.string(from: Measurement<UnitSpeed>(value: Double(wind.speed), unit: .metersPerSecond)),
-                                              wind.direction.description))
-                    }
-
-                    if let clouds = weatherData.details?.clouds {
-                        details.append(String(format: NSLocalizedString("clouds: %@", comment: "Info menu: clouds"), "\(clouds) %"))
-                    }
-
-                    return details
-                }(),
-            ]
-
-            for row in details {
-                guard !row.isEmpty else { continue }
-                menu.addString(row.joined(separator: ", ").capitalizingFirstLetter)
-            }
-        } else {
-            menu.addString("-")
+        for row in weatherDetails ?? [] {
+            menu.addString(row)
         }
 
         return menu
+    }
+
+    var weatherDetails: [String]? {
+        guard let weatherData = weatherData else { return nil }
+
+        let details: [[String]] = [
+            {
+                var details: [String] = []
+
+                if let conditionDescription = weatherData.details?.conditionDescription {
+                    details.append(conditionDescription)
+                }
+
+                details.append(formatTemperature(weatherData.temperature))
+
+                if let temperatureFelt = weatherData.details?.temperatureFelt {
+                    let format = NSLocalizedString("feels like %@", comment: "Info menu: temperature felt")
+                    details.append(String(format: format, formatTemperature(Double(temperatureFelt))))
+                }
+
+                return details
+            }(),
+
+            {
+                var details: [String] = []
+
+                if let pressure = weatherData.details?.pressure {
+                    details.append(String(format: NSLocalizedString("pressure: %@", comment: "Info menu: pressure"), formatPressure(Double(pressure))))
+                }
+
+                if let humidity = weatherData.details?.humidity {
+                    details.append(String(format: NSLocalizedString("humidity: %@", comment: "Info menu: humidity"), formatPercent(Double(humidity) / 100)))
+                }
+
+                if let visibility = weatherData.details?.visibility {
+                    details.append(String(format: NSLocalizedString("visibility: %@", comment: "Info menu: visibility"), formatLength(Double(visibility))))
+                }
+
+                return details
+            }(),
+
+            {
+                var details: [String] = []
+
+                if let wind = weatherData.details?.wind {
+                    details.append(String(format: NSLocalizedString("wind: %@ from %@", comment: "Info menu: wind <speed> from <direction>"),
+                                          formatSpeed(Double(wind.speed)),
+                                          wind.direction.description))
+                }
+
+                if let clouds = weatherData.details?.clouds {
+                    details.append(String(format: NSLocalizedString("clouds: %@", comment: "Info menu: clouds"), formatPercent(Double(clouds) / 100)))
+                }
+
+                return details
+            }(),
+        ]
+
+        return details.compactMap {
+            guard !$0.isEmpty else { return nil }
+            return $0.joined(separator: ", ").capitalizingFirstLetter
+        }
+    }
+
+    private lazy var formatter: MeasurementFormatter = {
+        let formatter = MeasurementFormatter()
+
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 0
+
+        formatter.numberFormatter = numberFormatter
+        formatter.unitStyle = .medium
+        return formatter
+    }()
+
+    private lazy var percentFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .percent
+        return numberFormatter
+    }()
+
+    func formatPercent(_ value: Double) -> String {
+        return percentFormatter.string(from: NSNumber(value: value))!
+    }
+
+    func formatTemperature(_ value: Double, unit: UnitTemperature = .celsius) -> String {
+        return formatter.string(from: Measurement<UnitTemperature>(value: Double(Int(value.rounded())), unit: unit))
+    }
+
+    func formatPressure(_ value: Double, unit: UnitPressure = .hectopascals) -> String {
+        return formatter.string(from: Measurement<UnitPressure>(value: value, unit: unit))
+    }
+
+    func formatSpeed(_ value: Double, unit: UnitSpeed = .metersPerSecond) -> String {
+        return formatter.string(from: Measurement<UnitSpeed>(value: value, unit: unit))
+    }
+
+    func formatLength(_ value: Double, unit: UnitLength = .meters) -> String {
+        return formatter.string(from: Measurement<UnitLength>(value: value, unit: unit))
     }
 }
 

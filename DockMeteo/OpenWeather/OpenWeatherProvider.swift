@@ -102,7 +102,7 @@ class OpenWeatherProvider {
             URLQueryItem(name: "appid", value: "5d20c08f748c06727dbdacc4d6dd2c42"),
             URLQueryItem(name: "lat", value: String(format: "%f", location.coordinate.latitude)),
             URLQueryItem(name: "lon", value: String(format: "%f", location.coordinate.longitude)),
-            URLQueryItem(name: "units", value: UnitTemperature.default ?? .celsius == .celsius ? "metric" : "imperial"),
+            URLQueryItem(name: "units", value: "metric"),
             URLQueryItem(name: "lang", value: Locale.current.languageCode),
         ]
 
