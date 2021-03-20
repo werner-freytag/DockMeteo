@@ -5,30 +5,22 @@
 
 import Foundation
 
-enum TemperatureUnitPreferences {
-    case celsius
-    case fahrenheit
-
-    init() throws {
+extension UnitTemperature {
+    static var `default`: UnitTemperature? {
         let key = "AppleTemperatureUnit" as CFString
         let domain = "Apple Global Domain" as CFString
 
         guard let unit = CFPreferencesCopyValue(key, domain, kCFPreferencesCurrentUser, kCFPreferencesAnyHost) as? String else {
-            throw Error.TemperatureUnitNotFound
+            return nil
         }
 
         switch unit {
         case "Celsius":
-            self = .celsius
+            return .celsius
         case "Fahrenheit":
-            self = .fahrenheit
+            return .fahrenheit
         default:
-            throw Error.UnknownTemperatureUnit(unit)
+            return nil
         }
     }
-}
-
-enum Error: Swift.Error {
-    case TemperatureUnitNotFound
-    case UnknownTemperatureUnit(String)
 }

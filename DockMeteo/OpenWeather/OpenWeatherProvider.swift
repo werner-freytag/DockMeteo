@@ -80,9 +80,9 @@ class OpenWeatherProvider {
             }, receiveValue: { data, response in
                 do {
                     let response = try JSONDecoder().decode(OpenWeatherResponse.self, from: data)
-                    guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
+                    NSLog("Weather: \(response)\n")
 
-                    NSLog("Weather: \(weatherData)\n")
+                    guard let weatherData = WeatherData(response: response) else { return assertionFailure() }
 
                     self.weatherData = weatherData
                 } catch {
@@ -94,15 +94,6 @@ class OpenWeatherProvider {
             .store(in: &cancellable)
     }
 
-    private var temperatureUnit: TemperatureUnitPreferences {
-        do {
-            return try TemperatureUnitPreferences()
-        } catch {
-            assertionFailure("\(error)")
-            return .celsius
-        }
-    }
-
     private var requestURL: URL? {
         guard let location = location else { return nil }
 
@@ -111,7 +102,8 @@ class OpenWeatherProvider {
             URLQueryItem(name: "appid", value: "5d20c08f748c06727dbdacc4d6dd2c42"),
             URLQueryItem(name: "lat", value: String(format: "%f", location.coordinate.latitude)),
             URLQueryItem(name: "lon", value: String(format: "%f", location.coordinate.longitude)),
-            URLQueryItem(name: "units", value: temperatureUnit == .celsius ? "metric" : "imperial"),
+            URLQueryItem(name: "units", value: "metric"),
+            URLQueryItem(name: "lang", value: Locale.current.languageCode),
         ]
 
         return urlComponents.url
@@ -161,7 +153,19 @@ private extension WeatherData {
         assert(response.weather.last != nil)
         guard let weather = response.weather.last else { return nil }
 
-        self.init(condition: weather.icon.condition, temperature: response.main.temp, location: .init(name: response.name, coordinate: .init(latitude: response.coord.lat, longitude: response.coord.lon)), date: Date(timeIntervalSince1970: response.dt))
+        self.init(condition: weather.icon.condition, temperature: response.main.temp, location: .init(name: response.name, coordinate: .init(latitude: response.coord.lat, longitude: response.coord.lon)), date: Date(timeIntervalSince1970: response.dt), details: Details(response: response))
+    }
+}
+
+private extension WeatherData.Details {
+    init?(response: OpenWeatherResponse) {
+        self.init(conditionDescription: response.weather.last?.description,
+                  temperatureFelt: response.main.feels_like,
+                  pressure: response.main.pressure,
+                  humidity: response.main.humidity,
+                  visibility: response.visibility,
+                  wind: .init(speed: response.wind.speed, direction: SkyDirection(degrees: Double(response.wind.deg))),
+                  clouds: response.clouds.all)
     }
 }
 

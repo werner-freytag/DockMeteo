@@ -13,13 +13,15 @@
 		366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CA25F92CEA004FE324 /* DockTileContentView.swift */; };
 		366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */; };
 		366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366042CF25F94A23004FE324 /* NSTextField+Extension.swift */; };
+		36901ADB26039BB00018B52F /* DockMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36901ADA26039BB00018B52F /* DockMenuProvider.swift */; };
+		36901ADD26039E7C0018B52F /* SkyDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36901ADC26039E7C0018B52F /* SkyDirection.swift */; };
 		36B6822725E6CFA70035D7FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822525E6CFA70035D7FE /* Localizable.strings */; };
 		36B6822D25E6D2BF0035D7FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */; };
 		36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6590A25E3C3B3000D4F46 /* AppDelegate.swift */; };
 		36C6590D25E3C3B4000D4F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36C6590C25E3C3B4000D4F46 /* Assets.xcassets */; };
 		36C6591025E3C3B4000D4F46 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36C6590E25E3C3B4000D4F46 /* MainMenu.xib */; };
 		36C6591F25E3ECCC000D4F46 /* OpenWeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6591E25E3ECCC000D4F46 /* OpenWeatherProvider.swift */; };
-		36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */; };
+		36C6592125E3F5C4000D4F46 /* UnitTemperature+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6592025E3F5C4000D4F46 /* UnitTemperature+Extension.swift */; };
 		36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 36D0F4C525F1422200935183 /* SunMoonCalc */; };
 		36E9413925FF6E9D00E31093 /* CustomStringConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E9413825FF6E9D00E31093 /* CustomStringConvertable.swift */; };
 		36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */; };
@@ -34,6 +36,8 @@
 		366042CA25F92CEA004FE324 /* DockTileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileContentView.swift; sourceTree = "<group>"; };
 		366042CD25F93D91004FE324 /* CustomTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldCell.swift; sourceTree = "<group>"; };
 		366042CF25F94A23004FE324 /* NSTextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Extension.swift"; sourceTree = "<group>"; };
+		36901ADA26039BB00018B52F /* DockMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockMenuProvider.swift; sourceTree = "<group>"; };
+		36901ADC26039E7C0018B52F /* SkyDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyDirection.swift; sourceTree = "<group>"; };
 		36B6821E25E6CC900035D7FE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6821F25E6CC960035D7FE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		36B6822025E6CC9B0035D7FE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -53,11 +57,15 @@
 		36C6591125E3C3B4000D4F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36C6591225E3C3B4000D4F46 /* DockMeteo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockMeteo.entitlements; sourceTree = "<group>"; };
 		36C6591E25E3ECCC000D4F46 /* OpenWeatherProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherProvider.swift; sourceTree = "<group>"; };
-		36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnitPreferences.swift; sourceTree = "<group>"; };
+		36C6592025E3F5C4000D4F46 /* UnitTemperature+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitTemperature+Extension.swift"; sourceTree = "<group>"; };
 		36E9413825FF6E9D00E31093 /* CustomStringConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStringConvertable.swift; sourceTree = "<group>"; };
 		36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherResponse.swift; sourceTree = "<group>"; };
 		36ED738A25E40E83005D81FA /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		36ED739125E41192005D81FA /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		528EDDB82604CDF0006EDC80 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		528EDDB92604CDF0006EDC80 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		528EDDBA2604CDF0006EDC80 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		528EDDBC2604D702006EDC80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				36ED739125E41192005D81FA /* WeatherData.swift */,
+				36901ADC26039E7C0018B52F /* SkyDirection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -111,6 +120,7 @@
 			children = (
 				3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */,
 				36E9413825FF6E9D00E31093 /* CustomStringConvertable.swift */,
+				36C6592025E3F5C4000D4F46 /* UnitTemperature+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -148,6 +158,7 @@
 				36B6822B25E6D2BF0035D7FE /* InfoPlist.strings */,
 				36C6591225E3C3B4000D4F46 /* DockMeteo.entitlements */,
 				36B6822525E6CFA70035D7FE /* Localizable.strings */,
+				36901ADA26039BB00018B52F /* DockMenuProvider.swift */,
 			);
 			path = DockMeteo;
 			sourceTree = "<group>";
@@ -157,7 +168,6 @@
 			children = (
 				36C6591E25E3ECCC000D4F46 /* OpenWeatherProvider.swift */,
 				36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */,
-				36C6592025E3F5C4000D4F46 /* TemperatureUnitPreferences.swift */,
 			);
 			path = OpenWeather;
 			sourceTree = "<group>";
@@ -212,6 +222,7 @@
 				fr,
 				es,
 				it,
+				ja,
 			);
 			mainGroup = 36C658FE25E3C3B3000D4F46;
 			packageReferences = (
@@ -271,9 +282,11 @@
 				36C6590B25E3C3B3000D4F46 /* AppDelegate.swift in Sources */,
 				366042D025F94A23004FE324 /* NSTextField+Extension.swift in Sources */,
 				36E9413925FF6E9D00E31093 /* CustomStringConvertable.swift in Sources */,
-				36C6592125E3F5C4000D4F46 /* TemperatureUnitPreferences.swift in Sources */,
+				36C6592125E3F5C4000D4F46 /* UnitTemperature+Extension.swift in Sources */,
 				3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */,
+				36901ADB26039BB00018B52F /* DockMenuProvider.swift in Sources */,
 				366042CB25F92CEA004FE324 /* DockTileContentView.swift in Sources */,
+				36901ADD26039E7C0018B52F /* SkyDirection.swift in Sources */,
 				36C6591F25E3ECCC000D4F46 /* OpenWeatherProvider.swift in Sources */,
 				366042CE25F93D91004FE324 /* CustomTextFieldCell.swift in Sources */,
 				36ED739225E41192005D81FA /* WeatherData.swift in Sources */,
@@ -291,6 +304,8 @@
 				36B6822825E6CFAA0035D7FE /* it */,
 				36B6822925E6CFAB0035D7FE /* es */,
 				36B6822A25E6CFAC0035D7FE /* fr */,
+				528EDDBA2604CDF0006EDC80 /* ja */,
+				528EDDBC2604D702006EDC80 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -302,6 +317,7 @@
 				36B6822E25E6D2C90035D7FE /* es */,
 				36B6822F25E6D2DE0035D7FE /* fr */,
 				36B6823025E6D2E90035D7FE /* de */,
+				528EDDB92604CDF0006EDC80 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -314,6 +330,7 @@
 				36B6821F25E6CC960035D7FE /* fr */,
 				36B6822025E6CC9B0035D7FE /* es */,
 				36B6822125E6CCA20035D7FE /* it */,
+				528EDDB82604CDF0006EDC80 /* ja */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

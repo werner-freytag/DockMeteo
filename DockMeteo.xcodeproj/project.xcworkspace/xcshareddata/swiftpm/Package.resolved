@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/werner-freytag/SunMoonCalc.git",
         "state": {
           "branch": "develop",
-          "revision": "ef0b749820a2f684ac3c34c81e4661029b584178",
+          "revision": "a27bed90bb5231c6f43de463f0c1babc76854ec7",
           "version": null
         }
       },
@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/werner-freytag/SwiftToolbox.git",
         "state": {
           "branch": "develop",
-          "revision": "61fba003a2e8d60392a85ff86fad5adb1eb7af51",
+          "revision": "529385e7823b85eeaa5992cbeee4793db2f55a1a",
           "version": null
         }
       }

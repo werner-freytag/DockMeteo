@@ -1,5 +1,17 @@
-/* No comment provided by engineer. */
-"%@º" = "%@º";
+/* Info menu: clouds */
+"clouds: %@" = "Wolken: %@";
+
+/* Info menu: temperature felt */
+"feels like %@" = "gefühlt: %@";
+
+/* Info menu: humidity */
+"humidity: %@" = "Luftfeuchtigkeit: %@";
+
+/* Info menu title */
+"Info" = "Info";
+
+/* Info menu: Location */
+"Location" = "Standort";
 
 /* Alert title */
 "Location services are not enabled." = "Standortdienste sind nicht aktiviert.";
@@ -7,9 +19,68 @@
 /* Alert button */
 "Open Preferences" = "Voreinstellungen öffnen";
 
+/* Info menu: pressure */
+"pressure: %@" = "Luftdruck: %@";
+
 /* Alert button */
 "Quit DockMeteo" = "DockMeteo beenden";
+
+/* Info menu: visibility */
+"visibility: %@" = "Sicht: %@";
+
+/* Info menu: Weather */
+"Weather" = "Wetter";
 
 /* Alert title */
 "Weather data download failed." = "Download der Wetterdaten fehlgeschlagen.";
 
+/* Info menu: wind <speed> from <direction> */
+"wind: %@ from %@" = "Wind: %1$@ aus %2$@";
+
+/* Short for SkyDirection N */
+"SkyDirection.N" = "N";
+
+/* Short for SkyDirection NNE */
+"SkyDirection.NNE" = "NNO";
+
+/* Short for SkyDirection NE */
+"SkyDirection.NE" = "NO";
+
+/* Short for SkyDirection ENE */
+"SkyDirection.ENE" = "ONO";
+
+/* Short for SkyDirection E */
+"SkyDirection.E" = "O";
+
+/* Short for SkyDirection ESE */
+"SkyDirection.ESE" = "OSO";
+
+/* Short for SkyDirection SE */
+"SkyDirection.SE" = "SO";
+
+/* Short for SkyDirection SSE */
+"SkyDirection.SSE" = "SSO";
+
+/* Short for SkyDirection S */
+"SkyDirection.S" = "S";
+
+/* Short for SkyDirection SSW */
+"SkyDirection.SSW" = "SSW";
+
+/* Short for SkyDirection SW */
+"SkyDirection.SW" = "SW";
+
+/* Short for SkyDirection WSW */
+"SkyDirection.WSW" = "WSW";
+
+/* Short for SkyDirection W */
+"SkyDirection.W" = "W";
+
+/* Short for SkyDirection WNW */
+"SkyDirection.WNW" = "WNW";
+
+/* Short for SkyDirection NW */
+"SkyDirection.NW" = "NW";
+
+/* Short for SkyDirection NNW */
+"SkyDirection.NNW" = "NNW";

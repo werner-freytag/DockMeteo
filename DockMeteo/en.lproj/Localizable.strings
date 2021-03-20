@@ -1,0 +1,47 @@
+/* Short for SkyDirection N */
+"SkyDirection.N" = "N";
+
+/* Short for SkyDirection NNE */
+"SkyDirection.NNE" = "NNE";
+
+/* Short for SkyDirection NE */
+"SkyDirection.NE" = "NE";
+
+/* Short for SkyDirection ENE */
+"SkyDirection.ENE" = "ENE";
+
+/* Short for SkyDirection E */
+"SkyDirection.E" = "E";
+
+/* Short for SkyDirection ESE */
+"SkyDirection.ESE" = "ESE";
+
+/* Short for SkyDirection SE */
+"SkyDirection.SE" = "SE";
+
+/* Short for SkyDirection SSE */
+"SkyDirection.SSE" = "SSE";
+
+/* Short for SkyDirection S */
+"SkyDirection.S" = "S";
+
+/* Short for SkyDirection SSW */
+"SkyDirection.SSW" = "SSW";
+
+/* Short for SkyDirection SW */
+"SkyDirection.SW" = "SW";
+
+/* Short for SkyDirection WSW */
+"SkyDirection.WSW" = "WSW";
+
+/* Short for SkyDirection W */
+"SkyDirection.W" = "W";
+
+/* Short for SkyDirection WNW */
+"SkyDirection.WNW" = "WNW";
+
+/* Short for SkyDirection NW */
+"SkyDirection.NW" = "NW";
+
+/* Short for SkyDirection NNW */
+"SkyDirection.NNW" = "NNW";

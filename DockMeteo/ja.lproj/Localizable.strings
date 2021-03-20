@@ -1,0 +1,86 @@
+/* Info menu: clouds */
+"clouds: %@" = "雲：%@";
+
+/* Info menu: temperature felt */
+"feels like %@" = "%@のように感じる";
+
+/* Info menu: humidity */
+"humidity: %@" = "湿度：%@";
+
+/* Info menu title */
+"Info" = "情報";
+
+/* Info menu: Location */
+"Location" = "ロケーション";
+
+/* Alert title */
+"Location services are not enabled." = "位置情報サービスが有効になっていません。";
+
+/* Alert button */
+"Open Preferences" = "環境設定を開く";
+
+/* Info menu: pressure */
+"pressure: %@" = "気圧：%@";
+
+/* Alert button */
+"Quit DockMeteo" = "DockMeteoを終了";
+
+/* Info menu: visibility */
+"visibility: %@" = "視界：%@";
+
+/* Info menu: Weather */
+"Weather" = "天候";
+
+/* Alert title */
+"Weather data download failed." = "気象データのダウンロードに失敗しました。";
+
+/* Info menu: wind <speed> from <direction> */
+"wind: %@ from %@" = "風：%2$@より%1$@";
+
+/* Short for SkyDirection N */
+"SkyDirection.N" = "北";
+
+/* Short for SkyDirection NNE */
+"SkyDirection.NNE" = "北北東";
+
+/* Short for SkyDirection NE */
+"SkyDirection.NE" = "北東";
+
+/* Short for SkyDirection ENE */
+"SkyDirection.ENE" = "東北東";
+
+/* Short for SkyDirection E */
+"SkyDirection.E" = "東";
+
+/* Short for SkyDirection ESE */
+"SkyDirection.ESE" = "東南東";
+
+/* Short for SkyDirection SE */
+"SkyDirection.SE" = "南東";
+
+/* Short for SkyDirection SSE */
+"SkyDirection.SSE" = "南南東";
+
+/* Short for SkyDirection S */
+"SkyDirection.S" = "南";
+
+/* Short for SkyDirection SSW */
+"SkyDirection.SSW" = "南南西";
+
+/* Short for SkyDirection SW */
+"SkyDirection.SW" = "南西";
+
+/* Short for SkyDirection WSW */
+"SkyDirection.WSW" = "西南西";
+
+/* Short for SkyDirection W */
+"SkyDirection.W" = "西";
+
+/* Short for SkyDirection WNW */
+"SkyDirection.WNW" = "西北西";
+
+/* Short for SkyDirection NW */
+"SkyDirection.NW" = "北西";
+
+/* Short for SkyDirection NNW */
+"SkyDirection.NNW" = "北北東";
