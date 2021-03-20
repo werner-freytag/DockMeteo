@@ -4,21 +4,41 @@
 //
 
 import Foundation
+import SwiftToolbox
 
 struct WeatherData {
-    init(condition: Condition, temperature: Double, location: Location, date: Date) {
-        self.condition = condition
-        self.temperature = temperature
-
-        self.location = location
-        self.date = date
-    }
-
     let condition: Condition
     let temperature: Double
 
     let location: Location
     let date: Date
+
+    let details: Details?
+
+    struct Details {
+        struct Wind {
+            let speed: Double
+            let direction: SkyDirection
+        }
+
+        init(conditionDescription: String? = nil, temperatureFelt: Double? = nil, pressure: Int? = nil, humidity: Int? = nil, visibility: Int? = nil, wind: Wind? = nil, clouds: Int? = nil) {
+            self.conditionDescription = conditionDescription
+            self.temperatureFelt = temperatureFelt
+            self.pressure = pressure
+            self.humidity = humidity
+            self.visibility = visibility
+            self.wind = wind
+            self.clouds = clouds
+        }
+
+        let conditionDescription: String?
+        let temperatureFelt: Double?
+        let pressure: Int?
+        let humidity: Int?
+        let visibility: Int?
+        let wind: Wind?
+        let clouds: Int?
+    }
 
     struct Location {
         var name: String
@@ -48,3 +68,7 @@ extension WeatherData: Equatable {}
 extension WeatherData.Location: Equatable {}
 
 extension WeatherData.Location.Coordinate: Equatable {}
+
+extension WeatherData.Details: Equatable {}
+
+extension WeatherData.Details.Wind: Equatable {}

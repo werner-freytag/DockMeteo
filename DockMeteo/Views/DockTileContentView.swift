@@ -66,9 +66,14 @@ class DockTileContentView: NSView {
             foregroundImageView.image = nil
         }
 
-        if let temperature = weatherData?.temperature.rounded() {
-            temperatureLabel.stringValue = "\(Int(temperature))º"
-            temperatureLabel.frame.origin.x = 10 + (temperature < 0 ? -1 : 3)
+        if var temperature = weatherData?.temperature {
+            if UnitTemperature.default ?? .celsius != .celsius {
+                temperature = Measurement<UnitTemperature>(value: temperature, unit: .celsius).converted(to: UnitTemperature.default ?? .celsius).value
+            }
+
+            let temperatureValue = Int(temperature.rounded())
+            temperatureLabel.stringValue = "\(temperatureValue)º"
+            temperatureLabel.frame.origin.x = 10 + (temperatureValue < 0 ? -1 : 3)
             temperatureLabel.shadow(color: textShadowColor, radius: 3, x: 0, y: -1.5)
         } else {
             temperatureLabel.stringValue = ""
