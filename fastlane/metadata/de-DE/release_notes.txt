@@ -1,5 +1,1 @@
-- Die Grafik wird jetzt in hochaufgelöstem Retina dargestellt
-- Detailoptimierungen der Grafiken
-- Genauere Ortsangaben
-- Zahlreiche technische Verbesserungen
-- Umbenannt in DockMeteo
+- Im Dock-Menü werden Wetterdetails angezeigt
