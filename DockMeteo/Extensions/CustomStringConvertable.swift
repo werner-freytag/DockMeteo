@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import SunMoonCalc
 
 extension OpenWeatherResponse: CustomStringConvertible {
     var description: String {
@@ -40,39 +39,6 @@ extension WeatherData.Location: CustomStringConvertible {
 
 extension WeatherData.Location.Coordinate: CustomStringConvertible {
     var description: String { "<\(latitude),\(longitude)>" }
-}
-
-extension Sun: CustomStringConvertible {
-    public var description: String {
-        "\(ephemeris)"
-    }
-}
-
-extension Moon: CustomStringConvertible {
-    public var description: String {
-        "\(ephemeris), phase: \(phase) (\(formatDouble(((phaseAge < Moon.maxPhaseAge / 2) ? phaseAge * 2 : phaseAge * 2 - Moon.maxPhaseAge) / Moon.maxPhaseAge * 100))%%/\((phaseAge < Moon.maxPhaseAge / 2) ? "+" : "-")), illumination: \(formatDouble(illumination * 100))%%, shadow angle: \(formatDegrees(diskOrientationViewingAngles.shadow.converted(to: .degrees).value))"
-    }
-}
-
-extension Moon.Phase: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case .newMoon: return "new moon"
-        case .waxingCrescent: return "waxing crescent"
-        case .firstQuarter: return "first quarter"
-        case .waxingGibbous: return "waxing gibbous"
-        case .fullMoon: return "fullMoon"
-        case .waningGibbous: return "waning gibbous"
-        case .lastQuarter: return "last quarter"
-        case .waningCrescent: return "waning crescent"
-        }
-    }
-}
-
-extension Ephemeris: CustomStringConvertible {
-    public var description: String {
-        "azimuth: \(formatDirection(azimuth.converted(to: .degrees).value)), elevation: \(formatDegrees(elevation.converted(to: .degrees).value)), rise: \(formatDate(rise)), set: \(formatDate(set)), transit: \(formatDate(transit)), transit elevation: \(formatDegrees(transitElevation.converted(to: .degrees).value)), distance: \(formatDouble(distance.converted(to: .kilometers).value)) km"
-    }
 }
 
 private func formatDegrees(_ degrees: Double) -> String {

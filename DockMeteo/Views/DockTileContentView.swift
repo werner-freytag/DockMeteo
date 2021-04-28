@@ -4,7 +4,6 @@
 //
 
 import Cocoa
-import SunMoonCalc
 
 class DockTileContentView: NSView {
     @IBOutlet var backgroundImageView: NSImageView!
@@ -26,11 +25,6 @@ class DockTileContentView: NSView {
 
     var weatherData: WeatherData? {
         didSet {
-            updateSunAndMoon()
-
-            NSLog("Sun: \(sun!)\n")
-            NSLog("Moon: \(moon!)\n")
-
             updateViews()
         }
     }
@@ -39,15 +33,6 @@ class DockTileContentView: NSView {
         didSet {
             updateViews()
         }
-    }
-
-    private var sun: Sun?
-    private var moon: Moon?
-
-    private func updateSunAndMoon() {
-        guard let coords = weatherData?.location.coordinate else { return }
-        sun = Sun(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: .init())
-        moon = Moon(location: .init(latitude: coords.latitude, longitude: coords.longitude), date: .init(), twilightMode: .closest)
     }
 
     private func updateViews() {
@@ -90,18 +75,9 @@ class DockTileContentView: NSView {
         }
     }
 
-    private var isNight: Bool? {
-        guard let ephemeris = sun?.ephemeris else { return nil }
-        guard let rise = ephemeris.rise, let set = ephemeris.set else { assertionFailure(); return nil }
-
-        guard rise <= set else { return (set ... rise).contains(.init()) }
-
-        return !(rise ... set).contains(.init())
-    }
-
     private var textShadowColor: NSColor {
         switch true {
-        case isNight:
+        case weatherData?.isNight:
             return NSColor(hex: 0x001F3A).withAlphaComponent(0.5)
         default:
             return NSColor(hex: 0x7E9FB1).withAlphaComponent(0.5)
@@ -109,30 +85,33 @@ class DockTileContentView: NSView {
     }
 
     var foregroundImageName: String? {
-        switch weatherData?.condition {
-        case .clearSky, .none:
+        guard let weatherData = weatherData else { return nil }
+        let isNight = weatherData.isNight
+
+        switch weatherData.condition {
+        case .clearSky:
             return nil
-        case .fewClouds where isNight == true:
+        case .fewClouds where isNight:
             return "FewClouds Night Foreground"
         case .fewClouds:
             return "FewClouds Foreground"
-        case .scatteredClouds where isNight == true:
+        case .scatteredClouds where isNight:
             return "ScatteredClouds Night Foreground"
         case .scatteredClouds:
             return "ScatteredClouds Foreground"
-        case .brokenClouds where isNight == true:
+        case .brokenClouds where isNight:
             return "BrokenClouds Night Foreground"
         case .brokenClouds:
             return "BrokenClouds Foreground"
-        case .showerRain where isNight == true:
+        case .showerRain where isNight:
             return "ShowerRain Night Foreground"
         case .showerRain:
             return "ShowerRain Foreground"
-        case .rain where isNight == true:
+        case .rain where isNight:
             return "Rain Night Foreground"
         case .rain:
             return "Rain Foreground"
-        case .thunderstorm where isNight == true:
+        case .thunderstorm where isNight:
             return "Thunderstorm Night Foreground"
         case .thunderstorm:
             return "Thunderstorm Foreground"
@@ -144,7 +123,7 @@ class DockTileContentView: NSView {
     }
 
     private var middleImageName: String? {
-        switch isNight {
+        switch weatherData?.isNight {
         case true:
             switch weatherData?.condition {
             case .clearSky, .fewClouds, .rain:
@@ -176,7 +155,7 @@ class DockTileContentView: NSView {
     }
 
     private var backgroundImageName: String {
-        switch isNight {
+        switch weatherData?.isNight {
         case true:
             switch weatherData?.condition {
             case .clearSky, .fewClouds, .none:
