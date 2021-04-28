@@ -30,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		360D0B25263A080D000C568A /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		3633223E25E7C7240014AA17 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
 		366042C825F92CDB004FE324 /* DockTileContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DockTileContentView.xib; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 		36C658FE25E3C3B3000D4F46 = {
 			isa = PBXGroup;
 			children = (
+				360D0B25263A080D000C568A /* Secrets.xcconfig */,
 				36C6590925E3C3B3000D4F46 /* DockMeteo */,
 				3633223E25E7C7240014AA17 /* fastlane */,
 				36C6590825E3C3B3000D4F46 /* Products */,
@@ -340,6 +342,7 @@
 /* Begin XCBuildConfiguration section */
 		36C6591325E3C3B4000D4F46 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360D0B25263A080D000C568A /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -404,6 +407,7 @@
 		};
 		36C6591425E3C3B4000D4F46 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360D0B25263A080D000C568A /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
