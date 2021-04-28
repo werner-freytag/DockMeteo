@@ -86,7 +86,7 @@ class DockTileContentView: NSView {
 
     var foregroundImageName: String? {
         guard let weatherData = weatherData else { return nil }
-        let isNight = weatherData.isNight ?? false
+        let isNight = weatherData.isNight
 
         switch weatherData.condition {
         case .clearSky:

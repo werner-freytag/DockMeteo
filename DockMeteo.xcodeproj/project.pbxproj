@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360D0B24263A0480000C568A /* SwiftToolbox in Frameworks */ = {isa = PBXBuildFile; productRef = 360D0B23263A0480000C568A /* SwiftToolbox */; };
 		3633223F25E7C7240014AA17 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3633223E25E7C7240014AA17 /* fastlane */; };
 		3641C8F825FB8E0600748BB7 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641C8F725FB8E0600748BB7 /* CLLocation+Extension.swift */; };
 		366042C925F92CDB004FE324 /* DockTileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366042C825F92CDB004FE324 /* DockTileContentView.xib */; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360D0B24263A0480000C568A /* SwiftToolbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +190,7 @@
 			);
 			name = DockMeteo;
 			packageProductDependencies = (
+				360D0B23263A0480000C568A /* SwiftToolbox */,
 			);
 			productName = DockMeteo;
 			productReference = 36C6590725E3C3B3000D4F46 /* DockMeteo.app */;
@@ -223,6 +226,7 @@
 			);
 			mainGroup = 36C658FE25E3C3B3000D4F46;
 			packageReferences = (
+				360D0B22263A0480000C568A /* XCRemoteSwiftPackageReference "SwiftToolbox" */,
 			);
 			productRefGroup = 36C6590825E3C3B3000D4F46 /* Products */;
 			projectDirPath = "";
@@ -523,6 +527,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		360D0B22263A0480000C568A /* XCRemoteSwiftPackageReference "SwiftToolbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/werner-freytag/SwiftToolbox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		360D0B23263A0480000C568A /* SwiftToolbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 360D0B22263A0480000C568A /* XCRemoteSwiftPackageReference "SwiftToolbox" */;
+			productName = SwiftToolbox;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36C658FF25E3C3B3000D4F46 /* Project object */;
 }
