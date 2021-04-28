@@ -1,1 +1,1 @@
-- Im Dock-Menü werden Wetterdetails angezeigt
+- Code-Verbesserungen
