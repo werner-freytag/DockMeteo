@@ -22,7 +22,6 @@
 		36C6591025E3C3B4000D4F46 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36C6590E25E3C3B4000D4F46 /* MainMenu.xib */; };
 		36C6591F25E3ECCC000D4F46 /* OpenWeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6591E25E3ECCC000D4F46 /* OpenWeatherProvider.swift */; };
 		36C6592125E3F5C4000D4F46 /* UnitTemperature+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6592025E3F5C4000D4F46 /* UnitTemperature+Extension.swift */; };
-		36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 36D0F4C525F1422200935183 /* SunMoonCalc */; };
 		36E9413925FF6E9D00E31093 /* CustomStringConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E9413825FF6E9D00E31093 /* CustomStringConvertable.swift */; };
 		36ED738725E4039A005D81FA /* OpenWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738625E4039A005D81FA /* OpenWeatherResponse.swift */; };
 		36ED738B25E40E83005D81FA /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ED738A25E40E83005D81FA /* LocationProvider.swift */; };
@@ -73,7 +72,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36D0F4C625F1422200935183 /* SunMoonCalc in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +188,6 @@
 			);
 			name = DockMeteo;
 			packageProductDependencies = (
-				36D0F4C525F1422200935183 /* SunMoonCalc */,
 			);
 			productName = DockMeteo;
 			productReference = 36C6590725E3C3B3000D4F46 /* DockMeteo.app */;
@@ -226,7 +223,6 @@
 			);
 			mainGroup = 36C658FE25E3C3B3000D4F46;
 			packageReferences = (
-				36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */,
 			);
 			productRefGroup = 36C6590825E3C3B3000D4F46 /* Products */;
 			projectDirPath = "";
@@ -527,25 +523,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/werner-freytag/SunMoonCalc.git";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		36D0F4C525F1422200935183 /* SunMoonCalc */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 36D0F4C425F1422200935183 /* XCRemoteSwiftPackageReference "SunMoonCalc" */;
-			productName = SunMoonCalc;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36C658FF25E3C3B3000D4F46 /* Project object */;
 }

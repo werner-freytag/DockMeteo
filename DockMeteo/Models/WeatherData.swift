@@ -12,6 +12,7 @@ struct WeatherData {
 
     let location: Location
     let date: Date
+    let isNight: Bool?
 
     let details: Details?
 

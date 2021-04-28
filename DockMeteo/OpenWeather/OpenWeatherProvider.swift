@@ -6,7 +6,6 @@
 import AppKit
 import Combine
 import CoreLocation
-import SunMoonCalc
 
 class OpenWeatherProvider {
     // Timer runs every 10 seconds so it updates faster when data is missing / outdated
@@ -146,6 +145,24 @@ private extension OpenWeatherResponse.Icon {
             return .mist
         }
     }
+
+    var isNight: Bool {
+        switch self {
+        case .clearSky_Night,
+             .fewClouds_Night,
+             .scatteredClouds_Night,
+             .brokenClouds_Night,
+             .showerRain_Night,
+             .rain_Night,
+             .thunderstorm_Night,
+             .snow_Night,
+             .mist_Night:
+            return true
+
+        default:
+            return false
+        }
+    }
 }
 
 private extension WeatherData {
@@ -153,7 +170,7 @@ private extension WeatherData {
         assert(response.weather.last != nil)
         guard let weather = response.weather.last else { return nil }
 
-        self.init(condition: weather.icon.condition, temperature: response.main.temp, location: .init(name: response.name, coordinate: .init(latitude: response.coord.lat, longitude: response.coord.lon)), date: Date(timeIntervalSince1970: response.dt), details: Details(response: response))
+        self.init(condition: weather.icon.condition, temperature: response.main.temp, location: .init(name: response.name, coordinate: .init(latitude: response.coord.lat, longitude: response.coord.lon)), date: Date(timeIntervalSince1970: response.dt), isNight: weather.icon.isNight, details: Details(response: response))
     }
 }
 
