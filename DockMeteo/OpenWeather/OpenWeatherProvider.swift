@@ -97,7 +97,7 @@ class OpenWeatherProvider {
         guard let location = location else { return nil }
 
         let appId = Bundle.main.object(forInfoDictionaryKey: "OPEN_WEATHER_APP_ID") as? String
-        
+
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")!
         urlComponents.queryItems = [
             URLQueryItem(name: "appid", value: appId),

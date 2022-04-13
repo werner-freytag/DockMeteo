@@ -5,6 +5,7 @@
 
 import Cocoa
 import Combine
+import CoreLocation
 import SwiftUI
 
 @main

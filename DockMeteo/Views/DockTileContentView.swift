@@ -4,6 +4,7 @@
 //
 
 import Cocoa
+import CoreLocation
 
 class DockTileContentView: NSView {
     @IBOutlet var backgroundImageView: NSImageView!

@@ -3,7 +3,7 @@ import Cocoa
 extension NSTextField {
     @discardableResult
     func fontDesign(_ design: NSFontDescriptor.SystemDesign) -> Self {
-        if let font = self.font, let descriptor = font.fontDescriptor.withDesign(design) {
+        if let font = font, let descriptor = font.fontDescriptor.withDesign(design) {
             self.font = NSFont(descriptor: descriptor, size: font.pointSize)
         }
         return self
