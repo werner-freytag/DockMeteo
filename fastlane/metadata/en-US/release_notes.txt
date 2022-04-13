@@ -1,1 +1,1 @@
-- Code improvements
+- DockMeteo remembers the last location so that the weather is displayed even if wifi or localization is deactivated
