@@ -20,6 +20,20 @@ lane :build_number do
   increment_build_number
 end
 
+desc "Increment patch version number"
+lane :version_patch do
+  increment_version_number(
+    bump_type: "patch"
+  )
+end
+
+desc "Increment minor version number"
+lane :version_minor do
+  increment_version_number(
+    bump_type: "minor"
+  )
+end
+
 desc "Push a new release build to the App Store"
 lane :release do
   build_app(
