@@ -6,7 +6,6 @@
 import Cocoa
 import Combine
 import CoreLocation
-import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -21,23 +20,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return objects.first(where: { type(of: $0) == DockTileContentView.self }) as! DockTileContentView
     }()
 
-    private var specifiedLocation: CLLocation?
-
-    private var locationProvider: AnyPublisher<CLLocation, LocationProvider.Error> {
-        if let specifiedLocation = specifiedLocation {
-            return Just(specifiedLocation)
-                .setFailureType(to: LocationProvider.Error.self)
-                .eraseToAnyPublisher()
-        }
-
-        return LocationProvider.shared
-            .startUpdating()
-            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
-            .compactMap { $0.last }
-            .eraseToAnyPublisher()
-    }
+    private lazy var locationProvider = LocationProvider.shared
+        .startUpdating()
+        .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+        .compactMap { $0.last }
+        .eraseToAnyPublisher()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        if let placemark = UserDefaults.standard.lastPlacemark {
+            weatherProvider.location = placemark.location
+            assignPlacemark(placemark)
+        }
+
         locationProvider
             .sink(receiveCompletion: {
                 if case let .failure(error) = $0, self.weatherProvider.location == nil {
@@ -47,11 +41,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.weatherProvider.location = $0
 
                 CLGeocoder().reverseGeocodeLocation($0, completionHandler: { placemarks, error in
-                    self.contentView.placemark = placemarks?.first
-                    self.dockMenuProvider.placemark = placemarks?.first
-
-                    if let placemark = placemarks?.first {
-                        NSLog("Placemark: \(placemark)\n")
+                    self.assignPlacemark(placemarks?.first)
+                    if let lastPlacemark = placemarks?.first {
+                        UserDefaults.standard.lastPlacemark = lastPlacemark
                     }
                 })
             })
@@ -88,10 +80,46 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             workspace.open(URL(fileURLWithPath: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"))
         }
     }
+
+    private func assignPlacemark(_ placemark: CLPlacemark?) {
+        contentView.placemark = placemark
+        dockMenuProvider.placemark = placemark
+
+        if let placemark = placemark {
+            NSLog("Placemark: \(placemark)\n")
+        }
+    }
 }
 
 private extension CLLocation {
     convenience init(_ latitude: Double, _ longitude: Double) {
         self.init(latitude: latitude, longitude: longitude)
     }
+}
+
+private extension UserDefaults {
+    var lastPlacemark: CLPlacemark? {
+        get {
+            guard let data = UserDefaults.standard.object(forKey: .lastPlacemark) as? Data else { return nil }
+            do {
+                return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? CLPlacemark
+            } catch {
+                assertionFailure(error.localizedDescription)
+                return nil
+            }
+        }
+        set {
+            do {
+                guard let newValue = newValue else { assertionFailure(); return }
+                let data = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: true)
+                set(data, forKey: .lastPlacemark)
+            } catch {
+                assertionFailure(error.localizedDescription)
+            }
+        }
+    }
+}
+
+private extension String {
+    static let lastPlacemark = "lastPlacemark"
 }
