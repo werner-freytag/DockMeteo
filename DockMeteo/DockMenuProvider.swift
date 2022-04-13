@@ -4,6 +4,7 @@
 //
 
 import Cocoa
+import CoreLocation
 
 class DockMenuProvider {
     var placemark: CLPlacemark?

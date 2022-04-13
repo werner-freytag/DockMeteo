@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "SwiftToolbox",
-        "repositoryURL": "https://github.com/werner-freytag/SwiftToolbox.git",
-        "state": {
-          "branch": null,
-          "revision": "310125da6e7c3a27efc9899c20c592202be5ebb7",
-          "version": "0.9.0"
-        }
+  "pins" : [
+    {
+      "identity" : "swifttoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/werner-freytag/SwiftToolbox.git",
+      "state" : {
+        "revision" : "310125da6e7c3a27efc9899c20c592202be5ebb7",
+        "version" : "0.9.0"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }

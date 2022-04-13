@@ -1,1 +1,1 @@
-- Code-Verbesserungen
+- DockMeteo merkt sich den letzten Ort, so dass auch bei deaktiviertem WLAN oder deaktivierter Lokalisierung das Wetter dargestellt wird
