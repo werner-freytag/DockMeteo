@@ -102,7 +102,7 @@ private extension UserDefaults {
         get {
             guard let data = UserDefaults.standard.object(forKey: .lastPlacemark) as? Data else { return nil }
             do {
-                return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? CLPlacemark
+                return try NSKeyedUnarchiver.unarchivedObject(ofClass: CLPlacemark.self, from: data)
             } catch {
                 assertionFailure(error.localizedDescription)
                 return nil
