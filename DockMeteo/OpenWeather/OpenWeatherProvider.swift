@@ -110,17 +110,8 @@ class OpenWeatherProvider {
         return urlComponents.url
     }
 
-    private var didShowAlertNoWeatherData = false
     private func handleDownloadError(_ informativeText: String? = nil) {
-        guard !didShowAlertNoWeatherData else { return }
-        didShowAlertNoWeatherData = true
-
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("Weather data download failed.", comment: "Alert title")
-        if let informativeText = informativeText {
-            alert.informativeText = informativeText
-        }
-        alert.runModal()
+        NSLog("Weather data download failed: \(informativeText ?? "unknown error")\n")
     }
 }
 
