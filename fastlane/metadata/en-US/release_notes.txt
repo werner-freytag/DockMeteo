@@ -1,1 +1,2 @@
-- DockMeteo remembers the last location so that the weather is displayed even if wifi or localization is deactivated
+- No more error dialog when weather data can't be loaded — the app now retries silently in the background
+- Code improvements

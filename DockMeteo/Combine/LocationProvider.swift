@@ -3,40 +3,43 @@
 //  Copyright © 2021 Pecora GmbH. All rights reserved.
 //
 
-import Combine
 import CoreLocation
 import Foundation
 
 class LocationProvider: NSObject {
     static let shared = LocationProvider()
 
-    private let subject = PassthroughSubject<[CLLocation], Error>()
+    private var continuation: AsyncThrowingStream<CLLocation, Error>.Continuation?
 
     lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyKilometer
+        manager.distanceFilter = 500
         manager.delegate = self
         return manager
     }()
 
-    func startUpdating() -> AnyPublisher<[CLLocation], Error> {
-        locationManager.startUpdatingLocation()
-        return subject.eraseToAnyPublisher()
+    func locations() -> AsyncThrowingStream<CLLocation, Error> {
+        AsyncThrowingStream { continuation in
+            self.continuation = continuation
+            self.locationManager.startUpdatingLocation()
+        }
+    }
+
+    enum LocationError: Swift.Error {
+        case authorizationFailed
     }
 }
 
 extension LocationProvider: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        subject.send(locations)
+        guard let location = locations.last else { return }
+        continuation?.yield(location)
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .denied || manager.authorizationStatus == .restricted {
-            subject.send(completion: .failure(.authorizationFailed))
+            continuation?.finish(throwing: LocationError.authorizationFailed)
         }
-    }
-
-    enum Error: Swift.Error {
-        case authorizationFailed
     }
 }
