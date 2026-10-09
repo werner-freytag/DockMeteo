@@ -97,12 +97,14 @@ private extension UserDefaults {
     var lastPlacemark: CLPlacemark? {
         get {
             guard let data = object(forKey: .lastPlacemark) as? Data else { return nil }
-            do {
-                return try NSKeyedUnarchiver.unarchivedObject(ofClass: CLPlacemark.self, from: data)
-            } catch {
-                assertionFailure(error.localizedDescription)
-                return nil
+            if let placemark = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLPlacemark.self, from: data) {
+                return placemark
             }
+            // Fallback for data archived by older app versions without secure coding
+            let unarchiver = try? NSKeyedUnarchiver(forReadingFrom: data)
+            unarchiver?.requiresSecureCoding = false
+            defer { unarchiver?.finishDecoding() }
+            return unarchiver?.decodeObject(forKey: NSKeyedArchiveRootObjectKey) as? CLPlacemark
         }
         set {
             do {
