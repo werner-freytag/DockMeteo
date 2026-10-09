@@ -1,4 +1,5 @@
 {
+  "originHash" : "dcc6e1494251634187b91b949f58d78bcb579afaca1795e6ba5aad7e4be95a03",
   "pins" : [
     {
       "identity" : "swifttoolbox",
@@ -10,5 +11,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
