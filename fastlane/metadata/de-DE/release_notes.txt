@@ -1,1 +1,2 @@
-- DockMeteo merkt sich den letzten Ort, so dass auch bei deaktiviertem WLAN oder deaktivierter Lokalisierung das Wetter dargestellt wird
+- Kein Fehler-Dialog mehr, wenn Wetterdaten nicht geladen werden können — die App versucht es im Hintergrund erneut
+- Code-Verbesserungen
